@@ -28,7 +28,6 @@ last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 designation = db.Column(db.String, nullable=False)
 branch_id = db.Column(db.Integer, db.ForeignKey(
     "branch.id"), nullable=False)
-# branch = db.relationship("Branch", foreign_keys=branch_id)
 
 
 def __init__(self, name, code, designation, branch_id):
