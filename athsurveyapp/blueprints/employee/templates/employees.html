@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %} {% block title %}ATH - Employees{% endblock %}
+{% block meta_description %}Arabian Tea House survey application{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-6">
+      <h1 class="m-0 font-weight-bold">Employees</h1>
+    </div>
+    <div class="col-6">
+      <a
+        href="{{url_for('employee_page.create_employee')}}"
+        class="btn btn-primary float-right mr-2"
+        >Create employee</a
+      >
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Code</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Branch</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for employee in employees %}
+          <tr>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.code }}</td>
+            <td>{{ employee.designation }}</td>
+            <td>{{ employee.branch.name }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

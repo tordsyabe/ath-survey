@@ -1,0 +1,20 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  /* background: #e9ecef; */
+  font-size: 0.9rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 10px;
+  border-top: 1px solid #e9e9e9;
+
+  height: 60px;
+}

@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %} {% block title %}ATH - Survey{% endblock %} {%
+block meta_description %}Arabian Tea House survey application{% endblock %} {%
+block body %}
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-6">
+      <h1 class="m-0 font-weight-bold">Surveys</h1>
+    </div>
+    <div class="col-6">
+      <a href="#" class="btn btn-primary float-right">Conduct a survey</a>
+      <a
+        href="{{url_for('survey_page.create_survey')}}"
+        class="btn btn-primary float-right mr-2"
+        >Create survey</a
+      >
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for survey in surveys %}
+          <tr class="clickable-row" data-href="{{ survey.id }}">
+            <td>{{ survey.name }}</td>
+            <td>{{ survey.description }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

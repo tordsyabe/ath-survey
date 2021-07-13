@@ -1,0 +1,1 @@
+from athsurveyapp.blueprints.survey.views import survey_page

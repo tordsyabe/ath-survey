@@ -1,0 +1,289 @@
+{% extends 'layouts/base.html' %} 
+{% block title %}ATH - Survey{% endblock %} 
+{% block meta_description %}Arabian Tea House survey application{% endblock %} 
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12">
+      <h1>Conduct a survey</h1>
+    </div>
+
+    <div class="col-12 mt-5 bg-light">
+      <form action="#" method="POST">
+        <fieldset class="p-5">
+                    
+            <div class="row">
+                <div class="col-3">
+                    <label class="form-label font-weight-bold mb-0" for="branch">
+                        Branch
+                    </label>
+                </div>
+        
+                <div class="col-7">
+                    <div class="form-group">
+                        <select class="form-control form-select form-select-sm selectpicker w-100" 
+                        name="branch" id="branch" data-live-search="true">
+                        {% for branch in branches %}
+        
+                        <option value="{{branch.id}}">
+                            {{ branch.name }}
+                        </option>
+        
+                        {% endfor %}
+                        
+                    </select>
+                    </div>    
+                  
+        
+                </div>
+                
+                <div class="col-2 offset-3">
+                    <div class="invalid-feedback">
+                        Please select a branch
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+            <div class="mb-1 row align-items-center">
+                <div class="col-3">
+                    <label class="form-label font-weight-bold mb-0" for="staff">
+                        Staff
+                    </label>
+                </div>
+        
+                <div class="col-7">
+                    <div class="form-group">
+                        <select class="form-control form-select form-select-sm selectpicker w-100" 
+                        name="staff" id="staff" data-live-search="true">
+        
+                    </select>
+                    </div>
+                  
+        
+                </div>
+                
+                <div class="col-2 offset-3">
+                    <div class="invalid-feedback">
+                        Please select a staff
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+            <div class="mb-1 row align-items-center">
+                <div class="col-3">
+                    <label class="form-label font-weight-bold mb-0" for="branch">
+                        Survey Type
+                    </label>
+                </div>
+        
+                <div class="col-7">
+                    <div class="form-group">
+                        <select class="form-control form-select form-select-sm selectpicker w-100" 
+                        name="survey" id="survey" data-live-search="true">
+                        <option value="1">
+                            Grooming and personal hygiene
+                        </option>
+                        <option value="2">
+                            Customer service
+                        </option>
+                    
+                    </select>
+                    </div>
+                   
+        
+                </div>
+                
+                <div class="col-2 offset-3">
+                    <div class="invalid-feedback">
+                        Please select a survey
+                    </div>
+                </div>
+        
+        
+            </div>
+        
+        
+        <button class="btn btn-primary next mt-5">Start survey</a>
+        
+        </fieldset>
+        
+        <fieldset class="p-5" id="surveyForm2" style="display:none">
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>Date:</strong> July 7, 2021</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Branch:</strong> Arabian Tea House - The Mall</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Name:</strong> John Llave</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Designation:</strong> Waiter/ Cook</p>
+                </div>
+                <div class="col-12">
+                    <p><strong>Surveyor:</strong> Sadegh</p>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h5 class="text-muted font-weight-bold">Personal Hygiene</h5>
+
+                </div>
+                <div class="col-12">
+                    <div class="row mt-5">
+                        <div class="col-3">
+                            <label>Body odor</label>
+        
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check form-check-inline">
+                            
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">1</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">2</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">3</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">4</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">5</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">6</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">7</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">8</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">9</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">10</label>
+                              </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Feedback <span class="text-muted small">(Mandatory if less than 10)</span></label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary previous mt-5">Back</button>
+            <button class="btn btn-primary next mt-5">Next</button>
+        </fieldset>
+        
+        <fieldset class="p-5" id="surveyForm3" style="display:none">
+            <div class="row">
+                <div class="col-6">
+                    <p><strong>Date:</strong> July 7, 2021</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Branch:</strong> Arabian Tea House - The Mall</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Name:</strong> John Llave</p>
+                </div>
+                <div class="col-6">
+                    <p><strong>Designation:</strong> Waiter/ Cook</p>
+                </div>
+                <div class="col-12">
+                    <p><strong>Surveyor:</strong> Sadegh</p>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h5 class="text-muted font-weight-bold">Uniform</h5>
+
+                </div>
+                <div class="col-12">
+                    <div class="row mt-5">
+                        <div class="col-3">
+                            <label>Vest is cleaned and ironed</label>
+        
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check form-check-inline">
+                            
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">1</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">2</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">3</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">4</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">5</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">6</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">7</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">8</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">9</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label class="form-check-label" for="inlineRadio3">10</label>
+                              </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Feedback <span class="text-muted small">(Mandatory if less than 10)</span></label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary previous mt-5">Back</button>
+            <button class="btn btn-primary mt-5" id="thirdFormBtn">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
