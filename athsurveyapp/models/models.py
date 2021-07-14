@@ -11,23 +11,22 @@ class Employee(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-
-name = db.Column(db.String(64), nullable=False)
-code = db.Column(db.String(15), nullable=False)
-date_created = db.Column(db.DateTime(
-    timezone=True), server_default=func.now())
-last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-designation = db.Column(db.String(20), nullable=False)
-branch_id = db.Column(db.Integer, db.ForeignKey(
-    "branch.id"), nullable=False)
-name = db.Column(db.String, nullable=False)
-code = db.Column(db.String, nullable=False)
-date_created = db.Column(db.DateTime(
-    timezone=True), server_default=func.now())
-last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-designation = db.Column(db.String, nullable=False)
-branch_id = db.Column(db.Integer, db.ForeignKey(
-    "branch.id"), nullable=False)
+    name = db.Column(db.String(64), nullable=False)
+    code = db.Column(db.String(15), nullable=False)
+    date_created = db.Column(db.DateTime(
+        timezone=True), server_default=func.now())
+    last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+    designation = db.Column(db.String(20), nullable=False)
+    branch_id = db.Column(db.Integer, db.ForeignKey(
+        "branch.id"), nullable=False)
+    name = db.Column(db.String, nullable=False)
+    code = db.Column(db.String, nullable=False)
+    date_created = db.Column(db.DateTime(
+        timezone=True), server_default=func.now())
+    last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
+    designation = db.Column(db.String, nullable=False)
+    branch_id = db.Column(db.Integer, db.ForeignKey(
+        "branch.id"), nullable=False)
 
 
 def __init__(self, name, code, designation, branch_id):

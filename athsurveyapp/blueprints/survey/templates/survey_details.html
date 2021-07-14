@@ -5,19 +5,46 @@ block body %}
   <div class="row justify-content-center align-items-center">
     <div class="col-12">
       <h1 class="m-0 font-weight-bold">{{ survey.name }}</h1>
-      <br />
-      <p class="text-muted">{{ survey.description }}</p>
+      <p class="text-muted mt-3">{{ survey.description }}</p>
     </div>
   </div>
 
   <div class="row mt-5">
-    <div class="col-12">
+    <div class="col-6">
       <p class="font-weight-bold">Questions</p>
-      {% for question in survey.questions %}
-      <h5 class="font-weight-bold">{{ question.description }}</h5>
-      {% if question.description == "radio" %} {% for num in
-      range(int(question.value)) %} {{num}} {% endfor %} {% endif %} {% endfor
-      %}
+      {% if survey.questions | length == 0 %}
+        <p class="text-muted">No questions for this survey</p>
+      {% else %} 
+        {% for question in survey.questions %}
+          {{question.description}}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="col-6">
+      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#questionFormModal">Add Questions</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="questionFormModal" tabindex="-1" role="dialog" aria-labelledby="questionFormModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold">New Question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          Question forn here
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm">Send message</button>
+      </div>
     </div>
   </div>
 </div>
