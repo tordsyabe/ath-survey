@@ -12,13 +12,14 @@ block body %}
   <div class="row mt-5">
     <div class="col-6">
       <p class="font-weight-bold">Questions</p>
-      {% if survey.questions | length == 0 %}
-        <p class="text-muted">No questions for this survey</p>
-      {% else %} 
-        {% for question in survey.questions %}
-          {{question.description}}
+        {% for question_type in survey.question_types %}
+          <p>{{question_type.description}}</p>
+          <ul>
+          {% for question in question_type.questions %}
+            <li>{{ question.description }}</li> 
+          {% endfor %}
+        </ul>
         {% endfor %}
-      {% endif %}
     </div>
 
     <div class="col-6">

@@ -13,20 +13,16 @@ class Employee(db.Model):
 
     name = db.Column(db.String(64), nullable=False)
     code = db.Column(db.String(15), nullable=False)
-    date_created = db.Column(db.DateTime(
-        timezone=True), server_default=func.now())
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     designation = db.Column(db.String(20), nullable=False)
-    branch_id = db.Column(db.Integer, db.ForeignKey(
-        "branch.id"), nullable=False)
+    branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
     name = db.Column(db.String, nullable=False)
     code = db.Column(db.String, nullable=False)
-    date_created = db.Column(db.DateTime(
-        timezone=True), server_default=func.now())
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     designation = db.Column(db.String, nullable=False)
-    branch_id = db.Column(db.Integer, db.ForeignKey(
-        "branch.id"), nullable=False)
+    branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
 
 
 def __init__(self, name, code, designation, branch_id):
@@ -51,7 +47,7 @@ class Branch(db.Model):
         timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     address = db.Column(db.String())
-    employees = db.relationship("Employee", backref="branch", lazy=True)
+    employees = db.relationship("Employee", backref="branch")
 
     def __init__(self, name, address):
         self.name = name
@@ -69,7 +65,7 @@ class Survey(db.Model):
         timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    questions = db.relationship("Question", backref="survey", lazy=True)
+    question_types = db.relationship("QuestionType", backref="survey")
 
     def __init__(self, name, description):
         self.name = name
@@ -82,27 +78,13 @@ class QuestionType(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(64), nullable=False)
+    
+    survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
 
-    questions = db.relationship("Question", backref="question_type", lazy=True)
+    questions = db.relationship("Question", backref="question_type")
 
     def __init__(self, description):
         self.description = description
-
-
-class Choice(db.Model):
-
-    __tablename__ = "choice"
-
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(64), nullable=False)
-    value = db.Column(db.Integer)
-
-    questions = db.relationship("Question", backref="choice", lazy=True)
-
-    def __init__(self, description, value):
-        self.description = description
-        self.value = value
-
 
 class Question(db.Model):
 
@@ -113,13 +95,8 @@ class Question(db.Model):
     is_required = db.Column(db.Boolean, nullable=False, default=False)
     place_number = db.Column(db.Integer, nullable=False)
 
-    question_type_id = db.Column(db.Integer, db.ForeignKey(
-        "question_type.id"), nullable=False)
-    choice_id = db.Column(db.Integer, db.ForeignKey(
-        "choice.id"), nullable=False)
-
-    survey_id = db.Column(db.Integer, db.ForeignKey(
-        "survey.id"), nullable=False)
+    question_type_id = db.Column(db.Integer, db.ForeignKey("question_type.id"), nullable=False)
+    choice_id = db.Column(db.Integer, db.ForeignKey("choice.id"), nullable=False)
 
     def __init__(self, description, is_required, place_number, question_type_id, choice_id, survey_id):
         self.description = description
@@ -128,3 +105,17 @@ class Question(db.Model):
         self.question_type_id = question_type_id
         self.choice_id = choice_id
         self.survey_id = survey_id
+
+class Choice(db.Model):
+
+    __tablename__ = "choice"
+
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(64), nullable=False)
+    value = db.Column(db.Integer)
+
+    questions = db.relationship("Question", backref="choice")
+
+    def __init__(self, description, value):
+        self.description = description
+        self.value = value
