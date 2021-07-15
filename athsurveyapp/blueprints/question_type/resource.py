@@ -6,7 +6,7 @@ from athsurveyapp.schemas import QtSchema
 class QuestionTypeResource(Resource):
     def get(self):
         
-        question_type = Qt.query.get(1)
+        question_type = Qt.query.get(2)
         print(question_type)
         
         schema = QtSchema()
