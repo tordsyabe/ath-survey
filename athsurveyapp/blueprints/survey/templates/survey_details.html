@@ -9,21 +9,45 @@ block body %}
     </div>
   </div>
 
-  <div class="row mt-5">
+  <div class="row mt-5 align-items-center">
     <div class="col-6">
-      <p class="font-weight-bold">Questions</p>
-        {% for question_type in survey.question_types %}
-          <p>{{question_type.description}}</p>
-          <ul>
-          {% for question in question_type.questions %}
-            <li>{{ question.description }}</li> 
-          {% endfor %}
-        </ul>
-        {% endfor %}
+      <h5 class="font-weight-bold m-0">Questions</h5>
+       
     </div>
 
     <div class="col-6">
-      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#questionFormModal">Add Questions</button>
+      <button type="button" class="btn btn-primary float-right font-weight-bold" data-toggle="modal" data-target="#questionFormModal">Add Category</button>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="jumbotron py-2">
+        {% for question_type in survey.question_types %}
+        <div class="d-flex">
+          <h2 class="font-weight-bold my-5 mr-5">{{question_type.description}}</h2>
+          <button class="btn btn-dark btn-sm my-auto font-weight-bold">Add Question</button>
+        </div>
+
+        {% for question in question_type.questions %}
+          <div class="row p-3">
+            <div class="col-4">
+              <span class="font-weight-bold">{{ question.description }}</span>
+              <span class="text-muted small">(description)</span>
+            </div>
+            <div class="col-4">
+              <span class="font-weight-bold col-4">{{question.is_required}}</span>
+              <span class="text-muted small">(required)</span>
+            </div>
+            <div class="col-4">
+              <span class="font-weight-bold col-4">{{question.choice.value}}</span>
+              <span class="text-muted small">(no. ratings)</span>
+            </div>
+          </div> 
+        {% endfor %}
+      </ul>
+      {% endfor %}
+      </div>
     </div>
   </div>
 </div>
@@ -32,7 +56,7 @@ block body %}
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title font-weight-bold">New Question</h5>
+        <h5 class="modal-title font-weight-bold">New survey category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -44,7 +68,7 @@ block body %}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm">Send message</button>
+        <button type="button" class="btn btn-primary btn-sm">Save</button>
       </div>
     </div>
   </div>

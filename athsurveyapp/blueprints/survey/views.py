@@ -36,6 +36,7 @@ def create_survey():
 def survey_details(id):
 
     survey = Survey.query.get(id)
+    print(survey)
 
     return render_template("survey_details.html", survey=survey)
 

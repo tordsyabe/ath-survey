@@ -1,10 +1,10 @@
 from sqlalchemy.sql import func
-
+from dataclasses import dataclass
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
+@dataclass
 class Employee(db.Model):
 
     __tablename__ = "employee"
@@ -31,7 +31,7 @@ def __init__(self, name, code, designation, branch_id):
     self.designation = designation
     self.branch_id = branch_id
 
-
+@dataclass
 class Branch(db.Model):
 
     __tablename__ = "branch"
@@ -53,7 +53,7 @@ class Branch(db.Model):
         self.name = name
         self.address = address
 
-
+@dataclass
 class Survey(db.Model):
 
     __tablename__ = "survey"
@@ -71,7 +71,7 @@ class Survey(db.Model):
         self.name = name
         self.description = description
 
-
+@dataclass
 class QuestionType(db.Model):
 
     __tablename__ = "question_type"
@@ -86,6 +86,7 @@ class QuestionType(db.Model):
     def __init__(self, description):
         self.description = description
 
+@dataclass
 class Question(db.Model):
 
     __tablename__ = "question"
@@ -106,6 +107,7 @@ class Question(db.Model):
         self.choice_id = choice_id
         self.survey_id = survey_id
 
+@dataclass
 class Choice(db.Model):
 
     __tablename__ = "choice"
