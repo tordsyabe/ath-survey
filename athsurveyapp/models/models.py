@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-@dataclass
 class Employee(db.Model):
 
     __tablename__ = "employee"
@@ -31,20 +30,17 @@ def __init__(self, name, code, designation, branch_id):
     self.designation = designation
     self.branch_id = branch_id
 
-@dataclass
 class Branch(db.Model):
 
     __tablename__ = "branch"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
-    date_created = db.Column(db.DateTime(
-        timezone=True), server_default=func.now())
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     address = db.Column(db.String(120))
     name = db.Column(db.String, nullable=False)
-    date_created = db.Column(db.DateTime(
-        timezone=True), server_default=func.now())
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     address = db.Column(db.String())
     employees = db.relationship("Employee", backref="branch")
@@ -53,7 +49,6 @@ class Branch(db.Model):
         self.name = name
         self.address = address
 
-@dataclass
 class Survey(db.Model):
 
     __tablename__ = "survey"
@@ -61,8 +56,7 @@ class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(64), nullable=False)
-    date_created = db.Column(db.DateTime(
-        timezone=True), server_default=func.now())
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     question_types = db.relationship("QuestionType", backref="survey")
@@ -71,14 +65,14 @@ class Survey(db.Model):
         self.name = name
         self.description = description
 
-@dataclass
 class QuestionType(db.Model):
 
     __tablename__ = "question_type"
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(64), nullable=False)
-    
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
 
     questions = db.relationship("Question", backref="question_type")
@@ -86,7 +80,6 @@ class QuestionType(db.Model):
     def __init__(self, description):
         self.description = description
 
-@dataclass
 class Question(db.Model):
 
     __tablename__ = "question"
@@ -98,6 +91,8 @@ class Question(db.Model):
 
     question_type_id = db.Column(db.Integer, db.ForeignKey("question_type.id"), nullable=False)
     choice_id = db.Column(db.Integer, db.ForeignKey("choice.id"), nullable=False)
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     def __init__(self, description, is_required, place_number, question_type_id, choice_id, survey_id):
         self.description = description
@@ -107,7 +102,6 @@ class Question(db.Model):
         self.choice_id = choice_id
         self.survey_id = survey_id
 
-@dataclass
 class Choice(db.Model):
 
     __tablename__ = "choice"
@@ -117,6 +111,8 @@ class Choice(db.Model):
     value = db.Column(db.Integer)
 
     questions = db.relationship("Question", backref="choice")
+    date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     def __init__(self, description, value):
         self.description = description
