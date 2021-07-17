@@ -24,11 +24,11 @@ class Employee(db.Model):
     branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
 
 
-def __init__(self, name, code, designation, branch_id):
-    self.name = name
-    self.code = code
-    self.designation = designation
-    self.branch_id = branch_id
+    def __init__(self, name, code, designation, branch_id):
+        self.name = name
+        self.code = code
+        self.designation = designation
+        self.branch_id = branch_id
 
 class Branch(db.Model):
 
