@@ -77,8 +77,9 @@ class QuestionType(db.Model):
 
     questions = db.relationship("Question", backref="question_type")
 
-    def __init__(self, description):
+    def __init__(self, description, survey_id):
         self.description = description
+        self.survey_id = survey_id
 
 class Question(db.Model):
 

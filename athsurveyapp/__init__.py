@@ -8,7 +8,7 @@ import os
 from athsurveyapp.blueprints.survey import survey_page
 from athsurveyapp.blueprints.branch import branch_page
 from athsurveyapp.blueprints.employee import employee_page
-from athsurveyapp.blueprints.question_type import question_type_page, QuestionTypeResource
+from athsurveyapp.blueprints.question_type import question_type_page, QuestionTypeResource, QuestionTypeResourceList
 from athsurveyapp.schemas import ma
 
 migrate = Migrate()
@@ -35,7 +35,8 @@ def create_app():
     app.config.from_object("config.settings")
     app.config.from_pyfile("settings.py", silent=True)
     
-    api.add_resource(QuestionTypeResource, '/api')
+    api.add_resource(QuestionTypeResource, '/api/<int:id>')
+    api.add_resource(QuestionTypeResourceList, '/api')
     app.register_blueprint(question_type_page, url_prefix='/question_types') 
 
     app.register_blueprint(survey_page, url_prefix='/surveys')

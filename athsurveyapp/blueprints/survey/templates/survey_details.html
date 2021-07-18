@@ -3,7 +3,7 @@ block meta_description %}Arabian Tea House survey application{% endblock %} {%
 block body %}
 <div class="container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-12">
+    <div class="col-12" data-surveyid="{{ survey.id }}">
       <h1 class="m-0 font-weight-bold">{{ survey.name }}</h1>
       <p class="text-muted mt-3">{{ survey.description }}</p>
     </div>
@@ -55,6 +55,8 @@ block body %}
 <div class="modal fade" id="questionFormModal" tabindex="-1" role="dialog" aria-labelledby="questionFormModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <form id="surveyCategoryForm">
+
       <div class="modal-header">
         <h5 class="modal-title font-weight-bold">New survey category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -62,14 +64,17 @@ block body %}
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST">
-          Question forn here
-        </form>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm">Save</button>
+        <button type="button" class="btn btn-primary btn-sm" id="saveSurveyCategoryBtn">Save</button>
       </div>
+    </form>
+
     </div>
   </div>
 </div>

@@ -101,7 +101,20 @@ $(document).ready(function () {
     });
   });
 
+  // survey table navigation
   $(".clickable-row").on("click", function () {
     window.location = $(this).data("href");
+  });
+
+  var surveryId = $("[data-surveyid]").data("surveyid");
+  
+  
+  var saveSurveyCategoryBtn = $('#saveSurveyCategoryBtn');
+
+  saveSurveyCategoryBtn.on('click', function(event){
+    var categoryDescription =  $('#surveyCategoryForm input[id="description"]').val();
+    $.ajax({
+      
+    })
   });
 });
