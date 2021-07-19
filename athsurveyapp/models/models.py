@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class Employee(db.Model):
 
     __tablename__ = "employee"
@@ -23,12 +24,12 @@ class Employee(db.Model):
     designation = db.Column(db.String, nullable=False)
     branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
 
-
     def __init__(self, name, code, designation, branch_id):
         self.name = name
         self.code = code
         self.designation = designation
         self.branch_id = branch_id
+
 
 class Branch(db.Model):
 
@@ -49,6 +50,7 @@ class Branch(db.Model):
         self.name = name
         self.address = address
 
+
 class Survey(db.Model):
 
     __tablename__ = "survey"
@@ -64,6 +66,7 @@ class Survey(db.Model):
     def __init__(self, name, description):
         self.name = name
         self.description = description
+
 
 class QuestionType(db.Model):
 
@@ -81,6 +84,7 @@ class QuestionType(db.Model):
         self.description = description
         self.survey_id = survey_id
 
+
 class Question(db.Model):
 
     __tablename__ = "question"
@@ -90,18 +94,29 @@ class Question(db.Model):
     is_required = db.Column(db.Boolean, nullable=False, default=False)
     place_number = db.Column(db.Integer, nullable=False)
 
-    question_type_id = db.Column(db.Integer, db.ForeignKey("question_type.id"), nullable=False)
+    question_type_id = db.Column(
+        db.Integer, db.ForeignKey("question_type.id"), nullable=False
+    )
     choice_id = db.Column(db.Integer, db.ForeignKey("choice.id"), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    def __init__(self, description, is_required, place_number, question_type_id, choice_id, survey_id):
+    def __init__(
+        self,
+        description,
+        is_required,
+        place_number,
+        question_type_id,
+        choice_id,
+        survey_id,
+    ):
         self.description = description
         self.is_required = is_required
         self.place_number = place_number
         self.question_type_id = question_type_id
         self.choice_id = choice_id
         self.survey_id = survey_id
+
 
 class Choice(db.Model):
 

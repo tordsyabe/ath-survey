@@ -22,3 +22,15 @@ body {
 .clickable-row {
   cursor: pointer;
 }
+
+.survey-category-inline-input {
+  font-size: 32px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.survey-category-inline-input:focus {
+  outline: none;
+}
