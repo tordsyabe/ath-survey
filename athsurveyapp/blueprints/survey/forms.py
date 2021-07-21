@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, BooleanField, HiddenField
 from wtforms.validators import DataRequired
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
-from athsurveyapp.models.models import db, Survey
+from athsurveyapp.models.models import db, Survey, Choice
 
 
 class SurveyForm(FlaskForm):

@@ -29,8 +29,10 @@ block body %}
   <div class="row mt-5">
     <div class="col-12">
       <div class="jumbotron py-2">
-        {% for question_type in survey.question_types %}
-        <div data-categoryid="{{question_type.id}}">
+        {% if not survey.question_types %}
+        <p>No survery</p>
+        {% else %} {% for question_type in survey.question_types %}
+        <div data-categoryid="{{question_type.id}}" class="mb-5">
           <div class="d-flex">
             <h2 class="font-weight-bold my-5 mr-5 survey-category">
               {{question_type.description}}
@@ -41,51 +43,86 @@ block body %}
               style="display: none"
               value="{{question_type.description}}"
             />
-            <button class="btn btn-dark btn-sm my-auto font-weight-bold">
+            <button
+              class="
+                btn btn-dark btn-sm
+                my-auto
+                font-weight-bold
+                add-question-btn
+              "
+              data-toggle="modal"
+              data-target="#questionFormModal"
+            >
               Add Question
             </button>
           </div>
 
-          {% if question_type.questions %} {% for question in
-          question_type.questions %}
-          <div class="row p-3">
-            <div class="col-4">
-              <span class="font-weight-bold">{{ question.description }}</span>
-              <span class="text-muted small">(description)</span>
-            </div>
-            <div class="col-4">
-              <span class="font-weight-bold col-4"
-                >{{question.is_required}}</span
-              >
-              <span class="text-muted small">(required)</span>
-            </div>
-            <div class="col-4">
-              <span class="font-weight-bold col-4"
-                >{{question.choice.value}}</span
-              >
-              <span class="text-muted small">(no. ratings)</span>
-            </div>
-          </div>
-          {% endfor %} {% else %}
+          {% if question_type.questions %}
+          <table class="table table-hover">
+            <tbody>
+              {% for question in question_type.questions %}
+              <tr>
+                <td>
+                  <span class="font-weight-bold"
+                    >{{ question.description }}</span
+                  >
+                  <span class="text-muted small">(description)</span>
+                </td>
+                <td>
+                  <span class="font-weight-bold col-4"
+                    >{{question.is_required}}</span
+                  >
+                  <span class="text-muted small">(required)</span>
+                </td>
+                <td>
+                  <span class="font-weight-bold col-4"
+                    >{{question.choice.value}}</span
+                  >
+                  <span class="text-muted small">(no. of choices)</span>
+                </td>
+                <td>
+                  <span class="font-weight-bold col-4"
+                    >{{question.sequence}}</span
+                  >
+                  <span class="text-muted small">(sequence no.)</span>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-danger btn-sm font-weight-bold float-right"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
           <div class="row p-3">
             <div class="col-4">
               <span class="font-weight-bold text-muted">No questions</span>
             </div>
           </div>
           {% endif %}
-          <button
-            class="
-              btn btn-danger btn-sm
-              mt-5
-              font-weight-bold
-              delete-category-form-modal-btn
-            "
-            data-toggle="modal"
-            data-target="#deleteCategoryFormModal"
-          >
-            Delete
-          </button>
-          {% endfor %}
+          <div class="mt-5">
+            <button
+              class="
+                btn btn-danger btn-sm
+                font-weight-bold
+                delete-category-form-modal-btn
+              "
+              data-toggle="modal"
+              data-target="#deleteCategoryFormModal"
+            >
+              Delete
+            </button>
+            <span class="small text-muted ml-3"
+              >(Deleting category will also delete corresponding
+              questions)</span
+            >
+          </div>
+
+          {% endfor %} {% endif %}
         </div>
       </div>
     </div>
@@ -100,7 +137,7 @@ block body %}
   aria-labelledby="deleteCategoryFormModal"
   aria-hidden="true"
 >
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <form id="deleteCategoryForm">
         <div class="modal-header">
@@ -148,7 +185,7 @@ block body %}
   aria-labelledby="categoryFormModal"
   aria-hidden="true"
 >
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <form id="surveyCategoryForm">
         <div class="modal-header">
@@ -163,15 +200,18 @@ block body %}
           </button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <!-- <label for="description">Description</label> -->
-            <input
-              type="text"
-              class="form-control"
-              id="description"
-              name="description"
-              placeholder="Description"
-            />
+          <div class="row align-items-center justify-content-center">
+            <div class="col-3 font-weight-bold">
+              {{qt_form.qt_description.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <!-- <label for="description">Description</label> -->
+
+                {{qt_form.qt_description(class_="form-control",
+                placeholder="Description")}}
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -183,9 +223,97 @@ block body %}
             Close
           </button>
           <button
-            type="button"
+            type="submit"
             class="btn btn-primary btn-sm"
             id="saveSurveyCategoryBtn"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="questionFormModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="questionFormModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form id="questionForm">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold">
+            New question
+            <span class="small question-description-form">(Grooming)</span>
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{question_form.question_type_id}}
+          <div class="row align-items-center justify-content-center">
+            <div class="col-3 font-weight-bold">
+              {{question_form.q_description.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                {{question_form.q_description(class_="form-control",
+                placeholder="Description")}}
+              </div>
+            </div>
+
+            <div class="col-3 font-weight-bold">
+              {{question_form.place_number.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                {{question_form.place_number (class_="form-control",
+                placeholder="Sequence no.")}}
+              </div>
+            </div>
+
+            <div class="col-3 font-weight-bold">
+              {{question_form.choice_id.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                {{ question_form.choice_id(class_="form-control form-select
+                form-select-sm selectpicker w-100")}}
+              </div>
+            </div>
+
+            <div class="col-3 font-weight-bold">
+              {{question_form.is_required.label(class_="float-right
+              form-check-label")}}
+            </div>
+            <div class="col-7">
+              {{ question_form.is_required(class_="form-check")}}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary btn-sm"
+            id="saveQuestionBtn"
           >
             Save
           </button>

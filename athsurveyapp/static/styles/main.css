@@ -5,7 +5,6 @@ html {
 
 body {
   font-family: "Montserrat", sans-serif;
-  /* background: #e9ecef; */
   font-size: 0.9rem;
 }
 
@@ -24,13 +23,24 @@ body {
 }
 
 .survey-category-inline-input {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: bold;
   border: none;
   background-color: transparent;
   padding: 0;
+  color: #ffffff;
 }
 
 .survey-category-inline-input:focus {
   outline: none;
+}
+/* override modal design */
+.modal-header,
+.modal-footer {
+  border: none !important;
+}
+
+.modal-content {
+  border: none !important;
+  border-radius: 0px;
 }

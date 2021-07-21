@@ -78,7 +78,9 @@ class QuestionType(db.Model):
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
 
-    questions = db.relationship("Question", backref="question_type")
+    questions = db.relationship(
+        "Question", backref="question_type", cascade="all, delete-orphan"
+    )
 
     def __init__(self, description, survey_id):
         self.description = description
@@ -92,7 +94,7 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(64), nullable=False)
     is_required = db.Column(db.Boolean, nullable=False, default=False)
-    place_number = db.Column(db.Integer, nullable=False)
+    sequence = db.Column(db.Integer, nullable=False)
 
     question_type_id = db.Column(
         db.Integer, db.ForeignKey("question_type.id"), nullable=False
@@ -105,17 +107,15 @@ class Question(db.Model):
         self,
         description,
         is_required,
-        place_number,
+        sequence,
         question_type_id,
         choice_id,
-        survey_id,
     ):
         self.description = description
         self.is_required = is_required
-        self.place_number = place_number
+        self.sequence = sequence
         self.question_type_id = question_type_id
         self.choice_id = choice_id
-        self.survey_id = survey_id
 
 
 class Choice(db.Model):
