@@ -44,3 +44,36 @@ body {
   border: none !important;
   border-radius: 0px;
 }
+
+.form-control,
+.dropdown-toggle {
+  background-color: #2b2b2b !important;
+  color: #fff !important;
+  border: 1px solid #222;
+}
+
+.dropdown-toggle:hover {
+  border: 1px solid #222;
+}
+
+.form-control:focus,
+.dropdown-toggle:focus {
+  border-color: #3498db !important;
+}
+
+element {
+}
+.bootstrap-select .dropdown-menu li a {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dropdown-item.active {
+  background-color: #3498db !important;
+}
+
+.dropdown-item:hover {
+  background-color: #3498db !important;
+}

@@ -40,6 +40,18 @@ class QuestionResouce(Resource):
         question_schema = QuestionSchema()
 
         return question_schema.dump(question)
+    
+    def delete(self, id):
+
+        question = Question.query.get(id)
+
+        if not question:
+            abort(400, message="Questio does not exist")
+
+        db.session.delete(question)
+        db.session.commit()
+
+        return {"message": "Question successfully deleted"}, 200
 
 
 class QuestionResourceList(Resource):

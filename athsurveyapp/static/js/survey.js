@@ -65,25 +65,47 @@ $(document).ready(function () {
       });
     });
   });
+  // SETTING QUESTION ID TO DELETE
+  $(".delete-question-form-modal-btn").on("click", function (e) {
+    e.preventDefault();
+    const questionIdToDel = $(this).parent().parent().data("questionid");
+    console.log(questionIdToDel);
+    $("#deleteQuestionForm").find("input:first").val(questionIdToDel);
+  });
+  // DELETE QUESTION
+  $("#deleteQuestionForm").on("submit", function (e) {
+    e.preventDefault();
+    const dataQuestionId = $(this).find("input:first").val();
+    $.ajax({
+      type: "DELETE",
+      url: "/api/questions/" + dataQuestionId,
+      success: function (data) {
+        location.href = "/surveys/" + surveryId;
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
+
   //   SETTING CATEGORY ID TO DELETE
   $(".delete-category-form-modal-btn").on("click", function (e) {
     e.preventDefault();
-    const categoryIdToDel = $(this).parent().data("categoryid");
+    const categoryIdToDel = $(this).parent().parent().data("categoryid");
     console.log(categoryIdToDel);
-    $('#deleteCategoryForm input[id="id"]').val(categoryIdToDel);
+    $("#deleteCategoryForm").find("input:first").val(categoryIdToDel);
   });
 
   //   DELETING SURVEY CATEGORY, SHOULD BE CASCADING WITH QUESTIONS
   $("#deleteCategoryForm").on("submit", function (e) {
     e.preventDefault();
     const dataCategoryId = $(this).find("input:first").val();
+
     $.ajax({
       type: "DELETE",
       url: "/api/question_types/" + dataCategoryId,
       success: function (data) {
-        console.log($(`div[data-categoryid="${dataCategoryId}"]`));
-        $("#deleteCategoryFormModal").modal("toggle");
-        $(`*div[data-categoryid="${dataCategoryId}"]`).remove();
+        location.href = "/surveys/" + surveryId;
       },
       error: function (error) {
         console.log(error);
@@ -111,7 +133,6 @@ $(document).ready(function () {
     const qt_id = $(this).find("input[name='question_type_id']").val();
 
     console.log(desc, sq, choice, is_req, qt_id);
-    const surveryId = $("[data-surveyid]").data("surveyid");
 
     $.ajax({
       type: "POST",
