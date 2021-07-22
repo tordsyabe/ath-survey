@@ -7,10 +7,10 @@ endblock %} {% block body %}
       <h1 class="m-0 font-weight-bold">New survey</h1>
     </div>
 
-    <div class="col-12 mt-5 bg-light">
+    <div class="col-12 mt-5 jumbotron">
       <form method="POST">
         {{ form.csrf_token }}
-        <fieldset class="p-5">
+        <fieldset class="">
           <div class="row">
             <!--  -->
             <div class="col-3">
@@ -48,13 +48,16 @@ endblock %} {% block body %}
           <!--  -->
 
           <div class="mt-5">
-            <button type="submit" class="btn btn-primary float-right">
+            <button
+              type="submit"
+              class="btn btn-info btn-sm float-right font-weight-bold"
+            >
               Save
             </button>
 
             <a
               href="{{ url_for('survey_page.survey_index') }}"
-              class="btn btn-secondary float-right mr-2"
+              class="btn btn-secondary btn-sm float-right mr-2 font-weight-bold"
               >Cancel</a
             >
           </div>

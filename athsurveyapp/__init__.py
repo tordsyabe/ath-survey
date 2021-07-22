@@ -5,7 +5,7 @@ from flask_restful import Api
 
 import os
 
-from athsurveyapp.blueprints.survey import survey_page
+from athsurveyapp.blueprints.survey import survey_page, SurveyResource
 from athsurveyapp.blueprints.branch import branch_page
 from athsurveyapp.blueprints.employee import employee_page
 from athsurveyapp.blueprints.question_type import (
@@ -40,6 +40,8 @@ def create_app():
 
     api.add_resource(QuestionResouce, "/api/questions/<int:id>")
     api.add_resource(QuestionResourceList, "/api/questions")
+
+    api.add_resource(SurveyResource, "/api/surveys/<int:id>")
 
     db.init_app(app)
     migrate.init_app(app, db)

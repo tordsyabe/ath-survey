@@ -61,7 +61,9 @@ class Survey(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    question_types = db.relationship("QuestionType", backref="survey")
+    question_types = db.relationship(
+        "QuestionType", backref="survey", cascade="all, delete-orphan"
+    )
 
     def __init__(self, name, description):
         self.name = name
