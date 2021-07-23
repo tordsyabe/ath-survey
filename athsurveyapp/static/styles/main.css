@@ -40,12 +40,30 @@ body {
   color: #ffffff;
 }
 
+.survey-description-inline-input {
+  font-size: 0.9rem;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  color: #ffffff;
+}
+
+.survey-description-inline-input:focus {
+  outline: none;
+}
+
 .survey-category-inline-input:focus {
   outline: none;
 }
 
 .survey-name-inline-input:focus {
   outline: none;
+}
+
+#surveyName,
+#surveyDescription,
+.survey-category {
+  cursor: pointer;
 }
 /* override modal design */
 .modal-header,

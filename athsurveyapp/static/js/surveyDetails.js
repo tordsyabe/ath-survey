@@ -64,6 +64,38 @@ $(document).ready(function () {
     });
   });
 
+  // EDITING SURVEY DESCRIPTION
+  $("#surveyDescription").dblclick(function () {
+    $(this).hide();
+    const surveyDescInp = $(".survey-description-inline-input");
+    surveyDescInp.show();
+    surveyDescInp.focus();
+    const suveyDescInputWidth = 30 + $(this).width();
+    surveyDescInp.css({
+      width: suveyDescInputWidth + "px",
+    });
+    surveyDescInp.focusout(function () {
+      $.ajax({
+        type: "PUT",
+        url: "/api/surveys/" + surveyId,
+        contentType: "application/json",
+        data: JSON.stringify({
+          name: $(".survey-name-inline-input").val(),
+          description: surveyDescInp.val(),
+        }),
+        success: function (data) {
+          console.log(data);
+          surveyDescInp.hide();
+          surveyDescInp.prev().html(data.description);
+          surveyDescInp.prev().show();
+        },
+        error: function (error) {
+          console.log(error);
+        },
+      });
+    });
+  });
+
   //   EDITING SURVEY CATEGORY
   $(".survey-category").dblclick(function () {
     $(this).hide();
