@@ -37,6 +37,6 @@ class QtSchema(ma.Schema):
 class SurveySchema(ma.Schema):
     class Meta:
         model = Survey
-        fields = ("id", "description", "question_types")
+        fields = ("id", "name", "description", "question_types")
 
     question_types = fields.Nested(QtSchema, many=True)

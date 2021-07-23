@@ -4,7 +4,7 @@ $(document).ready(function () {
     window.location = $(this).data("href");
   });
   //   ADDING NEW SURVEY CATEGORY
-  const surveryId = $("[data-surveyid]").data("surveyid");
+  const surveyId = $("[data-surveyid]").data("surveyid");
 
   const saveSurveyCategoryForm = $("#surveyCategoryForm");
 
@@ -19,17 +19,51 @@ $(document).ready(function () {
       contentType: "application/json",
       data: JSON.stringify({
         description: categoryDescription,
-        survey_id: surveryId,
+        survey_id: surveyId,
       }),
 
       success: function (data) {
-        location.href = "/surveys/" + surveryId;
+        location.href = "/surveys/" + surveyId;
       },
       error: function (error) {
         console.log(error);
       },
     });
   });
+  // EDITING SURVEY NAME
+  $("#surveyName").dblclick(function () {
+    $(this).hide();
+    const surveyNameInp = $(".survey-name-inline-input");
+
+    surveyNameInp.show();
+    surveyNameInp.focus();
+    const suveyNameInputWidth = 30 + $(this).width();
+    surveyNameInp.css({
+      width: suveyNameInputWidth + "px",
+    });
+
+    surveyNameInp.focusout(function () {
+      $.ajax({
+        type: "PUT",
+        url: "/api/surveys/" + surveyId,
+        contentType: "application/json",
+        data: JSON.stringify({
+          name: surveyNameInp.val(),
+          description: $(".survey-description-inline-input").val(),
+        }),
+        success: function (data) {
+          console.log(data);
+          surveyNameInp.hide();
+          surveyNameInp.prev().html(data.name);
+          surveyNameInp.prev().show();
+        },
+        error: function (error) {
+          console.log(error.responseJSON.message);
+        },
+      });
+    });
+  });
+
   //   EDITING SURVEY CATEGORY
   $(".survey-category").dblclick(function () {
     $(this).hide();
@@ -51,7 +85,7 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify({
           description: categoryInput.val(),
-          survey_id: surveryId,
+          survey_id: surveyId,
         }),
         success: function (data) {
           console.log(data);
@@ -80,7 +114,7 @@ $(document).ready(function () {
       type: "DELETE",
       url: "/api/questions/" + dataQuestionId,
       success: function (data) {
-        location.href = "/surveys/" + surveryId;
+        location.href = "/surveys/" + surveyId;
       },
       error: function (error) {
         console.log(error);
@@ -105,7 +139,7 @@ $(document).ready(function () {
       type: "DELETE",
       url: "/api/question_types/" + dataCategoryId,
       success: function (data) {
-        location.href = "/surveys/" + surveryId;
+        location.href = "/surveys/" + surveyId;
       },
       error: function (error) {
         console.log(error);
@@ -148,7 +182,7 @@ $(document).ready(function () {
 
       success: function (data) {
         console.log(data);
-        location.href = "/surveys/" + surveryId;
+        location.href = "/surveys/" + surveyId;
       },
       error: function (error) {
         console.log(error);

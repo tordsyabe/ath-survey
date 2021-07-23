@@ -4,8 +4,22 @@ block body %}
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <div class="col-12" data-surveyid="{{ survey.id }}">
-      <h1 class="m-0 font-weight-bold">{{ survey.name }}</h1>
-      <p class="text-muted mt-3">{{ survey.description }}</p>
+      <h1 class="m-0 font-weight-bold" id="surveyName">{{ survey.name }}</h1>
+      <input
+        type="text"
+        class="survey-name-inline-input font-weight-bold"
+        style="display: none"
+        value="{{survey.name}}"
+      />
+      <p class="text-muted mt-3" id="surveyDescription">
+        {{ survey.description }}
+      </p>
+      <input
+        type="text"
+        class="survey-description-inline-input font-weight-bold"
+        style="display: none"
+        value="{{survey.description}}"
+      />
     </div>
   </div>
 
@@ -41,7 +55,7 @@ block body %}
             </h2>
             <input
               type="text"
-              class="survey-category-inline-input ont-weight-bold my-5 mr-5"
+              class="survey-category-inline-input font-weight-bold my-5 mr-5"
               style="display: none"
               value="{{question_type.description}}"
             />
