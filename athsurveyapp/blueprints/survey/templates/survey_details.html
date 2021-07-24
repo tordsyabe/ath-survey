@@ -16,7 +16,7 @@ block body %}
       </p>
       <input
         type="text"
-        class="survey-description-inline-input mt-3"
+        class="survey-description-inline-input my-3"
         style="display: none"
         value="{{survey.description}}"
       />
@@ -84,13 +84,16 @@ block body %}
                   >
                   <span class="text-muted small">(description)</span>
                 </td>
-                <td>
+                <!-- <td>
                   <span class="font-weight-bold col-4"
                     >{{question.is_required}}</span
                   >
                   <span class="text-muted small">(required)</span>
-                </td>
+                </td> -->
                 <td>
+                  <span class="font-weight-bold col-4 d-none"
+                    >{{question.choice.id}}</span
+                  >
                   <span class="font-weight-bold col-4"
                     >{{question.choice.value}}</span
                   >
@@ -114,6 +117,19 @@ block body %}
                     data-target="#deleteQuestionFormModal"
                   >
                     Delete
+                  </button>
+                  <button
+                    class="
+                      btn btn-secondary btn-sm
+                      font-weight-bold
+                      float-right
+                      edit-question-form-modal-btn
+                      mr-2
+                    "
+                    data-toggle="modal"
+                    data-target="#questionFormModal"
+                  >
+                    Edit
                   </button>
                 </td>
               </tr>
@@ -324,7 +340,7 @@ block body %}
       <form id="questionForm">
         <div class="modal-header">
           <h5 class="modal-title font-weight-bold">
-            New question
+            Add/Edit
             <span class="small question-description-form">(Grooming)</span>
           </h5>
           <button
@@ -337,7 +353,7 @@ block body %}
           </button>
         </div>
         <div class="modal-body">
-          {{question_form.question_type_id}}
+          {{question_form.question_type_id}} {{question_form.q_id}}
           <div class="row align-items-center justify-content-center">
             <div class="col-3 font-weight-bold">
               {{question_form.q_description.label(class_="float-right")}}
@@ -365,16 +381,8 @@ block body %}
             <div class="col-7">
               <div class="form-group">
                 {{ question_form.choice_id(class_="form-control form-select
-                form-select-sm selectpicker w-100")}}
+                w-100")}}
               </div>
-            </div>
-
-            <div class="col-3 font-weight-bold">
-              {{question_form.is_required.label(class_="float-right
-              form-check-label")}}
-            </div>
-            <div class="col-7">
-              {{ question_form.is_required(class_="form-check")}}
             </div>
           </div>
         </div>

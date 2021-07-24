@@ -6,6 +6,8 @@ from athsurveyapp.models.models import Question, db
 from athsurveyapp.schemas import QuestionSchema
 
 question_args = reqparse.RequestParser()
+
+question_args.add_argument("id")
 question_args.add_argument(
     "description", type=str, help="Question description is required", required=True
 )
@@ -66,6 +68,22 @@ class QuestionResourceList(Resource):
 
         args = question_args.parse_args()
 
+        question_schema = QuestionSchema()
+
+
+        if args["id"]:
+            question = Question.query.get(int(args["id"]))
+
+            question.description = args["description"]
+            question.choice_id = args["choice_id"]
+            question.question_type_id = args["question_type_id"]
+            question.sequence = args["sequence"]
+            question.is_required = args["is_required"]
+
+            db.session.commit()
+
+            return question_schema.dump(question), 201
+
         new_question = Question(
             args["description"],
             args["is_required"],
@@ -77,6 +95,5 @@ class QuestionResourceList(Resource):
         db.session.add(new_question)
         db.session.commit()
 
-        new_question_schema = QuestionSchema()
 
-        return new_question_schema.dump(new_question), 201
+        return question_schema.dump(new_question), 201

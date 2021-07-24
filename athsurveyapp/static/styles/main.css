@@ -38,6 +38,7 @@ body {
   background-color: transparent;
   padding: 0;
   color: #ffffff;
+  width: 80%;
 }
 
 .survey-description-inline-input {
@@ -46,6 +47,7 @@ body {
   background-color: transparent;
   padding: 0;
   color: #ffffff;
+  width: 80%;
 }
 
 .survey-description-inline-input:focus {
@@ -92,8 +94,6 @@ body {
   border-color: #3498db !important;
 }
 
-element {
-}
 .bootstrap-select .dropdown-menu li a {
   cursor: pointer;
   -webkit-user-select: none;
@@ -102,9 +102,5 @@ element {
   user-select: none;
 }
 .dropdown-item.active {
-  background-color: #3498db !important;
-}
-
-.dropdown-item:hover {
   background-color: #3498db !important;
 }

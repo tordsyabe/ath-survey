@@ -37,10 +37,10 @@ $(document).ready(function () {
 
     surveyNameInp.show();
     surveyNameInp.focus();
-    const suveyNameInputWidth = 30 + $(this).width();
-    surveyNameInp.css({
-      width: suveyNameInputWidth + "px",
-    });
+    // const suveyNameInputWidth = 30 + $(this).width();
+    // surveyNameInp.css({
+    //   width: suveyNameInputWidth + "px",
+    // });
 
     surveyNameInp.focusout(function () {
       $.ajax({
@@ -70,10 +70,10 @@ $(document).ready(function () {
     const surveyDescInp = $(".survey-description-inline-input");
     surveyDescInp.show();
     surveyDescInp.focus();
-    const suveyDescInputWidth = 30 + $(this).width();
-    surveyDescInp.css({
-      width: suveyDescInputWidth + "px",
-    });
+    // const suveyDescInputWidth = 30 + $(this).width();
+    // surveyDescInp.css({
+    //   width: suveyDescInputWidth + "px",
+    // });
     surveyDescInp.focusout(function () {
       $.ajax({
         type: "PUT",
@@ -189,9 +189,10 @@ $(document).ready(function () {
     $(".question-description-form").html(`(${surveyCatDesc})`);
   });
 
-  // ADDING QUESTION
+  // SAVING QUESTION
   $("#questionForm").on("submit", function (e) {
     e.preventDefault();
+    const q_id = $(this).find("input[name='q_id']").val();
     const desc = $(this).find("input[name='q_description']").val();
     const sq = $(this).find("input[name='place_number']").val();
     const choice = $(this).find("select[name='choice_id']").val();
@@ -205,6 +206,7 @@ $(document).ready(function () {
       url: "/api/questions",
       contentType: "application/json",
       data: JSON.stringify({
+        id: q_id,
         description: desc,
         sequence: parseInt(sq),
         is_required: true,
@@ -220,5 +222,40 @@ $(document).ready(function () {
         console.log(error);
       },
     });
+  });
+
+  $(".edit-question-form-modal-btn").on("click", function (e) {
+    $("#questionFormModal").modal("toggle");
+    const surveyCatDesc = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .find("h2")
+      .text();
+    const surveyCatId = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .data("categoryid");
+
+    $("#questionForm").find("input[name='question_type_id']").val(surveyCatId);
+
+    $(".question-description-form").html(`(${surveyCatDesc})`);
+    const quesToEdit = $(this).parent().parent().data("questionid");
+    const quesInfo = $(this).parent().parent();
+    $('input[id="q_id"').val(quesToEdit);
+    $('input[id="q_description"').val(
+      $(quesInfo).find("td:eq(0) .font-weight-bold").text()
+    );
+    $('input[id="place_number"').val(
+      $(quesInfo).find("td:eq(2) .font-weight-bold").text()
+    );
+
+    $('select[id="choice_id"').val(
+      $(quesInfo).find("td:eq(1) span:first").text()
+    );
   });
 });
