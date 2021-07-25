@@ -5,33 +5,28 @@
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <div class="col-12">
-      <h1>Conduct a survey</h1>
+      <h1 class="font-weight-bold">Conduct a survey</h1>
     </div>
 
-    <div class="col-12 mt-5 bg-light">
+    <div class="col-12 mt-5 jumbotron">
       <form action="#" method="POST">
-        <fieldset class="p-5">
+        <fieldset>
                     
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-3">
-                    <label class="form-label font-weight-bold mb-0" for="branch">
-                        Branch
-                    </label>
+                  <label class="form-label font-weight-bold mb-0 float-right" for="branch">
+                    Branch
+                </label>
                 </div>
         
                 <div class="col-7">
                     <div class="form-group">
-                        <select class="form-control form-select form-select-sm selectpicker w-100" 
-                        name="branch" id="branch" data-live-search="true">
-                        {% for branch in branches %}
-        
-                        <option value="{{branch.id}}">
-                            {{ branch.name }}
-                        </option>
-        
-                        {% endfor %}
-                        
-                    </select>
+                      <select class="form-control form-select form-select-sm selectpicker w-100" 
+                      name="branch" id="branch" data-live-search="true">
+                      {% for branch in branches %}
+                        <option value="{{branch.id}}">{{branch.name}}</option>
+                      {% endfor %}
+                      </select>
                     </div>    
                   
         
@@ -48,17 +43,17 @@
         
             <div class="mb-1 row align-items-center">
                 <div class="col-3">
-                    <label class="form-label font-weight-bold mb-0" for="staff">
-                        Staff
-                    </label>
+                  <label class="form-label font-weight-bold mb-0 float-right" for="employee">
+                    Employee
+                </label>
                 </div>
         
                 <div class="col-7">
                     <div class="form-group">
-                        <select class="form-control form-select form-select-sm selectpicker w-100" 
-                        name="staff" id="staff" data-live-search="true">
-        
-                    </select>
+                      <select class="form-control form-select form-select-sm selectpicker w-100" 
+                      name="employee" id="employee" data-live-search="true">
+                      
+                      </select>
                     </div>
                   
         
@@ -66,7 +61,7 @@
                 
                 <div class="col-2 offset-3">
                     <div class="invalid-feedback">
-                        Please select a staff
+                        Please select an employee
                     </div>
                 </div>
         
@@ -75,23 +70,14 @@
         
             <div class="mb-1 row align-items-center">
                 <div class="col-3">
-                    <label class="form-label font-weight-bold mb-0" for="branch">
-                        Survey Type
-                    </label>
+
+                    {{form.survey.label(class_="form-label font-weight-bold mb-0 float-right")}}
                 </div>
         
                 <div class="col-7">
                     <div class="form-group">
-                        <select class="form-control form-select form-select-sm selectpicker w-100" 
-                        name="survey" id="survey" data-live-search="true">
-                        <option value="1">
-                            Grooming and personal hygiene
-                        </option>
-                        <option value="2">
-                            Customer service
-                        </option>
-                    
-                    </select>
+
+                    {{form.survey(class_="form-control form-select form-select-sm selectpicker w-100")}}
                     </div>
                    
         
@@ -105,13 +91,13 @@
         
         
             </div>
-        
-        
-        <button class="btn btn-primary next mt-5">Start survey</a>
+                <button type="button" class="btn btn-info next mt-5">Start survey</button>
+
+
         
         </fieldset>
         
-        <fieldset class="p-5" id="surveyForm2" style="display:none">
+        <fieldset id="surveyForm2" style="display:none">
             <div class="row">
                 <div class="col-6">
                     <p><strong>Date:</strong> July 7, 2021</p>
@@ -197,7 +183,7 @@
             <button class="btn btn-primary next mt-5">Next</button>
         </fieldset>
         
-        <fieldset class="p-5" id="surveyForm3" style="display:none">
+        <fieldset id="surveyForm3" style="display:none">
             <div class="row">
                 <div class="col-6">
                     <p><strong>Date:</strong> July 7, 2021</p>

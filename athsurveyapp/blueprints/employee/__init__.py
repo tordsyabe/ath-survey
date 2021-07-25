@@ -1,1 +1,2 @@
 from athsurveyapp.blueprints.employee.views import employee_page
+from athsurveyapp.blueprints.employee.resource import EmployeeResourceList, BranchEmployeeResource

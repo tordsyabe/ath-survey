@@ -1,6 +1,7 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
-from athsurveyapp.models.models import QuestionType, Survey, Question, Choice
+from sqlalchemy.sql.functions import mode
+from athsurveyapp.models.models import QuestionType, Survey, Question, Choice, Employee, Branch
 
 ma = Marshmallow()
 
@@ -40,3 +41,21 @@ class SurveySchema(ma.Schema):
         fields = ("id", "name", "description", "question_types")
 
     question_types = fields.Nested(QtSchema, many=True)
+    
+    
+class BranchSchema(ma.Schema):
+    class Meta:
+        model = Branch
+        fields = ("id", "name", "address")
+    
+class EmployeeSchema(ma.Schema):
+    class Meta:
+        model = Employee
+        fields = ("id", "name", "designation", "code", "branch")
+        
+    branch = fields.Nested(BranchSchema)
+
+class EmployeeByBranchSchema(ma.Schema):
+    class Meta:
+        model = Employee
+        fields = ("id", "name", "designation", "code")

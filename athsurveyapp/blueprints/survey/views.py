@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from athsurveyapp.blueprints.survey.forms import SurveyForm
+from athsurveyapp.blueprints.survey.forms import SurveyForm, ConductSurveyForm
 from athsurveyapp.blueprints.question.forms import QuestionForm
-from athsurveyapp.models.models import db, Survey
+from athsurveyapp.models.models import db, Survey, Branch
 
 from athsurveyapp.blueprints.question_type import QuestionTypeForm
 
@@ -49,3 +49,12 @@ def survey_details(id):
         qt_form=qt_form,
         question_form=question_form,
     )
+    
+@survey_page.route("/conduct")
+def conduct_survey():
+    
+    form = ConductSurveyForm()
+    
+    branches = Branch.query.all()
+    
+    return render_template("conduct_survey.html", form=form, branches=branches)

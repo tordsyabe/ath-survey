@@ -83,7 +83,7 @@
               >
             </li>
             <li class="nav-item float-right">
-              <a class="nav-link" href="#">Conduct Survey</a>
+              <a class="btn btn-secondary" href="{{ url_for('survey_page.conduct_survey')}}">Conduct Survey</a>
             </li>
           </ul>
         </div>
@@ -102,5 +102,6 @@
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
     <script src="{{url_for('static', filename='js/surveyDetails.js')}}"></script>
     <script src="{{url_for('static', filename='js/survey.js')}}"></script>
+    <script src="{{url_for('static', filename='js/conductSurvey.js')}}"></script>
   </body>
 </html>
