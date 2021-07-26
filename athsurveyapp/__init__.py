@@ -19,7 +19,7 @@ from athsurveyapp.blueprints.question import (
     QuestionResourceList,
 )
 
-from athsurveyapp.blueprints.employee import EmployeeResourceList, BranchEmployeeResource
+from athsurveyapp.blueprints.employee import EmployeeResourceList, BranchEmployeeResource, EmployeeResource
 from athsurveyapp.schemas import ma
 
 migrate = Migrate()
@@ -46,6 +46,7 @@ def create_app():
     api.add_resource(SurveyResource, "/api/surveys/<int:id>")
     
     api.add_resource(EmployeeResourceList, "/api/employees")
+    api.add_resource(EmployeeResource, "/api/employees/<int:id>")
     api.add_resource(BranchEmployeeResource, "/api/employees/branch/<int:id>")
 
     db.init_app(app)

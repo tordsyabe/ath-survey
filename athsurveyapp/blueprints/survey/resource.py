@@ -14,6 +14,17 @@ survey_args.add_argument(
 
 
 class SurveyResource(Resource):
+    
+    def get(self, id):
+        survey = Survey.query.get(id)
+        
+        if not survey:
+            abort(400, message="Survey does not exist")
+        
+        survey_schema = SurveySchema()
+        
+        return survey_schema.dump(survey)
+    
     def put(self, id):
         args = survey_args.parse_args()
         survey_to_update = Survey.query.get(id)

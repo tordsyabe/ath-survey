@@ -13,6 +13,20 @@ class BranchEmployeeResource(Resource):
         employees_by_branch = Employee.query.filter_by(branch_id=id) 
         employees_by_branch_schema = EmployeeByBranchSchema(many=True)
         return employees_by_branch_schema.dump(employees_by_branch)
+    
+class EmployeeResource(Resource):
+    
+    def get(self, id):
+        
+        employee = Employee.query.get(id)
+        
+        if not employee:
+            abort(404, message="Employee does not exist")
+            
+            
+        employee_schema = EmployeeSchema()
+            
+        return employee_schema.dump(employee)
 
 class EmployeeResourceList(Resource):
     
