@@ -50,11 +50,15 @@ def survey_details(id):
         question_form=question_form,
     )
     
-@survey_page.route("/conduct")
+@survey_page.route("/conduct", methods=["GET", "POST"])
 def conduct_survey():
     
     form = ConductSurveyForm()
     
+    data = request.form
+    
     branches = Branch.query.all()
+    
+    print(data)
     
     return render_template("conduct_survey.html", form=form, branches=branches)

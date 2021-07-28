@@ -25,10 +25,13 @@ $(document).ready(function() {
     });
 
 
-
     $("#startSurveyBtn").on("click", function(e){
         const selectedEmp = $('select[id="employee"]').val();
         const selectedSurvey = $('select[id="survey"]').val();
+        console.log("clicked");
+        let fieldsetCategory = "";
+        let questions = "";
+        let choices = "";
 
         // var current_fs, next_fs, previous_fs; //fieldsets
         // var opacity;
@@ -115,39 +118,54 @@ $(document).ready(function() {
             url: `/api/surveys/${selectedSurvey}`,
             contentType: "application/json",
             success: function(data) {
-                console.log(data);
+
                 surveyName = data.name
                 $(".survey-name").html(data.name)
-                let fieldsetCategory = "";
+                
                 for (let i = 0; i < data.question_types.length; i++) {
 
-                    let questions = "";
+                    
                     data.question_types[i].questions.forEach(question => {
 
-                        let choices = "";
+                        
 
                         for (let k = 0; k < question.choice.value; k++) {
+
                             choices += `
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">${k + 1}</label>
-                                `
+                            <input style="display: none;" class="form-check-input" type="radio" name="${question.description}" id="${question.description + k}" value="${k + 1}">
+                            <label class="form-check-label" for="${question.description + k}">${k + 1}</label>
+                            `;
+
+                            
                         }
 
+                        
                         questions += `
                         <tr>
-                        <td>
-                            <label class="font-weight-bold">${question.description}</label>
-                        </td>
-                        <td>
-                            <div class="form-check form-check-inline d-flex justify-content-between">${choices}</div>
-                         </td>
+                            <td class="w-50">
+                                <label class="font-weight-bold">${question.description}</label>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline d-flex justify-content-between">${choices}</div>
+                                <div class="form-group py-3 mt-3" style="display: none;">
+                                    <input type="text" class="form-control" placeholder="Please provide reason why less than 10">
+                                </div>
+                            </td>
 
                          </tr>
 
                         `;
+                        $(`input[name="${question.description}"]:eq(9)`).attr('checked', true);
+                        $(`input[name="${question.description}"]`).change(function(){
+                            if($(this).val() !== '10') {
+                                $(this).parent().next().css("display", "block");
+                            } else {
+                                $(this).parent().next().css("display", "none");
+                            }
+                        });
+
                     });
 
-                    console.log(data.question_types.length, i);
                     fieldsetCategory += `
                     <fieldset style="display: none;">
                     <div class="row">
@@ -185,7 +203,6 @@ $(document).ready(function() {
                     ${data.question_types.length == i + 1 ? '<button type="submit" class="btn btn-info mt-5">Submit</button>' : '<button class="btn btn-info next mt-5">Next</button>' }
                 </fieldset>`;
                 }
-                console.log(fieldsetCategory);
                 $("form").append(fieldsetCategory);
             },
             error: function(error) {
