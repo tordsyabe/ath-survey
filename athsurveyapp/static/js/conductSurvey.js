@@ -29,18 +29,16 @@ $(document).ready(function() {
         const selectedEmp = $('select[id="employee"]').val();
         const selectedSurvey = $('select[id="survey"]').val();
         console.log("clicked");
-        let fieldsetCategory = "";
-        let questions = "";
-        let choices = "";
+        $(this).html("Start Survey")
 
         // var current_fs, next_fs, previous_fs; //fieldsets
-        // var opacity;
+        // var opacity;          
+
       
         $(".next").click(function (event) {
-          event.preventDefault();
-          current_fs = $(this).parent();
-          next_fs = $(this).parent().next();
-      
+            event.preventDefault();
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
           //show the next fieldset
           next_fs.show();
           //hide the current fieldset with style
@@ -118,6 +116,7 @@ $(document).ready(function() {
             url: `/api/surveys/${selectedSurvey}`,
             contentType: "application/json",
             success: function(data) {
+                let fieldsetCategory = "";
 
                 surveyName = data.name
                 $(".survey-name").html(data.name)
@@ -125,9 +124,11 @@ $(document).ready(function() {
                 for (let i = 0; i < data.question_types.length; i++) {
 
                     
+                    let questions = "";
+                    
                     data.question_types[i].questions.forEach(question => {
 
-                        
+                        let choices = "";
 
                         for (let k = 0; k < question.choice.value; k++) {
 
@@ -194,8 +195,10 @@ $(document).ready(function() {
                             <h1 class="font-weight-bold">${data.question_types[i].description}</h1>
         
                         </div>
-                        <table class="table table-hover mt-5 px-5">
-                                ${questions}
+                        <table class="table table-hover mt-5 px-5" id="tableSurvey">
+                            <tbody>
+                            ${questions}
+                            </tbody>
                         </table>
                     </div>
 

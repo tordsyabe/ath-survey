@@ -1,7 +1,8 @@
+from athsurveyapp.blueprints import employee
 from flask import Blueprint, render_template, request, redirect, url_for
 from athsurveyapp.blueprints.survey.forms import SurveyForm, ConductSurveyForm
 from athsurveyapp.blueprints.question.forms import QuestionForm
-from athsurveyapp.models.models import db, Survey, Branch
+from athsurveyapp.models.models import db, Survey, Branch, Employee
 
 from athsurveyapp.blueprints.question_type import QuestionTypeForm
 
@@ -58,7 +59,8 @@ def conduct_survey():
     data = request.form
     
     branches = Branch.query.all()
+    employees = Employee.query.filter_by(branch_id=1)
     
     print(data)
     
-    return render_template("conduct_survey.html", form=form, branches=branches)
+    return render_template("conduct_survey.html", form=form, branches=branches, employees=employees)

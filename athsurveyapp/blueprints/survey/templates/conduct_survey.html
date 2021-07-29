@@ -47,7 +47,9 @@
                     <div class="form-group">
                       <select class="form-control form-select form-select-sm selectpicker w-100" 
                       name="employee" id="employee" data-live-search="true">
-                      
+                        {% for employee in employees%}
+                          <option value="{{employee.id}}">{{employee.name}}</option>
+                        {% endfor %}
                       </select>
                     </div>
                   
@@ -86,10 +88,10 @@
         
         
             </div>
-                <button type="button" class="btn btn-info next mt-5" id="startSurveyBtn">Start survey</button>
+
+                <button type="button" class="btn btn-info next mt-5" id="startSurveyBtn">Confirm Selection</button>
 
 
-        
         </fieldset>
 
         
