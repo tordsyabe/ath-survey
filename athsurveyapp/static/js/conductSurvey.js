@@ -1,147 +1,143 @@
-$(document).ready(function() {
-    $('select[id="branch"]').on('change', function(e){
-        const branch_id = e.target.value;
+$(document).ready(function () {
+  $('select[id="branch"]').on("change", function (e) {
+    const branch_id = e.target.value;
 
-        const empSelection = $('select[id="employee"]');
+    const empSelection = $('select[id="employee"]');
 
-        $.ajax({
-            type: "GET",
-            url: `/api/employees/branch/${branch_id}`,
-            contentType: "application/json",
-            dataType: "json",
-            success: function (data) {
-              options = "";
-              for (var i = 0; i < data.length; i++) {
-                options += `<option value="${data[i].id}">${data[i].name}</option>`;
-              }
-              empSelection.empty().append(options);
-              empSelection.val(0);
-              empSelection.selectpicker("refresh");
-            },
-            error: function (error) {
-              console.log(error);
-            },
-          });
+    $.ajax({
+      type: "GET",
+      url: `/api/employees/branch/${branch_id}`,
+      contentType: "application/json",
+      dataType: "json",
+      success: function (data) {
+        options = "";
+        for (var i = 0; i < data.length; i++) {
+          options += `<option value="${data[i].id}">${data[i].name}</option>`;
+        }
+        empSelection.empty().append(options);
+        empSelection.val(0);
+        empSelection.selectpicker("refresh");
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
+
+  $("#startSurveyBtn").on("click", function (e) {
+    const selectedEmp = $('select[id="employee"]').val();
+    const selectedSurvey = $('select[id="survey"]').val();
+    console.log("clicked");
+    $(this).html("Start Survey");
+
+    // var current_fs, next_fs, previous_fs; //fieldsets
+    // var opacity;
+
+    $(".next").click(function (event) {
+      event.preventDefault();
+      current_fs = $(this).parent();
+      next_fs = $(this).parent().next();
+      //show the next fieldset
+      next_fs.show();
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
+
+            current_fs.css({
+              display: "none",
+              position: "relative",
+            });
+            next_fs.css({ opacity: opacity });
+          },
+          duration: 600,
+        }
+      );
     });
 
+    $(".previous").click(function (event) {
+      event.preventDefault();
+      current_fs = $(this).parent();
+      previous_fs = $(this).parent().prev();
 
-    $("#startSurveyBtn").on("click", function(e){
-        const selectedEmp = $('select[id="employee"]').val();
-        const selectedSurvey = $('select[id="survey"]').val();
-        console.log("clicked");
-        $(this).html("Start Survey")
+      //show the previous fieldset
+      previous_fs.show();
 
-        // var current_fs, next_fs, previous_fs; //fieldsets
-        // var opacity;          
+      //hide the current fieldset with style
+      current_fs.animate(
+        { opacity: 0 },
+        {
+          step: function (now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
 
-      
-        $(".next").click(function (event) {
-            event.preventDefault();
-            current_fs = $(this).parent();
-            next_fs = $(this).parent().next();
-          //show the next fieldset
-          next_fs.show();
-          //hide the current fieldset with style
-          current_fs.animate(
-            { opacity: 0 },
-            {
-              step: function (now) {
-                // for making fielset appear animation
-                opacity = 1 - now;
-      
-                current_fs.css({
-                  display: "none",
-                  position: "relative",
-                });
-                next_fs.css({ opacity: opacity });
-              },
-              duration: 600,
-            }
-          );
-        });
+            current_fs.css({
+              display: "none",
+              position: "relative",
+            });
+            previous_fs.css({ opacity: opacity });
+          },
+          duration: 600,
+        }
+      );
+    });
 
-        
-        $(".previous").click(function (event) {
-            event.preventDefault();
-            current_fs = $(this).parent();
-            previous_fs = $(this).parent().prev();
+    let empName = "";
+    let empDesignation = "";
+    let branchName = "";
+    let surveyName = "";
 
-            //show the previous fieldset
-            previous_fs.show();
+    $.ajax({
+      type: "GET",
+      url: `/api/employees/${selectedEmp}`,
+      contentType: "application/json",
+      dataType: "json",
+      success: function (data) {
+        empName = data.name;
+        empDesignation = data.designation;
+        branchName = data.branch.name;
+        $(".employee-name").html(empName);
+        $(".branch-name").html(branchName);
+        $(".employee-designation").html(empDesignation);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
 
-            //hide the current fieldset with style
-            current_fs.animate(
-            { opacity: 0 },
-            {
-                step: function (now) {
-                // for making fielset appear animation
-                opacity = 1 - now;
+    $.ajax({
+      type: "GET",
+      url: `/api/surveys/${selectedSurvey}`,
+      contentType: "application/json",
+      success: function (data) {
+        let fieldsetCategory = "";
 
-                current_fs.css({
-                    display: "none",
-                    position: "relative",
-                });
-                previous_fs.css({ opacity: opacity });
-                },
-                duration: 600,
-            }
-            );
-        });
+        surveyName = data.name;
+        $(".survey-name").html(data.name);
 
-        let empName = ""
-        let empDesignation = ""
-        let branchName = ""
-        let surveyName = ""
+        for (let i = 0; i < data.question_types.length; i++) {
+          let questions = "";
 
-        $.ajax({
-            type: "GET",
-            url: `/api/employees/${selectedEmp}`,
-            contentType: "application/json",
-            dataType: "json",
-            success: function (data) {
-                empName = data.name
-                empDesignation = data.designation
-                branchName = data.branch.name
-                $(".employee-name").html(empName);
-                $(".branch-name").html(branchName);
-                $(".employee-designation").html(empDesignation);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+          data.question_types[i].questions.forEach((question) => {
+            let choices = "";
 
-        $.ajax({
-            type: "GET",
-            url: `/api/surveys/${selectedSurvey}`,
-            contentType: "application/json",
-            success: function(data) {
-                let fieldsetCategory = "";
-
-                surveyName = data.name
-                $(".survey-name").html(data.name)
-                
-                for (let i = 0; i < data.question_types.length; i++) {
-
-                    
-                    let questions = "";
-                    
-                    data.question_types[i].questions.forEach(question => {
-
-                        let choices = "";
-
-                        for (let k = 0; k < question.choice.value; k++) {
-
-                            choices += `
-                            <input style="display: none;" class="form-check-input" type="radio" name="${question.description}" id="${question.description + k}" value="${k + 1}">
-                            <label class="form-check-label" for="${question.description + k}">${k + 1}</label>
+            for (let k = 0; k < question.choice.value; k++) {
+              choices += `
+                            <input style="display: none;" class="form-check-input" type="radio" name="${
+                              question.id
+                            }" id="${question.description + k}" value="${
+                k + 1
+              }">
+                            <label class="form-check-label" for="${
+                              question.description + k
+                            }">${k + 1}</label>
                             `;
+            }
 
-                            
-                        }
-
-                        
-                        questions += `
+            questions += `
                         <tr>
                             <td class="w-50">
                                 <label class="font-weight-bold">${question.description}</label>
@@ -156,18 +152,17 @@ $(document).ready(function() {
                          </tr>
 
                         `;
-                        $(`input[name="${question.description}"]:eq(9)`).attr('checked', true);
-                        $(`input[name="${question.description}"]`).change(function(){
-                            if($(this).val() !== '10') {
-                                $(this).parent().next().css("display", "block");
-                            } else {
-                                $(this).parent().next().css("display", "none");
-                            }
-                        });
+            $(`input[name="${question.id}"]:eq(9)`).attr("checked", true);
+            $(`input[name="${question.id}"]`).change(function () {
+              if ($(this).val() !== "10") {
+                $(this).parent().next().css("display", "block");
+              } else {
+                $(this).parent().next().css("display", "none");
+              }
+            });
+          });
 
-                    });
-
-                    fieldsetCategory += `
+          fieldsetCategory += `
                     <fieldset style="display: none;">
                     <div class="row">
                         <div class="col-6">
@@ -192,7 +187,9 @@ $(document).ready(function() {
 
                     <div class="row mt-5">
                         <div class="col-12">
-                            <h1 class="font-weight-bold">${data.question_types[i].description}</h1>
+                            <h1 class="font-weight-bold">${
+                              data.question_types[i].description
+                            }</h1>
         
                         </div>
                         <table class="table table-hover mt-5 px-5" id="tableSurvey">
@@ -203,16 +200,18 @@ $(document).ready(function() {
                     </div>
 
                     <button class="btn btn-secondary previous mt-5">Back</button>
-                    ${data.question_types.length == i + 1 ? '<button type="submit" class="btn btn-info mt-5">Submit</button>' : '<button class="btn btn-info next mt-5">Next</button>' }
+                    ${
+                      data.question_types.length == i + 1
+                        ? '<button type="submit" class="btn btn-info mt-5">Submit</button>'
+                        : '<button class="btn btn-info next mt-5">Next</button>'
+                    }
                 </fieldset>`;
-                }
-                $("form").append(fieldsetCategory);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+        }
+        $("form").append(fieldsetCategory);
+      },
+      error: function (error) {
+        console.log(error);
+      },
     });
-
-    
+  });
 });

@@ -70,7 +70,7 @@ class Survey(db.Model):
         self.description = description
 
 
-class QuestionType(db.Model): 
+class QuestionType(db.Model):
 
     __tablename__ = "question_type"
 
@@ -135,34 +135,35 @@ class Choice(db.Model):
     def __init__(self, description, value):
         self.description = description
         self.value = value
-        
+
+
 class Response(db.Model):
-    
+
     __tablename__ = "response"
-    
+
     id = db.Column(db.Integer, primary_key=True)
     employee_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=False)
     survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-    
-    question_responses = db.relationship("QuestionResponse", backref="response", cascade="all, delete-orphan")
-    
-    def __init__(self,employee_id, survey_id):
+
+    question_responses = db.relationship(
+        "QuestionResponse", backref="response", cascade="all, delete-orphan"
+    )
+
+    def __init__(self, employee_id, survey_id):
         self.employee_id = employee_id
         self.survey_id = survey_id
-    
+
+
 class QuestionResponse(db.Model):
-    
+
     __tablename__ = "question_response"
-    
+
     id = db.Column(db.Integer, primary_key=True)
     response_id = db.Column(db.Integer, db.ForeignKey("response.id"), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey("question.id"), nullable=False)
-    
+
     def __init__(self, response_id, question_id):
         self.response_id = response_id
         self.question_id = question_id
-    
-    
-    
