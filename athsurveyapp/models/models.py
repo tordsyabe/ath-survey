@@ -22,7 +22,8 @@ class Employee(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     designation = db.Column(db.String, nullable=False)
-    branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
+    
+    responses = db.relationship("Response", backref="employee", cascade="all, delete-orphan")
 
     def __init__(self, name, code, designation, branch_id):
         self.name = name
@@ -61,9 +62,7 @@ class Survey(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    question_types = db.relationship(
-        "QuestionType", backref="survey", cascade="all, delete-orphan"
-    )
+    question_types = db.relationship("QuestionType", backref="survey", cascade="all, delete-orphan")
 
     def __init__(self, name, description):
         self.name = name
@@ -80,9 +79,7 @@ class QuestionType(db.Model):
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
 
-    questions = db.relationship(
-        "Question", backref="question_type", cascade="all, delete-orphan"
-    )
+    questions = db.relationship("Question", backref="question_type", cascade="all, delete-orphan")
 
     def __init__(self, description, survey_id):
         self.description = description
@@ -98,21 +95,12 @@ class Question(db.Model):
     is_required = db.Column(db.Boolean, nullable=False, default=False)
     sequence = db.Column(db.Integer, nullable=False)
 
-    question_type_id = db.Column(
-        db.Integer, db.ForeignKey("question_type.id"), nullable=False
-    )
+    question_type_id = db.Column(db.Integer, db.ForeignKey("question_type.id"), nullable=False)
     choice_id = db.Column(db.Integer, db.ForeignKey("choice.id"), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    def __init__(
-        self,
-        description,
-        is_required,
-        sequence,
-        question_type_id,
-        choice_id,
-    ):
+    def __init__(self,description,is_required,sequence,question_type_id,choice_id):
         self.description = description
         self.is_required = is_required
         self.sequence = sequence
@@ -136,7 +124,6 @@ class Choice(db.Model):
         self.description = description
         self.value = value
 
-
 class Response(db.Model):
 
     __tablename__ = "response"
@@ -147,9 +134,7 @@ class Response(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    question_responses = db.relationship(
-        "QuestionResponse", backref="response", cascade="all, delete-orphan"
-    )
+    question_responses = db.relationship("QuestionResponse", backref="response", cascade="all, delete-orphan")
 
     def __init__(self, employee_id, survey_id):
         self.employee_id = employee_id
@@ -161,9 +146,10 @@ class QuestionResponse(db.Model):
     __tablename__ = "question_response"
 
     id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.String)
     response_id = db.Column(db.Integer, db.ForeignKey("response.id"), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey("question.id"), nullable=False)
-
-    def __init__(self, response_id, question_id):
-        self.response_id = response_id
-        self.question_id = question_id
+    
+    def __init__(self, question_id, answer):
+        self.question_id = int(question_id)
+        self.answer = answer

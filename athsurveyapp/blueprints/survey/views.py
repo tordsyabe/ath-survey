@@ -2,7 +2,7 @@ from athsurveyapp.blueprints import employee
 from flask import Blueprint, render_template, request, redirect, url_for
 from athsurveyapp.blueprints.survey.forms import SurveyForm, ConductSurveyForm
 from athsurveyapp.blueprints.question.forms import QuestionForm
-from athsurveyapp.models.models import db, Survey, Branch, Employee
+from athsurveyapp.models.models import db, Survey, Branch, Employee, Response, QuestionResponse
 
 from athsurveyapp.blueprints.question_type import QuestionTypeForm
 
@@ -55,12 +55,34 @@ def survey_details(id):
 def conduct_survey():
     
     form = ConductSurveyForm()
-    
-    data = request.form
-    
     branches = Branch.query.all()
     employees = Employee.query.filter_by(branch_id=1)
     
-    print(data)
+    if request.method == "POST":
+        employee = request.form["employee"]
+        survey = request.form["survey"]
+        
+        
+        new_response = Response(employee, survey)
+        
+        
+        question_response = {}
+
+        for fieldname, value in request.form.items():
+            question_response[fieldname] = value
+            
+
+        question_response.pop("csrf_token", None)
+        question_response.pop("employee", None)
+        question_response.pop("branch", None)
+        question_response.pop("survey", None)
+
+        for q, qr in question_response.items():
+            new_response.question_responses.append(QuestionResponse(q, qr))
+        
+        db.session.add(new_response)
+        db.session.commit()
+        
+        return redirect(url_for("survey_page.conduct_survey"))
     
     return render_template("conduct_survey.html", form=form, branches=branches, employees=employees)

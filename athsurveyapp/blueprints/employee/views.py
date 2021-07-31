@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from athsurveyapp.blueprints.employee.forms import EmployeeForm
-from athsurveyapp.models.models import Employee, Branch, db
+from athsurveyapp.models.models import Employee, Branch, Question, db
 
 employee_page = Blueprint('employee_page', __name__,
                           template_folder="templates")
@@ -10,6 +10,13 @@ employee_page = Blueprint('employee_page', __name__,
 def employee_index():
 
     employees = Employee.query.all()
+    
+    for emp in employees:
+        for resp in emp.responses:
+            print(resp.survey_id)
+            for ques_res in resp.question_responses:
+                
+                print(Question.query.get(ques_res.question_id).description, ques_res.answer)
 
     return render_template('employees.html', employees=employees)
 
