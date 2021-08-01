@@ -100,7 +100,7 @@ class Question(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    def __init__(self,description,is_required,sequence,question_type_id,choice_id):
+    def __init__(self,description, is_required, sequence, question_type_id, choice_id):
         self.description = description
         self.is_required = is_required
         self.sequence = sequence
@@ -135,6 +135,7 @@ class Response(db.Model):
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     question_responses = db.relationship("QuestionResponse", backref="response", cascade="all, delete-orphan")
+    survey = db.relationship("Survey", backref="responses")
 
     def __init__(self, employee_id, survey_id):
         self.employee_id = employee_id

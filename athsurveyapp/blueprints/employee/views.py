@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from athsurveyapp.blueprints.employee.forms import EmployeeForm
 from athsurveyapp.models.models import Employee, Branch, Question, db
+import datetime
 
 employee_page = Blueprint('employee_page', __name__,
                           template_folder="templates")
@@ -10,15 +11,26 @@ employee_page = Blueprint('employee_page', __name__,
 def employee_index():
 
     employees = Employee.query.all()
-    
-    for emp in employees:
-        for resp in emp.responses:
-            print(resp.survey_id)
-            for ques_res in resp.question_responses:
-                
-                print(Question.query.get(ques_res.question_id).description, ques_res.answer)
 
     return render_template('employees.html', employees=employees)
+
+@employee_page.route("/<id>")
+def employee_details(id):
+    
+    employee = Employee.query.get(id)
+    for resp in employee.responses:
+        print(resp.date_created)
+        setattr(resp, "response_date", resp.date_created.strftime('%m/%d/%Y'))
+        
+        score = 0
+        
+        for ques_res in resp.question_responses:
+            score += int(ques_res.answer)
+            setattr(ques_res, "question_description", Question.query.get(ques_res.question_id).description)
+            setattr(resp, "average", score / len(resp.question_responses))
+    
+    return render_template('employee_details.html', employee=employee)
+    
 
 
 @employee_page.route("/create", methods=['GET', 'POST'])

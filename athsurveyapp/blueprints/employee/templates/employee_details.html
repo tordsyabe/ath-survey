@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %} 
+{% block title %}ATH - Survey{% endblock %} 
+{% block meta_description %}Arabian Tea House survey application{% endblock %} 
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12">
+            <h1 class="m-0 font-weight-bold">{{ employee.name }}</h1>
+            <span class="mt-3">
+                {{ employee.designation }}
+              </span>
+
+        </div>
+        <!-- <div class="col-6">
+          
+        </div>
+        <div class="col-6">
+            <p class="text-muted">
+                {{ employee.branch.name }}
+              </p>
+
+        </div>
+        <div class="col-12">
+            <p class="text-muted">
+                {{ employee.code }}
+              </p>
+
+        </div> -->
+    </div>
+
+    <div class="row mt-5 align-items-center">
+        <div class="col-6">
+            <h5 class="font-weight-bold m-0">Surveys</h5>
+          </div>
+          
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="jumbotron py-2">
+                {% if not employee.responses %}
+                    <p class="font-weight-bold text-center my-5 text-muted">
+                        No surveys
+                    </p>
+                {% else %}
+                <table class="table table-hover mt-5">
+                    {% for response in employee.responses %}
+                        <tr data-toggle="collapse" data-target="#{{response.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <td class="w-50">
+                               <p class="response-date">{{ response.response_date }}</p>
+                               <h1 class="font-weight-bold mt-3">{{ response.average }}</h1>
+
+                            </td>
+                            <td>
+                                <p class="font-weight-bold">{{response.survey.name}}</p>
+                                <div class="collapse mt-3" id="{{response.id}}">
+                                    <div class="card card-body bg-secondary">
+                                        {% for q_response in response.question_responses %}
+                                            <p>{{q_response.question_description }} - {{q_response.answer}}</p>
+                                        {% endfor %}
+                                    </div>
+                                  </div>
+                            </td>
+
+                        </tr>
+                   
+                     
+                        
+                    {% endfor %}
+                </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
