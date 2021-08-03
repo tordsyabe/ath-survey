@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 60ecfbf9731b
+Revision ID: a9717c3bef55
 Revises: 
-Create Date: 2021-07-31 09:09:31.691225
+Create Date: 2021-08-03 13:22:40.890578
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '60ecfbf9731b'
+revision = 'a9717c3bef55'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('branch',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.Column('address', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -30,7 +30,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=64), nullable=False),
     sa.Column('value', sa.Integer(), nullable=True),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -38,7 +38,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=64), nullable=False),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -47,7 +47,7 @@ def upgrade():
     sa.Column('branch_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('code', sa.String(), nullable=False),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.Column('designation', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['branch_id'], ['branch.id'], ),
@@ -56,7 +56,7 @@ def upgrade():
     op.create_table('question_type',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=64), nullable=False),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.Column('survey_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['survey_id'], ['survey.id'], ),
@@ -69,7 +69,7 @@ def upgrade():
     sa.Column('sequence', sa.Integer(), nullable=False),
     sa.Column('question_type_id', sa.Integer(), nullable=False),
     sa.Column('choice_id', sa.Integer(), nullable=False),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.ForeignKeyConstraint(['choice_id'], ['choice.id'], ),
     sa.ForeignKeyConstraint(['question_type_id'], ['question_type.id'], ),
@@ -79,7 +79,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('employee_id', sa.Integer(), nullable=False),
     sa.Column('survey_id', sa.Integer(), nullable=False),
-    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('date_created', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.Column('last_updated', sa.DateTime(timezone=True), nullable=True),
     sa.ForeignKeyConstraint(['employee_id'], ['employee.id'], ),
     sa.ForeignKeyConstraint(['survey_id'], ['survey.id'], ),

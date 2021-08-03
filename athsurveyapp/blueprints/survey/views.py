@@ -57,6 +57,7 @@ def conduct_survey():
     form = ConductSurveyForm()
     branches = Branch.query.all()
     employees = Employee.query.filter_by(branch_id=1)
+    survey = Survey.query.get(1)
     
     if request.method == "POST":
         employee = request.form["employee"]
@@ -85,4 +86,4 @@ def conduct_survey():
         
         return redirect(url_for("survey_page.conduct_survey"))
     
-    return render_template("conduct_survey.html", form=form, branches=branches, employees=employees)
+    return render_template("conduct_survey.html", form=form, branches=branches, employees=employees, survey=survey)

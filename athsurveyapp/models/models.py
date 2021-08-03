@@ -152,5 +152,5 @@ class QuestionResponse(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey("question.id"), nullable=False)
     
     def __init__(self, question_id, answer):
-        self.question_id = int(question_id)
+        self.question_id = question_id
         self.answer = answer

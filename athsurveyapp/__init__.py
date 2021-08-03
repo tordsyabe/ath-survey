@@ -32,9 +32,10 @@ def create_app():
     basedir = os.path.abspath(os.path.dirname(__file__))
     app.config["SECRET_KEY"] = "secrettalagato"
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
-        basedir, "data.sqlite"
-    )
+    # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    #     basedir, "data.sqlite"
+    # )
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://tordsyabe:tordsyabe@localhost/ath_survey'
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     api.add_resource(QuestionTypeResource, "/api/question_types/<int:id>")
