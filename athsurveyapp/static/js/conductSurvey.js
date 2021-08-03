@@ -13,7 +13,6 @@ $(document).ready(function() {
         contentType: "application/json",
         success: function(data) {
             let fieldsetCategory = "";
-
             const surveyName = data.name
             $(".survey-name").html(data.name)
             
@@ -50,14 +49,6 @@ $(document).ready(function() {
                      </tr>
 
                     `;
-                    $(`input[name="${question.description}"]:eq(9)`).attr('checked', true);
-                    $(`input[name="${question.description}"]`).change(function(){
-                        if($(this).val() !== '10') {
-                            $(this).parent().next().css("display", "block");
-                        } else {
-                            $(this).parent().next().css("display", "none");
-                        }
-                    });
 
                 });
 
@@ -99,6 +90,8 @@ $(document).ready(function() {
                 <button class="btn btn-secondary previous mt-5">Back</button>
                 ${data.question_types.length == i + 1 ? '<button type="submit" class="btn btn-info mt-5">Submit</button>' : '<button class="btn btn-info next mt-5">Next</button>' }
             </fieldset>`;
+            
+
             }
             $("form").append(fieldsetCategory);
         },
@@ -136,12 +129,24 @@ $(document).ready(function() {
 
     $("#startSurveyBtn").on("click", function(e){
         const selectedEmp = $('select[id="employee"]').val();
-        const selectedSurvey = $('select[id="survey"]').val();
+        // const selectedSurvey = $('select[id="survey"]').val();
         console.log("clicked");
         $(this).html("Start Survey")
 
-        // var current_fs, next_fs, previous_fs; //fieldsets
-        // var opacity;
+        $('input:radio').each(function(){
+          console.log($(this));
+
+        });
+
+        // $(`input[name=${question.id}]`).change(function(){
+        //   console.log("changed");
+        //     if($(this).val() !== '10') {
+        //         $(this).parent().next().css("display", "block");
+        //     } else {
+        //         $(this).parent().next().css("display", "none");
+        //     }
+        // });
+
       
         $(".next").click(function (event) {
           event.preventDefault();
