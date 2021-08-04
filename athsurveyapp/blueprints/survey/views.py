@@ -73,17 +73,16 @@ def conduct_survey():
                 if index % 2 == 1:
                     feedback.append(feedbacks[1])
         # print(feedback)
-        
+        f = 0
         for idx, answers in enumerate(question_responses):
             
             if idx > 3:
                 if idx % 2 == 0:
-                    print(answers)
-        #     if index % 2 == 0:
-        #         new_response.question_responses.append(QuestionResponse(answers[0], answers[1], feedback[index]))
+                    new_response.question_responses.append(QuestionResponse(answers[0], answers[1], feedback[f]))
+                    f += 1
                     
-        # db.session.add(new_response)
-        # db.session.commit()
+        db.session.add(new_response)
+        db.session.commit()
         
         return redirect(url_for("survey_page.conduct_survey"))
     
