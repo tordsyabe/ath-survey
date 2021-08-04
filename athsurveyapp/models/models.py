@@ -148,9 +148,11 @@ class QuestionResponse(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     answer = db.Column(db.String)
+    feedback = db.Column(db.String)
     response_id = db.Column(db.Integer, db.ForeignKey("response.id"), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey("question.id"), nullable=False)
     
-    def __init__(self, question_id, answer):
+    def __init__(self, question_id, answer, feedback):
         self.question_id = question_id
         self.answer = answer
+        self.feedback = feedback

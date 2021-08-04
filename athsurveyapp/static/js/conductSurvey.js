@@ -40,9 +40,9 @@ $(document).ready(function() {
                             <label class="font-weight-bold">${question.description}</label>
                         </td>
                         <td>
-                            <div class="form-check form-check-inline d-flex justify-content-between">${choices}</div>
+                            <div class="form-check form-check-inline d-flex justify-content-between queston-choices">${choices}</div>
                             <div class="form-group py-3 mt-3" style="display: none;">
-                                <input type="text" class="form-control" placeholder="Please provide reason why less than 10">
+                                <input type="text" class="form-control" name="${question.id + ".feed"}" placeholder="Please provide reason why less than 10">
                             </div>
                         </td>
 
@@ -133,19 +133,19 @@ $(document).ready(function() {
         console.log("clicked");
         $(this).html("Start Survey")
 
-        $('input:radio').each(function(){
-          console.log($(this));
+        $('.queston-choices').each(function(){
+          $('input[type=radio]:last', this).attr('checked', true);
 
         });
 
-        // $(`input[name=${question.id}]`).change(function(){
-        //   console.log("changed");
-        //     if($(this).val() !== '10') {
-        //         $(this).parent().next().css("display", "block");
-        //     } else {
-        //         $(this).parent().next().css("display", "none");
-        //     }
-        // });
+        $(`input[type=radio]`).change(function(){
+          console.log("changed");
+            if($(this).val() !== '10') {
+                $(this).parent().next().css("display", "block");
+            } else {
+                $(this).parent().next().css("display", "none");
+            }
+        });
 
       
         $(".next").click(function (event) {

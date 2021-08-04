@@ -47,11 +47,6 @@
                     {% for response in employee.responses %}
                         <tr data-toggle="collapse" data-target="#{{response.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <td class="w-50">
-                               <p class="response-date">{{ response.response_date }}</p>
-                               <h1 class="font-weight-bold mt-3">{{ response.average }}</h1>
-
-                            </td>
-                            <td>
                                 <p class="font-weight-bold">{{response.survey.name}}</p>
                                 <div class="collapse mt-3" id="{{response.id}}">
                                     <div class="card card-body bg-secondary">
@@ -60,6 +55,12 @@
                                         {% endfor %}
                                     </div>
                                   </div>
+
+                            </td>
+                            <td>
+
+                                  <p class="response-date">{{ response.response_date }}</p>
+                                  <h1 class="font-weight-bold mt-3">{{ response.average }}</h1>
                             </td>
 
                         </tr>

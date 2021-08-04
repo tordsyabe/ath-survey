@@ -63,26 +63,27 @@ def conduct_survey():
         employee = request.form["employee"]
         survey = request.form["survey"]
         
-        
         new_response = Response(employee, survey)
+        feedback = []
         
-        
-        question_response = {}
-
-        for fieldname, value in request.form.items():
-            question_response[fieldname] = value
+        question_responses = [[fieldname, value] for fieldname, value in request.form.items()]
+        for index, feedbacks in enumerate(question_responses):
             
-
-        question_response.pop("csrf_token", None)
-        question_response.pop("employee", None)
-        question_response.pop("branch", None)
-        question_response.pop("survey", None)
-
-        for q, qr in question_response.items():
-            new_response.question_responses.append(QuestionResponse(q, qr))
+            if index > 3:
+                if index % 2 == 1:
+                    feedback.append(feedbacks[1])
+        # print(feedback)
         
-        db.session.add(new_response)
-        db.session.commit()
+        for idx, answers in enumerate(question_responses):
+            
+            if idx > 3:
+                if idx % 2 == 0:
+                    print(answers)
+        #     if index % 2 == 0:
+        #         new_response.question_responses.append(QuestionResponse(answers[0], answers[1], feedback[index]))
+                    
+        # db.session.add(new_response)
+        # db.session.commit()
         
         return redirect(url_for("survey_page.conduct_survey"))
     
