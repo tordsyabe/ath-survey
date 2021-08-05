@@ -16,6 +16,7 @@ class Employee(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     designation = db.Column(db.String(20), nullable=False)
+    gender = db.Column(db.String(20))
     branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
     name = db.Column(db.String, nullable=False)
     code = db.Column(db.String, nullable=False)
