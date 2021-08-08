@@ -31,6 +31,26 @@ endblock %} {% block body %}
           </div>
 
           <!--  -->
+            <!--  -->
+            <div class="row">
+              <div class="col-3">
+                {{ form.gender.label(class="form-label font-weight-bold float-right mt-2") }}
+              </div>
+  
+              <div class="col-7">
+                <div class="form-group">
+                  {{ form.gender(class_="form-control form-select form-select-sm
+                  selectpicker w-100")}}
+                </div>
+              </div>
+  
+              <div class="col-2 offset-3">
+                <div class="invalid-feedback">Please select a gender</div>
+              </div>
+            </div>
+            
+
+          <!--  -->
 
           <!--  -->
           <div class="row">
@@ -72,28 +92,6 @@ endblock %} {% block body %}
             </div>
           </div>
 
-          <!--  -->
-          <!-- <div class="col-7">
-            <div class="form-group">
-              <select
-                class="
-                  form-control form-select form-select-sm
-                  selectpicker
-                  w-100
-                "
-                name="branch"
-                id="branch"
-                data-live-search="true"
-              >
-                {% for branch in branches %}
-
-                <option value="{{branch.id}}">{{ branch.name }}</option>
-
-                {% endfor %}
-              </select>
-            </div>
-          </div> -->
-          <!--  -->
           <div class="row">
             <div class="col-3">
               {{ form.branch.label(class="form-label font-weight-bold

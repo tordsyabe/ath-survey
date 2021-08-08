@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    const params = get_query();
+    $('#employee').selectpicker('val', params.employee);
+
 
     $('select[id="survey"]').change(function() {
     $("form").children("fieldset").each(function(index){
@@ -227,3 +230,13 @@ $(document).ready(function() {
 
     
 });
+
+function get_query(){
+    var url = document.location.href;
+    var qs = url.substring(url.indexOf('?') + 1).split('&');
+    for(var i = 0, result = {}; i < qs.length; i++){
+        qs[i] = qs[i].split('=');
+        result[qs[i][0]] = decodeURIComponent(qs[i][1]);
+    }
+    return result;
+}

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   $(".delete-survey-modal").on("click", function (e) {
     //   SETTING SURVEY TO DELETE
     e.preventDefault();

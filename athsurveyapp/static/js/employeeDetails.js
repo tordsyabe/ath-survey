@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    $('#employeesTable').DataTable();
+
     $('.response-date').each(function(){
         const responseDate = new Date($(this).text()).toLocaleDateString(undefined, {
             weekday: "long",

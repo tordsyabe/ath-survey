@@ -42,8 +42,10 @@ def create_employee():
         emp_code = form.code.data
         emp_designation = form.designation.data
         emp_branch = form.branch.data.id
+        emp_gender = form.gender.data
+        
 
-        new_emp = Employee(emp_name, emp_code, emp_designation, emp_branch)
+        new_emp = Employee(emp_name, emp_code, emp_designation, emp_branch, emp_gender)
 
         db.session.add(new_emp)
         db.session.commit()

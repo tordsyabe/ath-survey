@@ -7,30 +7,23 @@
         <div class="col-12">
             <h1 class="m-0 font-weight-bold">{{ employee.name }}</h1>
             <span class="mt-3">
-                {{ employee.designation }}
+                {{ employee.designation }} - {{ employee.gender | capitalize }} - {{ employee.branch.name }}
               </span>
 
         </div>
-        <!-- <div class="col-6">
-          
-        </div>
-        <div class="col-6">
-            <p class="text-muted">
-                {{ employee.branch.name }}
-              </p>
-
-        </div>
-        <div class="col-12">
-            <p class="text-muted">
-                {{ employee.code }}
-              </p>
-
-        </div> -->
     </div>
 
     <div class="row mt-5 align-items-center">
         <div class="col-6">
             <h5 class="font-weight-bold m-0">Surveys</h5>
+          </div>
+          <div class="col-6">
+              <form method="GET" action="{{url_for('survey_page.conduct_survey')}}">
+                <input type="hidden" name="employee" value="{{employee.id}}" />
+                <input type="hidden" name="branch" value="{{employee.branch.id}}" />
+
+                <input type="submit" class="btn btn-info float-right" value="Conduct Survey" />
+              </form>
           </div>
           
     </div>
@@ -51,7 +44,7 @@
                                 <div class="collapse mt-3" id="{{response.id}}">
                                     <div class="card card-body bg-secondary">
                                         {% for q_response in response.question_responses %}
-                                            <p>{{q_response.question_description }} - {{q_response.answer}}</p>
+                                            <p>{{q_response.question_description }} - {{q_response.answer}} <span class="small text-muted">({{q_response.feedback}})</span></p>
                                         {% endfor %}
                                     </div>
                                   </div>

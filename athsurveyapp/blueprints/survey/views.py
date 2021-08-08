@@ -54,9 +54,29 @@ def survey_details(id):
 @survey_page.route("/conduct", methods=["GET", "POST"])
 def conduct_survey():
     
+    url_employee_id = request.args.get('employee')
+    url_branch_id = request.args.get('branch')
+    
     form = ConductSurveyForm()
+    
+    if url_branch_id and url_employee_id:
+        default_branch = Branch.query.get(url_branch_id)
+        default_emp = Employee.query.get(url_employee_id)
+
+        form.branch.default = default_branch
+        form.employee.default = default_emp
+        
+        form.process()
+
+    # form.employee.default = url_employee_id
+    
     branches = Branch.query.all()
-    employees = Employee.query.filter_by(branch_id=1)
+    
+    if url_branch_id:
+        employees = Employee.query.filter_by(branch_id=url_branch_id)
+    else:
+        employees = Employee.query.filter_by(branch_id=1)
+        
     survey = Survey.query.get(1)
     
     if request.method == "POST":
