@@ -24,7 +24,7 @@
 
                 <input type="submit" class="btn btn-info float-right" value="Conduct Survey" />
               </form>
-              <button class="btn btn-secondary float-right mr-2">Edit Information</button>
+              <button class="btn btn-secondary float-right mr-2" data-toggle="modal" data-target="#editEmployeeFormModal">Edit Information</button>
 
           </div>
           
@@ -68,5 +68,157 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- EDIT EMPLOYEE MODAL FORM -->
+<div
+  class="modal fade"
+  id="editEmployeeFormModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="questionFormModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form method="POST">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold">
+            Edit Employee Information
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                {{ form.csrf_token }}
+                {{ form.id }}
+                
+                  <div class="row">
+                    <!--  -->
+                    <div class="col-3">
+                      {{ form.name.label(class="form-label font-weight-bold float-right
+                      mt-2") }}
+                    </div>
+        
+                    <div class="col-7">
+                      <div class="form-group">
+                        {{ form.name(class_="form-control")}}
+                      </div>
+                    </div>
+        
+                    <div class="col-2 offset-3">
+                      <div class="invalid-feedback">Employee fullname is required</div>
+                    </div>
+                  </div>
+        
+                  <!--  -->
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-3">
+                        {{ form.gender.label(class="form-label font-weight-bold float-right mt-2") }}
+                      </div>
+          
+                      <div class="col-7">
+                        <div class="form-group">
+                          {{ form.gender(class_="form-control form-select form-select-sm
+                          selectpicker w-100")}}
+                        </div>
+                      </div>
+          
+                      <div class="col-2 offset-3">
+                        <div class="invalid-feedback">Please select a gender</div>
+                      </div>
+                    </div>
+                    
+        
+                  <!--  -->
+        
+                  <!--  -->
+                  <div class="row">
+                    <div class="col-3">
+                      {{ form.code.label(class="form-label font-weight-bold float-right
+                      mt-2") }}
+                    </div>
+        
+                    <div class="col-7">
+                      <div class="form-group">
+                        {{ form.code(class_="form-control")}}
+                      </div>
+                    </div>
+        
+                    <div class="col-2 offset-3">
+                      <div class="invalid-feedback">Employee code is required</div>
+                    </div>
+                  </div>
+        
+                  <!--  -->
+        
+                  <!--  -->
+                  <div class="row">
+                    <div class="col-3">
+                      {{ form.designation.label(class="form-label font-weight-bold
+                      float-right mt-2") }}
+                    </div>
+        
+                    <div class="col-7">
+                      <div class="form-group">
+                        {{ form.designation(class_="form-control")}}
+                      </div>
+                    </div>
+        
+                    <div class="col-2 offset-3">
+                      <div class="invalid-feedback">
+                        Employee designation is required
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="row">
+                    <div class="col-3">
+                      {{ form.branch.label(class="form-label font-weight-bold
+                      float-right mt-2") }}
+                    </div>
+        
+                    <div class="col-7">
+                      <div class="form-group">
+                        {{ form.branch(class_="form-control form-select form-select-sm
+                        selectpicker w-100")}}
+                      </div>
+                    </div>
+        
+                    <div class="col-2 offset-3">
+                      <div class="invalid-feedback">
+                        Employee designation is required
+                      </div>
+                    </div>
+                  </div>
+
+            
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm font-weight-bold"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-info btn-sm font-weight-bold"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}

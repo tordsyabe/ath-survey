@@ -24,6 +24,8 @@
             <th scope="col">Code</th>
             <th scope="col">Designation</th>
             <th scope="col">Branch</th>
+            <th scope="col">No. of Surveys</th>
+
           </tr>
         </thead>
         <tbody>
@@ -33,6 +35,7 @@
             <td>{{ employee.code }}</td>
             <td>{{ employee.designation }}</td>
             <td>{{ employee.branch.name }}</td>
+            <td>{{ employee.responses | length }}</td>
           </tr>
           {% endfor %}
         </tbody>

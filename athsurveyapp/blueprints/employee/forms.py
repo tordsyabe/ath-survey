@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
+from wtforms import StringField, SelectField, HiddenField
 from wtforms.validators import DataRequired
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
@@ -9,6 +9,7 @@ GENDER_CHOICE = [('male', 'Male'), ('female', 'Female')]
 
 class EmployeeForm(FlaskForm):
 
+    id = HiddenField("Employee ID")
     name = StringField("Fullname", validators=[DataRequired()])
     code = StringField("Code", validators=[DataRequired()])
     designation = StringField("Designation", validators=[DataRequired()])

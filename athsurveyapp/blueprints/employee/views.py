@@ -14,10 +14,24 @@ def employee_index():
 
     return render_template('employees.html', employees=employees)
 
-@employee_page.route("/<id>")
+@employee_page.route("/<id>", methods=['GET', 'POST'])
 def employee_details(id):
+    form = EmployeeForm()
+    
+    if request.method == "POST" and form.validate_on_submit():
+            
+        employee_to_edit = Employee.query.get(form.id.data)
+        
+        employee_to_edit.name = form.name.data
+        employee_to_edit.code = form.code.data
+        employee_to_edit.designation = form.designation.data
+        employee_to_edit.branch = form.branch.data
+        employee_to_edit.gender = form.gender.data
+        
+        db.session.commit()
     
     employee = Employee.query.get(id)
+    
     for resp in employee.responses:
         print(resp.date_created)
         setattr(resp, "response_date", resp.date_created.strftime('%m/%d/%Y'))
@@ -29,7 +43,15 @@ def employee_details(id):
             setattr(ques_res, "question_description", Question.query.get(ques_res.question_id).description)
             setattr(resp, "average", score / len(resp.question_responses))
     
-    return render_template('employee_details.html', employee=employee)
+    form.id.default = employee.id
+    form.name.default = employee.name
+    form.branch.default = employee.branch
+    form.code.default = employee.code
+    form.designation.default = employee.designation
+    form.gender.default = employee.gender
+    form.process()
+    
+    return render_template('employee_details.html', employee=employee, form=form)
     
 
 
@@ -38,6 +60,7 @@ def create_employee():
 
     form = EmployeeForm()
     if request.method == 'POST' and form.validate_on_submit():
+        
         emp_name = form.name.data
         emp_code = form.code.data
         emp_designation = form.designation.data
