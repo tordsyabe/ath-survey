@@ -104,6 +104,6 @@ def conduct_survey():
         db.session.add(new_response)
         db.session.commit()
         
-        return redirect(url_for("survey_page.conduct_survey"))
+        return redirect(url_for("employee_page.employee_details", id=employee))
     
     return render_template("conduct_survey.html", form=form, branches=branches, employees=employees, survey=survey)
