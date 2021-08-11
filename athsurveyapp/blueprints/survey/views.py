@@ -2,7 +2,7 @@ from athsurveyapp.blueprints import employee
 from flask import Blueprint, render_template, request, redirect, url_for
 from athsurveyapp.blueprints.survey.forms import SurveyForm, ConductSurveyForm
 from athsurveyapp.blueprints.question.forms import QuestionForm
-from athsurveyapp.models.models import db, Survey, Branch, Employee, Response, QuestionResponse
+from athsurveyapp.models.models import db, Survey, Branch, Employee, Response, QuestionResponse, Question
 
 from athsurveyapp.blueprints.question_type import QuestionTypeForm
 
@@ -98,7 +98,8 @@ def conduct_survey():
             
             if idx > 3:
                 if idx % 2 == 0:
-                    new_response.question_responses.append(QuestionResponse(answers[0], answers[1], feedback[f]))
+                    question_desc = Question.query.get(answers[0])
+                    new_response.question_responses.append(QuestionResponse(question_desc.description, answers[0], answers[1], feedback[f]))
                     f += 1
                     
         db.session.add(new_response)

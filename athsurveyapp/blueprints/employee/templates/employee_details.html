@@ -1,75 +1,175 @@
-{% extends 'layouts/base.html' %} 
-{% block title %}ATH - Survey{% endblock %} 
-{% block meta_description %}Arabian Tea House survey application{% endblock %} 
-{% block body %}
+{% extends 'layouts/base.html' %} {% block title %}ATH - Survey{% endblock %} {%
+block meta_description %}Arabian Tea House survey application{% endblock %} {%
+block body %}
 <div class="container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12">
-            <h1 class="m-0 font-weight-bold">{{ employee.name }}</h1>
-            <span class="mt-3">
-                {{ employee.designation }} - {{ employee.gender | capitalize }} - {{ employee.branch.name }}
-              </span>
-
-        </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12">
+      <h1 class="m-0 font-weight-bold">{{ employee.name }}</h1>
+      <span class="mt-3">
+        {{ employee.designation }} - {{ employee.gender | capitalize }} - {{
+        employee.branch.name }}
+      </span>
     </div>
+  </div>
 
-    <div class="row mt-5 align-items-center">
-        <div class="col-6">
-            <h5 class="font-weight-bold m-0">Surveys</h5>
-          </div>
-          <div class="col-6">
-              <form method="GET" action="{{url_for('survey_page.conduct_survey')}}">
-                <input type="hidden" name="employee" value="{{employee.id}}" />
-                <input type="hidden" name="branch" value="{{employee.branch.id}}" />
-
-                <input type="submit" class="btn btn-info float-right" value="Conduct Survey" />
-              </form>
-              <button class="btn btn-secondary float-right mr-2" data-toggle="modal" data-target="#editEmployeeFormModal">Edit Information</button>
-
-          </div>
-          
+  <div class="row mt-5 align-items-center">
+    <div class="col-6">
+      <h5 class="font-weight-bold m-0">Surveys</h5>
     </div>
+    <div class="col-6">
+      <form method="GET" action="{{url_for('survey_page.conduct_survey')}}">
+        <input type="hidden" name="employee" value="{{employee.id}}" />
+        <input type="hidden" name="branch" value="{{employee.branch.id}}" />
 
-    <div class="row mt-5">
-        <div class="col-12">
-            <div class="jumbotron py-2">
-                {% if not employee.responses %}
-                    <p class="font-weight-bold text-center my-5 text-muted">
-                        No surveys
-                    </p>
-                {% else %}
-                <table class="table table-hover mt-5">
-                    {% for response in employee.responses %}
-                        <tr data-toggle="collapse" data-target="#{{response.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <td class="w-50">
-                                <p class="font-weight-bold">{{response.survey.name}}</p>
-                                <div class="collapse mt-3" id="{{response.id}}">
-                                    <div class="card card-body bg-secondary">
-                                        {% for q_response in response.question_responses %}
-                                            <p>{{q_response.question_description }} - {{q_response.answer}} <span class="small text-muted">({{q_response.feedback}})</span></p>
-                                        {% endfor %}
-                                    </div>
-                                  </div>
-
-                            </td>
-                            <td>
-
-                                  <p class="response-date">{{ response.response_date }}</p>
-                                  <h1 class="font-weight-bold mt-3">{{ response.average }}</h1>
-                            </td>
-
-                        </tr>
-                   
-                     
-                        
-                    {% endfor %}
-                </table>
-                {% endif %}
-            </div>
-        </div>
+        <input
+          type="submit"
+          class="btn btn-info float-right"
+          value="Conduct Survey"
+        />
+      </form>
+      <button
+        class="btn btn-secondary float-right mr-2"
+        data-toggle="modal"
+        data-target="#editEmployeeFormModal"
+      >
+        Edit Information
+      </button>
     </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="jumbotron py-2">
+        {% if not employee.responses %}
+        <p class="font-weight-bold text-center my-5 text-muted">No surveys</p>
+        {% else %}
+        <table class="table table-hover mt-5">
+          {% for response in employee.responses %}
+          <tr
+            data-reponse-id="{{response.id}}"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <td class="w-50">
+              <p class="font-weight-bold">{{response.survey.name}}</p>
+              <button
+                class="
+                  btn btn-secondary btn-sm
+                  font-weight-bold
+                  mr-1
+                  delete-reponse
+                "
+                data-delete-id="{{response.id}}"
+                data-target="#deleteResponseModal"
+                data-toggle="modal"
+              >
+                Delete
+              </button>
+              <button
+                class="
+                  btn btn-info btn-sm
+                  font-weight-bold
+                  view-detailed-response
+                "
+                data-details-id="{{response.id}}"
+                data-toggle="modal"
+                data-target="#responseDetailModal"
+              >
+                View Details
+              </button>
+            </td>
+            <td>
+              <p class="response-date font-weight-bold">
+                {{ response.response_date }}
+              </p>
+              <h1 class="font-weight-bold mt-3">{{ response.average }}</h1>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </table>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
 
+<div
+  class="modal fade"
+  id="deleteResponseModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteResponseModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form id="deleteResponseForm">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold">Delete</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this response?</p>
+          <input type="hidden" id="responseId" name="responseId" />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm font-weight-bold"
+            data-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-danger btn-sm font-weight-bold"
+            id="deleteResponseBtn"
+          >
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- RESPONSE DETAILS MODAL -->
+<div
+  class="modal fade"
+  id="responseDetailModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="responseDetailModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-weight-bold">Response Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="reponseDetails" class="px-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- EDIT EMPLOYEE MODAL FORM -->
 <div
@@ -97,110 +197,107 @@
           </button>
         </div>
         <div class="modal-body">
-                {{ form.csrf_token }}
-                {{ form.id }}
-                
-                  <div class="row">
-                    <!--  -->
-                    <div class="col-3">
-                      {{ form.name.label(class="form-label font-weight-bold float-right
-                      mt-2") }}
-                    </div>
-        
-                    <div class="col-7">
-                      <div class="form-group">
-                        {{ form.name(class_="form-control")}}
-                      </div>
-                    </div>
-        
-                    <div class="col-2 offset-3">
-                      <div class="invalid-feedback">Employee fullname is required</div>
-                    </div>
-                  </div>
-        
-                  <!--  -->
-                    <!--  -->
-                    <div class="row">
-                      <div class="col-3">
-                        {{ form.gender.label(class="form-label font-weight-bold float-right mt-2") }}
-                      </div>
-          
-                      <div class="col-7">
-                        <div class="form-group">
-                          {{ form.gender(class_="form-control form-select form-select-sm
-                          selectpicker w-100")}}
-                        </div>
-                      </div>
-          
-                      <div class="col-2 offset-3">
-                        <div class="invalid-feedback">Please select a gender</div>
-                      </div>
-                    </div>
-                    
-        
-                  <!--  -->
-        
-                  <!--  -->
-                  <div class="row">
-                    <div class="col-3">
-                      {{ form.code.label(class="form-label font-weight-bold float-right
-                      mt-2") }}
-                    </div>
-        
-                    <div class="col-7">
-                      <div class="form-group">
-                        {{ form.code(class_="form-control")}}
-                      </div>
-                    </div>
-        
-                    <div class="col-2 offset-3">
-                      <div class="invalid-feedback">Employee code is required</div>
-                    </div>
-                  </div>
-        
-                  <!--  -->
-        
-                  <!--  -->
-                  <div class="row">
-                    <div class="col-3">
-                      {{ form.designation.label(class="form-label font-weight-bold
-                      float-right mt-2") }}
-                    </div>
-        
-                    <div class="col-7">
-                      <div class="form-group">
-                        {{ form.designation(class_="form-control")}}
-                      </div>
-                    </div>
-        
-                    <div class="col-2 offset-3">
-                      <div class="invalid-feedback">
-                        Employee designation is required
-                      </div>
-                    </div>
-                  </div>
-        
-                  <div class="row">
-                    <div class="col-3">
-                      {{ form.branch.label(class="form-label font-weight-bold
-                      float-right mt-2") }}
-                    </div>
-        
-                    <div class="col-7">
-                      <div class="form-group">
-                        {{ form.branch(class_="form-control form-select form-select-sm
-                        selectpicker w-100")}}
-                      </div>
-                    </div>
-        
-                    <div class="col-2 offset-3">
-                      <div class="invalid-feedback">
-                        Employee designation is required
-                      </div>
-                    </div>
-                  </div>
+          {{ form.csrf_token }} {{ form.id }}
 
-            
+          <div class="row">
+            <!--  -->
+            <div class="col-3">
+              {{ form.name.label(class="form-label font-weight-bold float-right
+              mt-2") }}
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                {{ form.name(class_="form-control")}}
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">Employee fullname is required</div>
+            </div>
+          </div>
+
+          <!--  -->
+          <!--  -->
+          <div class="row">
+            <div class="col-3">
+              {{ form.gender.label(class="form-label font-weight-bold
+              float-right mt-2") }}
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                {{ form.gender(class_="form-control form-select form-select-sm
+                selectpicker w-100")}}
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">Please select a gender</div>
+            </div>
+          </div>
+
+          <!--  -->
+
+          <!--  -->
+          <div class="row">
+            <div class="col-3">
+              {{ form.code.label(class="form-label font-weight-bold float-right
+              mt-2") }}
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                {{ form.code(class_="form-control")}}
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">Employee code is required</div>
+            </div>
+          </div>
+
+          <!--  -->
+
+          <!--  -->
+          <div class="row">
+            <div class="col-3">
+              {{ form.designation.label(class="form-label font-weight-bold
+              float-right mt-2") }}
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                {{ form.designation(class_="form-control")}}
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">
+                Employee designation is required
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">
+              {{ form.branch.label(class="form-label font-weight-bold
+              float-right mt-2") }}
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                {{ form.branch(class_="form-control form-select form-select-sm
+                selectpicker w-100")}}
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">
+                Employee designation is required
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button
@@ -210,10 +307,7 @@
           >
             Close
           </button>
-          <button
-            type="submit"
-            class="btn btn-info btn-sm font-weight-bold"
-          >
+          <button type="submit" class="btn btn-info btn-sm font-weight-bold">
             Save
           </button>
         </div>

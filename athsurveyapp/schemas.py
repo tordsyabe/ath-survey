@@ -51,17 +51,15 @@ class BranchSchema(ma.Schema):
 class QuestionResponseSchema(ma.Schema):
     class Meta:
         model = QuestionResponse
-        fields = ("id", "question", "answer")
-        
-    question = fields.Nested(QuestionSchema)
-    
+        fields = ("id", "question_id", "answer", "feedback", "question")
+
 
 class ResponseSchema(ma.Schema):
     class Meta:
         model = Response
-        fields = ("id", "date_created", "survey_id", "question_responses")
+        fields = ("id", "date_created", "survey", "question_responses")
     
-    survey_id = fields.Nested(SurveySchema)
+    survey = fields.Nested(SurveySchema, only=('name','description', ))
     question_responses = fields.Nested(QuestionResponseSchema, many=True)
 
 class EmployeeSchema(ma.Schema):

@@ -40,7 +40,6 @@ def employee_details(id):
         
         for ques_res in resp.question_responses:
             score += int(ques_res.answer)
-            setattr(ques_res, "question_description", Question.query.get(ques_res.question_id).description)
             setattr(resp, "average", score / len(resp.question_responses))
     
     form.id.default = employee.id

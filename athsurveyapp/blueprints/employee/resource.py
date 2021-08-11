@@ -1,8 +1,8 @@
 from flask_restful import Resource, reqparse, abort
 from flask import jsonify
 
-from athsurveyapp.models.models import Employee, db
-from athsurveyapp.schemas import EmployeeSchema, EmployeeByBranchSchema
+from athsurveyapp.models.models import Employee, Response, db
+from athsurveyapp.schemas import EmployeeSchema, EmployeeByBranchSchema, ResponseSchema
 
 
 
@@ -37,4 +37,27 @@ class EmployeeResourceList(Resource):
         
         return employee_list_schema.dump(employees)
     
+class EmployeeResponseResource(Resource):
     
+    def get(self, id):
+        
+        response = Response.query.get(id)
+        
+        if not response:
+            abort(404, message="Response does not exist")
+            
+        response_schema = ResponseSchema()
+        
+        return response_schema.dump(response)
+    
+    def delete(self, id):
+        
+        response_to_delete = Response.query.get(id)
+        
+        if not response_to_delete:
+            abort(404, message="Response does not exist")
+        
+        db.session.delete(response_to_delete)
+        db.session.commit()
+        
+        return {"message": "Response successfully deleted"}
