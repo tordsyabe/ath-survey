@@ -11,7 +11,7 @@ class QuestionForm(FlaskForm):
     q_id = HiddenField("Question Id")
     q_description = StringField("Description", validators=[DataRequired()])
     is_required = BooleanField("Is Required", default="checked")
-    place_number = StringField("Sequence no.", validators=[DataRequired()])
+    q_sequence = StringField("Sequence no.", validators=[DataRequired()])
     question_type_id = HiddenField("Question Type", validators=[DataRequired()])
     choice_id = QuerySelectField(
         "Choice",

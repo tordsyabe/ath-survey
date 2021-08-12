@@ -13,6 +13,11 @@ $(document).ready(function () {
     const categoryDescription = $(
       '#surveyCategoryForm input[id="qt_description"]'
     ).val();
+
+    const categorySequence = $(
+      '#surveyCategoryForm input[id="qt_sequence"]'
+    ).val();
+
     $.ajax({
       type: "POST",
       url: "/api/question_types",
@@ -20,6 +25,7 @@ $(document).ready(function () {
       data: JSON.stringify({
         description: categoryDescription,
         survey_id: surveyId,
+        sequence: categorySequence,
       }),
 
       success: function (data) {
@@ -183,7 +189,7 @@ $(document).ready(function () {
   $(".add-question-btn").on("click", function (e) {
     const surveyCatDesc = $(this).siblings("h2").text();
     const surveyCatId = $(this).parent().parent().data("categoryid");
-
+    $("#questionForm").trigger("reset");
     $("#questionForm").find("input[name='question_type_id']").val(surveyCatId);
 
     $(".question-description-form").html(`(${surveyCatDesc})`);
@@ -194,12 +200,10 @@ $(document).ready(function () {
     e.preventDefault();
     const q_id = $(this).find("input[name='q_id']").val();
     const desc = $(this).find("input[name='q_description']").val();
-    const sq = $(this).find("input[name='place_number']").val();
+    const sq = $(this).find("input[name='q_sequence']").val();
     const choice = $(this).find("select[name='choice_id']").val();
     const is_req = $(this).find("input[name='is_required']").val();
     const qt_id = $(this).find("input[name='question_type_id']").val();
-
-    console.log(desc, sq, choice, is_req, qt_id);
 
     $.ajax({
       type: "POST",
@@ -250,7 +254,7 @@ $(document).ready(function () {
     $('input[id="q_description"').val(
       $(quesInfo).find("td:eq(0) .font-weight-bold").text()
     );
-    $('input[id="place_number"').val(
+    $('input[id="q_sequence"').val(
       $(quesInfo).find("td:eq(2) .font-weight-bold").text()
     );
 

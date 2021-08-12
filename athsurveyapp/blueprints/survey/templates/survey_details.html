@@ -303,6 +303,18 @@ block body %}
                 placeholder="Description")}}
               </div>
             </div>
+
+            <div class="col-3 font-weight-bold">
+              {{qt_form.qt_sequence.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <!-- <label for="description">Description</label> -->
+
+                {{qt_form.qt_sequence(class_="form-control",
+                placeholder="Sequence")}}
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -366,11 +378,11 @@ block body %}
             </div>
 
             <div class="col-3 font-weight-bold">
-              {{question_form.place_number.label(class_="float-right")}}
+              {{question_form.q_sequence.label(class_="float-right")}}
             </div>
             <div class="col-7">
               <div class="form-group">
-                {{question_form.place_number (class_="form-control",
+                {{question_form.q_sequence(class_="form-control",
                 placeholder="Sequence no.")}}
               </div>
             </div>

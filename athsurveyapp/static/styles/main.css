@@ -106,19 +106,19 @@ body {
 }
 
 .form-check-label {
-    border: 1px solid #444;
-    border-radius: 50%;
-    width: 30px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border: 1px solid #444;
+  border-radius: 50%;
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-input[type="radio"]:checked + label{
+input[type="radio"]:checked + label {
   background: var(--cyan);
 }
 
@@ -130,4 +130,16 @@ input[type="radio"]:checked + label{
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.page-item.active .page-link {
+  background-color: var(--info) !important;
+}
+
+.page-link {
+  background-color: var(--secondary) !important;
+}
+
+.page-link:hover {
+  background-color: var(--info) !important;
 }

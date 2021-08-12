@@ -51,7 +51,11 @@ $(document).ready(function () {
     $.ajax({
       type: "DELETE",
       url: "/api/employees/responses/" + reponseToDelete,
-      success: function (data) {},
+      success: function (data) {
+        location.href =
+          "/employees/" +
+          $("#deleteResponseForm").find("input[name='employeeId']").val();
+      },
       error: function (error) {
         console.log(error);
       },

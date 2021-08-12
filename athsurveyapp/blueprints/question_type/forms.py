@@ -9,3 +9,4 @@ from athsurveyapp.models.models import db, Branch
 class QuestionTypeForm(FlaskForm):
 
     qt_description = StringField("Description", validators=[DataRequired()])
+    qt_sequence = StringField("Sequence", validators=[DataRequired()])

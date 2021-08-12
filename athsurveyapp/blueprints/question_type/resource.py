@@ -9,6 +9,7 @@ question_type_args.add_argument(
     "description", type=str, help="Survey category description", required=True
 )
 question_type_args.add_argument("survey_id", type=int, help="Survey", required=True)
+question_type_args.add_argument("sequence", type=int, help="Sequence", required=True)
 
 
 class QuestionTypeResource(Resource):
@@ -61,7 +62,7 @@ class QuestionTypeResourceList(Resource):
 
         args = question_type_args.parse_args()
 
-        new_question_type = Qt(args["description"], args["survey_id"])
+        new_question_type = Qt(args["description"], args["survey_id"], args["sequence"])
 
         db.session.add(new_question_type)
         db.session.commit()

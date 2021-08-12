@@ -64,7 +64,7 @@ class Survey(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    question_types = db.relationship("QuestionType", backref="survey", cascade="all, delete-orphan")
+    question_types = db.relationship("QuestionType", backref="survey", cascade="all, delete-orphan", order_by="QuestionType.sequence")
 
     def __init__(self, name, description):
         self.name = name
@@ -80,12 +80,14 @@ class QuestionType(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
+    sequence = db.Column(db.Integer)
 
-    questions = db.relationship("Question", backref="question_type", cascade="all, delete-orphan")
+    questions = db.relationship("Question", backref="question_type", cascade="all, delete-orphan", order_by="Question.sequence")
 
-    def __init__(self, description, survey_id):
+    def __init__(self, description, survey_id, sequence):
         self.description = description
         self.survey_id = survey_id
+        self.sequence = sequence
 
 
 class Question(db.Model):

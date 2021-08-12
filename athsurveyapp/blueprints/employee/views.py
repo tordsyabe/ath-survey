@@ -72,6 +72,6 @@ def create_employee():
         db.session.add(new_emp)
         db.session.commit()
 
-        return redirect(url_for('employee_page.employee_index'))
+        return redirect(url_for('employee_page.employee_details', id=new_emp.id))
 
     return render_template('create_employee.html', form=form)
