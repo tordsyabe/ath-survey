@@ -1,7 +1,6 @@
-{% extends 'layouts/base.html' %} 
-{% block title %}ATH - Survey{% endblock %} 
-{% block meta_description %}Arabian Tea House survey application{% endblock %} 
-{% block body %}
+{% extends 'layouts/base.html' %} {% block title %}ATH - Survey{% endblock %} {%
+block meta_description %}Arabian Tea House survey application{% endblock %} {%
+block body %}
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <div class="col-12">
@@ -12,152 +11,191 @@
       <form method="POST">
         {{ form.csrf_token }}
         <fieldset>
-                    
-            <div class="row align-items-center">
-                <div class="col-3">
-                  {{form.branch.label(class_="form-label font-weight-bold mb-0 float-right")}}
-                </div>
-        
-                <div class="col-7">
-                    <div class="form-group">
-
-                      {{form.branch(class_="form-control form-select form-select-sm selectpicker w-100")}}
-                    </div>    
-                  
-        
-                </div>
-                
-                <div class="col-2 offset-3">
-                    <div class="invalid-feedback">
-                        Please select a branch
-                    </div>
-                </div>
-        
-        
-            </div>
-        
-            <div class="mb-1 row align-items-center">
-                <div class="col-3">
-                  <label class="form-label font-weight-bold mb-0 float-right" for="employee">
-                    Employee
-                </label>
-                </div>
-        
-                <div class="col-7">
-                    <div class="form-group">
-                      <select class="form-control form-select form-select-sm selectpicker w-100" 
-                      name="employee" id="employee" data-live-search="true">
-                        {% for employee in employees%}
-                          <option value="{{employee.id}}">{{employee.name}}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                  
-        
-                </div>
-                
-                <div class="col-2 offset-3">
-                    <div class="invalid-feedback">
-                        Please select an employee
-                    </div>
-                </div>
-        
-        
-            </div>
-        
-            <div class="mb-1 row align-items-center">
-                <div class="col-3">
-
-                    {{form.survey.label(class_="form-label font-weight-bold mb-0 float-right")}}
-                </div>
-        
-                <div class="col-7">
-                    <div class="form-group">
-
-                    {{form.survey(class_="form-control form-select form-select-sm selectpicker w-100")}}
-                    </div>
-                   
-        
-                </div>
-                
-                <div class="col-2 offset-3">
-                    <div class="invalid-feedback">
-                        Please select a survey
-                    </div>
-                </div>
-        
-        
+          <div class="row align-items-center">
+            <div class="col-3">
+              {{form.branch.label(class_="form-label font-weight-bold mb-0
+              float-right")}}
             </div>
 
-                <button type="button" class="btn btn-info next mt-5" id="startSurveyBtn">Confirm Selection</button>
+            <div class="col-7">
+              <div class="form-group">
+                {{form.branch(class_="form-control form-select form-select-sm
+                selectpicker w-100")}}
+              </div>
+            </div>
 
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">Please select a branch</div>
+            </div>
+          </div>
+
+          <div class="mb-1 row align-items-center">
+            <div class="col-3">
+              <label
+                class="form-label font-weight-bold mb-0 float-right"
+                for="employee"
+              >
+                Employee
+              </label>
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                <select
+                  class="
+                    form-control form-select form-select-sm
+                    selectpicker
+                    w-100
+                  "
+                  name="employee"
+                  id="employee"
+                  data-live-search="true"
+                >
+                  {% for employee in employees%}
+                  <option value="{{employee.id}}">{{employee.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">Please select an employee</div>
+            </div>
+          </div>
+
+          <div class="mb-1 row align-items-center">
+            <div class="col-3">
+              {{form.survey.label(class_="form-label font-weight-bold mb-0
+              float-right")}}
+            </div>
+
+            <div class="col-7">
+              <div class="form-group">
+                {{form.survey(class_="form-control form-select form-select-sm
+                selectpicker w-100")}}
+              </div>
+            </div>
+
+            <div class="col-2 offset-3">
+              <div class="invalid-feedback">Please select a survey</div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-info next mt-5"
+            id="startSurveyBtn"
+          >
+            Confirm Selection
+          </button>
         </fieldset>
         {% for question_type in survey.question_types %}
-        <fieldset style="display: none;">
+        <fieldset style="display: none">
           <div class="row">
-              <div class="col-6">
-                  <p><span class="text-muted">Date:</span> <span class="font-weight-bold">DATE TODAY</span></p>
-              </div>
-              <div class="col-6">
-                  <p><span class="text-muted">Branch:</span> <span class="font-weight-bold branch-name"></span></p>
-              </div>
-              <div class="col-6">
-                  <p><span class="text-muted">Name:</span> <span class="font-weight-bold employee-name"></span></p>
-              </div>
-              <div class="col-6">
-                  <p><span class="text-muted">Designation:</span> <span class="font-weight-bold employee-designation"></span></p>
-              </div>
-              <div class="col-6">
-                  <p><span class="text-muted">Surveyor:</span> <span class="font-weight-bold survey-name">{{survey.name}}</span></p>
-              </div>
-              <div class="col-6">
-                  <p><span class="text-muted">Surveyor:</span> <span class="font-weight-bold">USER NAME</span></p>
-              </div>
+            <div class="col-6">
+              <p>
+                <span class="text-muted">Date:</span>
+                <span class="font-weight-bold">DATE TODAY</span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p>
+                <span class="text-muted">Branch:</span>
+                <span class="font-weight-bold branch-name"></span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p>
+                <span class="text-muted">Name:</span>
+                <span class="font-weight-bold employee-name"></span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p>
+                <span class="text-muted">Designation:</span>
+                <span class="font-weight-bold employee-designation"></span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p>
+                <span class="text-muted">Surveyor:</span>
+                <span class="font-weight-bold survey-name"
+                  >{{survey.name}}</span
+                >
+              </p>
+            </div>
+            <div class="col-6">
+              <p>
+                <span class="text-muted">Surveyor:</span>
+                <span class="font-weight-bold">USER NAME</span>
+              </p>
+            </div>
           </div>
 
           <div class="row mt-5">
-              <div class="col-12">
-                  <h1 class="font-weight-bold">{{question_type.description}}</h1>
+            <div class="col-12">
+              <h1 class="font-weight-bold">{{question_type.description}}</h1>
+            </div>
+            <table class="table table-hover mt-5 px-5" id="tableSurvey">
+              <tbody>
+                {% for question in question_type.questions %}
+                <tr>
+                  <td class="w-50">
+                    <label class="font-weight-bold"
+                      >{{question.description}}</label
+                    >
+                  </td>
+                  <td>
+                    <div
+                      class="
+                        form-check form-check-inline
+                        d-flex
+                        justify-content-between
+                        queston-choices
+                      "
+                    >
+                      {% for k in range(question.choice.value) %}
+                      <input
+                        style="display: none"
+                        class="form-check-input"
+                        type="radio"
+                        name="{{question.id}}"
+                        id="{{question.description + k | string}}"
+                        value="{{k + 1}}"
+                      />
+                      <label
+                        class="form-check-label"
+                        for="{{question.description + k | string}}"
+                        >{{k + 1}}</label
+                      >
+                      {% endfor %}
+                    </div>
+                    <div class="form-group py-3 mt-3" style="display: none">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="{{question.id|string + '.feed'}}"
+                        placeholder="Please provide reason why less than 10"
+                      />
+                    </div>
+                  </td>
+                </tr>
 
-              </div>
-              <table class="table table-hover mt-5 px-5" id="tableSurvey">
-                  <tbody>
-                  {% for question in question_type.questions %}
-                      <tr>
-                        <td class="w-50">
-                            <label class="font-weight-bold">{{question.description}}</label>
-                        </td>
-                        <td>
-                            <div class="form-check form-check-inline d-flex justify-content-between queston-choices">
-                              {% for k in range(question.choice.value) %}
-                                <input style="display: none;" class="form-check-input" type="radio" name="{{question.id}}" id="{{question.description + k | string}}" value="{{k + 1}}">
-                                <label class="form-check-label" for="{{question.description + k | string}}">{{k + 1}}</label>
-                              {% endfor %}
-                            </div>
-                            <div class="form-group py-3 mt-3" style="display: none;">
-                                <input type="text" class="form-control" name="{{question.id|string + '.feed'}}" placeholder="Please provide reason why less than 10">
-                            </div>
-                        </td>
-
-                     </tr>
-
-                  {% endfor %}
-                  </tbody>
-              </table>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
 
           <button class="btn btn-secondary previous mt-5">Back</button>
-          {% if survey.question_types|length == loop.index + 1 %}
-            <button class="btn btn-info next mt-5">Next</button>
+          {% if survey.question_types | length != loop.index %}
+          <button class="btn btn-info next mt-5">Next</button>
 
           {% else %}
-            <button type="submit" class="btn btn-info mt-5">Submit</button>
+          <button type="submit" class="btn btn-info mt-5">Submit</button>
 
           {% endif %}
-      </fieldset>
-      {% endfor %}
-        
-        
+        </fieldset>
+        {% endfor %}
       </form>
     </div>
   </div>
