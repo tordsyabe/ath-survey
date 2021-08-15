@@ -18,22 +18,22 @@
   <div class="row mt-5 jumbotron">
     <div class="col-12">
       <table class="table table-hover">
-        <thead>
+        <!-- <thead>
           <tr>
             <th scope="col">Branch Name</th>
             <th scope="col">Address</th>
             <th scope="col">Employees</th>
           </tr>
-        </thead>
-        <tbody>
-          {% for branch in branches %}
-          <tr>
-            <td>{{ branch.name }}</td>
-            <td>{{ branch.address }}</td>
-            <td>{{ branch.employees | length }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
+        </thead> -->
+        <!-- <tbody> -->
+        {% for branch in branches %}
+        <tr>
+          <td>{{ branch.name }}</td>
+          <td>{{ branch.address }}</td>
+          <td>{{ branch.employees | length }}</td>
+        </tr>
+        {% endfor %}
+        <!-- </tbody>s -->
       </table>
     </div>
   </div>
