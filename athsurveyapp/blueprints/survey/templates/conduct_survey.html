@@ -13,7 +13,7 @@ block body %}
         <fieldset>
           <div class="row align-items-center">
             <div class="col-3">
-              {{form.branch.label(class_="form-label font-weight-bold mb-0
+              {{form.branch.label(class_="form-label font-weight-bold
               float-right")}}
             </div>
 
@@ -23,16 +23,12 @@ block body %}
                 selectpicker w-100")}}
               </div>
             </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">Please select a branch</div>
-            </div>
           </div>
 
-          <div class="mb-1 row align-items-center">
+          <div class="row align-items-center">
             <div class="col-3">
               <label
-                class="form-label font-weight-bold mb-0 float-right"
+                class="form-label font-weight-bold float-right"
                 for="employee"
               >
                 Employee
@@ -57,15 +53,11 @@ block body %}
                 </select>
               </div>
             </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">Please select an employee</div>
-            </div>
           </div>
 
-          <div class="mb-1 row align-items-center">
+          <div class="row align-items-center">
             <div class="col-3">
-              {{form.survey.label(class_="form-label font-weight-bold mb-0
+              {{form.survey.label(class_="form-label font-weight-bold
               float-right")}}
             </div>
 
@@ -74,10 +66,6 @@ block body %}
                 {{form.survey(class_="form-control form-select form-select-sm
                 selectpicker w-100")}}
               </div>
-            </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">Please select a survey</div>
             </div>
           </div>
 
@@ -94,8 +82,8 @@ block body %}
           <div class="row">
             <div class="col-6">
               <p>
-                <span class="text-muted">Date:</span>
-                <span class="font-weight-bold">DATE TODAY</span>
+                <span class="text-muted">Name:</span>
+                <span class="font-weight-bold employee-name"></span>
               </p>
             </div>
             <div class="col-6">
@@ -104,12 +92,7 @@ block body %}
                 <span class="font-weight-bold branch-name"></span>
               </p>
             </div>
-            <div class="col-6">
-              <p>
-                <span class="text-muted">Name:</span>
-                <span class="font-weight-bold employee-name"></span>
-              </p>
-            </div>
+
             <div class="col-6">
               <p>
                 <span class="text-muted">Designation:</span>
@@ -118,7 +101,7 @@ block body %}
             </div>
             <div class="col-6">
               <p>
-                <span class="text-muted">Surveyor:</span>
+                <span class="text-muted">Survey:</span>
                 <span class="font-weight-bold survey-name"
                   >{{survey.name}}</span
                 >

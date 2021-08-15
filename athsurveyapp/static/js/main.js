@@ -3,7 +3,6 @@ $(document).ready(function () {
 
   $(".nav-item").each(function () {
     var linkPage = $(this).find("a").attr("href");
-    console.log(activePage, linkPage);
     if (activePage === linkPage) {
       $(this).addClass("active");
     }
