@@ -3,8 +3,7 @@ from athsurveyapp.blueprints.employee.forms import EmployeeForm
 from athsurveyapp.models.models import Employee, Branch, Question, db
 import datetime
 
-employee_page = Blueprint('employee_page', __name__,
-                          template_folder="templates")
+employee_page = Blueprint('employee_page', __name__, template_folder="templates")
 
 
 @employee_page.route("/")

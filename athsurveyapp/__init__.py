@@ -5,6 +5,7 @@ from flask_restful import Api
 
 import os
 
+from athsurveyapp.blueprints.dashboard import dashboard_page
 from athsurveyapp.blueprints.survey import survey_page, SurveyResource
 from athsurveyapp.blueprints.branch import branch_page
 from athsurveyapp.blueprints.employee import employee_page
@@ -61,9 +62,11 @@ def create_app():
     app.config.from_object("config.settings")
     app.config.from_pyfile("settings.py", silent=True)
 
+    app.register_blueprint(dashboard_page, url_prefix="/")
     app.register_blueprint(survey_page, url_prefix="/surveys")
     app.register_blueprint(branch_page, url_prefix="/branches")
     app.register_blueprint(employee_page, url_prefix="/employees")
+    
     # app.register_blueprint(question_type_page, url_prefix="/question_types")
     # app.register_blueprint(question_page, url_prefix="/questions")
 
