@@ -129,6 +129,25 @@ block body %}
                     >
                   </td>
                   <td>
+                    {% if not question.choice.value%}
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control w-100"
+                        name="{{question.id | string}}"
+                        placeholder="Provide your response"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        style="display: none"
+                        type="text"
+                        class="form-control w-100"
+                        name="{{question.id | string + '.feed'}}"
+                        placeholder="Provide your response"
+                      />
+                    </div>
+                    {% else %}
                     <div
                       class="
                         form-check form-check-inline
@@ -138,6 +157,7 @@ block body %}
                       "
                     >
                       {% for k in range(question.choice.value) %}
+
                       <input
                         style="display: none"
                         class="form-check-input"
@@ -151,8 +171,11 @@ block body %}
                         for="{{question.description + k | string}}"
                         >{{k + 1}}</label
                       >
+
                       {% endfor %}
                     </div>
+                    {% endif %}
+
                     <div class="form-group py-3 mt-3" style="display: none">
                       <input
                         type="text"

@@ -37,6 +37,14 @@ block body %}
       >
         Add Category
       </button>
+
+      <button
+        class="btn btn-secondary float-right font-weight-bold mr-2"
+        data-toggle="modal"
+        data-target="#choiceFormModal"
+      >
+        Add Choice Type
+      </button>
     </div>
   </div>
 
@@ -275,6 +283,78 @@ block body %}
     </div>
   </div>
 </div>
+
+<!-- NEW CHOICE MODAL FORM -->
+<div
+  class="modal fade"
+  id="choiceFormModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="choiceFormModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form id="choiceForm">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold">New choice type</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-3 font-weight-bold">
+              {{qt_form.qt_description.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <!-- <label for="description">Description</label> -->
+
+                {{qt_form.qt_description(class_="form-control",
+                placeholder="Description")}}
+              </div>
+            </div>
+
+            <div class="col-3 font-weight-bold">
+              {{qt_form.qt_sequence.label(class_="float-right")}}
+            </div>
+            <div class="col-7">
+              <div class="form-group">
+                <!-- <label for="description">Description</label> -->
+
+                {{qt_form.qt_sequence(class_="form-control",
+                placeholder="Sequence")}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm font-weight-bold"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-info btn-sm font-weight-bold"
+            id="saveSurveyCategoryBtn"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- NEW CATREGORY MODAL FORM -->
 <div
   class="modal fade"
