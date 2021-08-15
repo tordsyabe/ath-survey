@@ -45,12 +45,7 @@ block body %}
         {% else %}
         <table class="table table-hover mt-5">
           {% for response in employee.responses %}
-          <tr
-            data-reponse-id="{{response.id}}"
-            role="button"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
+          <tr data-reponse-id="{{response.id}}">
             <td class="w-50">
               <p class="font-weight-bold">{{response.survey.name}}</p>
               <button

@@ -33,6 +33,7 @@ class QuestionTypeResource(Resource):
 
         qt_to_update.description = args["description"]
         qt_to_update.survey_id = args["survey_id"]
+        qt_to_update.sequence = args["sequence"]
 
         db.session.commit()
         schema = QtSchema()

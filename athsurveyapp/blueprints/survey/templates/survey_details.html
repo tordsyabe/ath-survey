@@ -53,12 +53,20 @@ block body %}
             <h2 class="font-weight-bold my-5 mr-5 survey-category">
               {{question_type.description}}
             </h2>
+
             <input
               type="text"
               class="survey-category-inline-input font-weight-bold my-5 mr-5"
               style="display: none"
               value="{{question_type.description}}"
             />
+            <input
+              type="text"
+              class="survey-category-sq-inline-input font-weight-bold my-5 mr-5"
+              style="display: none"
+              value="{{question_type.sequence}}"
+            />
+
             <button
               class="
                 btn btn-secondary btn-sm

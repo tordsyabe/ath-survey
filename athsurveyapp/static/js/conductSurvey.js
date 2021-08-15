@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  let employee;
+
   const params = get_query();
   $("#employee").selectpicker("val", params.employee);
 
@@ -103,6 +105,7 @@ $(document).ready(function () {
                 }
             </fieldset>`;
         }
+
         $("form").append(fieldsetCategory);
       },
       error: function (error) {
@@ -158,6 +161,7 @@ $(document).ready(function () {
         $(this).parent().next().css("display", "block");
       } else {
         $(this).parent().next().css("display", "none");
+        $(this).parent().next().find("input:first").val("");
       }
     });
 
@@ -224,6 +228,7 @@ $(document).ready(function () {
       contentType: "application/json",
       dataType: "json",
       success: function (data) {
+        employee = data;
         empName = data.name;
         empDesignation = data.designation;
         branchName = data.branch.name;

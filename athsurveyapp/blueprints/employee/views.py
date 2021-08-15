@@ -33,14 +33,13 @@ def employee_details(id):
     employee = Employee.query.get(id)
     
     for resp in employee.responses:
-        print(resp.date_created)
         setattr(resp, "response_date", resp.date_created.strftime('%m/%d/%Y'))
         
         score = 0
         
         for ques_res in resp.question_responses:
             score += int(ques_res.answer)
-            setattr(resp, "average", score / len(resp.question_responses))
+            setattr(resp, "average", format(score / len(resp.question_responses), ".1f"))
     
     form.id.default = employee.id
     form.name.default = employee.name

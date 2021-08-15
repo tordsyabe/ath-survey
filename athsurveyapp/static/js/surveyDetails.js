@@ -124,6 +124,7 @@ $(document).ready(function () {
         data: JSON.stringify({
           description: categoryInput.val(),
           survey_id: surveyId,
+          sequence: $(".survey-category-sq-inline-input").val(),
         }),
         success: function (data) {
           console.log(data);
@@ -202,7 +203,7 @@ $(document).ready(function () {
     const desc = $(this).find("input[name='q_description']").val();
     const sq = $(this).find("input[name='q_sequence']").val();
     const choice = $(this).find("select[name='choice_id']").val();
-    const is_req = $(this).find("input[name='is_required']").val();
+    // const is_req = $(this).find("input[name='is_required']").val();
     const qt_id = $(this).find("input[name='question_type_id']").val();
 
     $.ajax({

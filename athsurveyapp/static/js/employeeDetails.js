@@ -47,7 +47,7 @@ $(document).ready(function () {
             <div class="col-6">${data.question_responses[i].question}</div>
             <div class="col-1">${data.question_responses[i].answer}</div>
             <div class="col-3">${data.question_responses[i].feedback}</div>
-        </div>
+          </div>
          `;
         }
         $("#reponseDetails").append(responseDetail);
