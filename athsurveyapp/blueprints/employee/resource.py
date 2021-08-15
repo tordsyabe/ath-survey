@@ -27,6 +27,18 @@ class EmployeeResource(Resource):
         employee_schema = EmployeeSchema()
             
         return employee_schema.dump(employee)
+    
+    def delete(self, id):
+        
+        employee_to_delete = Employee.query.get(id)
+        
+        if not employee_to_delete:
+            abort(404, message="Employee does not exist")
+        
+        db.session.delete(employee_to_delete)
+        db.session.commit()
+        
+        return {"message": "Employee successfully deleted"}
 
 class EmployeeResourceList(Resource):
     

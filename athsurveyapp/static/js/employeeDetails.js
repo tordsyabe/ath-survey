@@ -1,6 +1,21 @@
 $(document).ready(function () {
   $("#employeesTable").DataTable();
 
+  $("#deleteEmployeeForm").submit(function (e) {
+    const employeeToDelete = $(this).find("input:first").val();
+    e.preventDefault();
+    $.ajax({
+      type: "DELETE",
+      url: "/api/employees/" + employeeToDelete,
+      success: function (data) {
+        location.href = "/employees";
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
+
   $(".response-date").each(function () {
     const responseDate = new Date($(this).text()).toLocaleDateString(
       undefined,
