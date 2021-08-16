@@ -13,12 +13,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String())
     name = db.Column(db.String(64))
     is_admin = db.Column(db.Boolean, default=False)
-    
-    def __init__(self, email, password, name, is_admin):
-        self.email = email
-        self.password = password
-        self.name = name
-        self.is_admin = is_admin
 
 class Employee(db.Model):
 
@@ -158,9 +152,10 @@ class Response(db.Model):
     survey = db.relationship("Survey", backref="responses")
     user = db.relationship("User", backref="responses")
 
-    def __init__(self, employee_id, survey_id):
+    def __init__(self, employee_id, survey_id, user_id):
         self.employee_id = employee_id
         self.survey_id = survey_id
+        self.user_id = user_id
 
 
 class QuestionResponse(db.Model):

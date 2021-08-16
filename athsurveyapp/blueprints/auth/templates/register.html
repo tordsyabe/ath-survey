@@ -81,11 +81,16 @@
         <!--  -->
 
         <div class="mt-5">
-          <button type="submit" class="btn btn-info float-right">Save</button>
+          <button
+            type="submit"
+            class="btn btn-info float-right font-weight-bold"
+          >
+            Save
+          </button>
 
           <a
-            href="{{ url_for('auth_page.users') }}"
-            class="btn btn-secondary float-right mr-2"
+            href="{{ url_for('auth_page.users_index') }}"
+            class="btn btn-secondary float-right mr-2 font-weight-bold"
             >Cancel</a
           >
         </div>

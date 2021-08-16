@@ -1,5 +1,6 @@
 $(document).ready(function () {
   let employee;
+  const currentUsername = $(".user-name").eq(0).text();
 
   const params = get_query();
   $("#employee").selectpicker("val", params.employee);
@@ -64,22 +65,20 @@ $(document).ready(function () {
                 <fieldset style="display: none;">
                 <div class="row">
                     <div class="col-6">
-                        <p><span class="text-muted">Date:</span> <span class="font-weight-bold">DATE TODAY</span></p>
+                        <p><span class="text-muted">Name:</span> <span class="font-weight-bold employee-name"></span></p>
                     </div>
                     <div class="col-6">
                         <p><span class="text-muted">Branch:</span> <span class="font-weight-bold branch-name" ></span></p>
                     </div>
-                    <div class="col-6">
-                        <p><span class="text-muted">Name:</span> <span class="font-weight-bold employee-name"></span></p>
-                    </div>
+  
                     <div class="col-6">
                         <p><span class="text-muted">Designation:</span> <span class="font-weight-bold employee-designation"></span></p>
                     </div>
                     <div class="col-6">
-                        <p><span class="text-muted">Surveyor:</span> <span class="font-weight-bold survey-name">${surveyName}</span></p>
+                        <p><span class="text-muted">Survey:</span> <span class="font-weight-bold survey-name user-name">${surveyName}</span></p>
                     </div>
                     <div class="col-6">
-                        <p><span class="text-muted">Surveyor:</span> <span class="font-weight-bold">USER NAME</span></p>
+                        <p><span class="text-muted">Surveyor:</span> <span class="font-weight-bold">${currentUsername}</span></p>
                     </div>
                 </div>
 

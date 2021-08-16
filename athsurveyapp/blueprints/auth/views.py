@@ -64,11 +64,11 @@ def create_user():
         hashed_password = generate_password_hash(user_password, method='sha256')
         print(len(hashed_password))
 
-        new_user = User(user_email, hashed_password, user_name, user_is_admin)
+        new_user = User(email=user_email, password=hashed_password, name=user_name, is_admin=user_is_admin)
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('auth_page.users'))
+        return redirect(url_for('auth_page.users_index'))
     
     return render_template('register.html', form=form)
 

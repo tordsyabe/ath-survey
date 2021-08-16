@@ -48,9 +48,18 @@ $(document).ready(function () {
             <div class="col-1">${data.question_responses[i].answer}</div>
             <div class="col-3">${data.question_responses[i].feedback}</div>
           </div>
+
+          
          `;
         }
         $("#reponseDetails").append(responseDetail);
+        $("#reponseDetails").append(`
+          <div class="row mt-5">
+            <div class="col-12">
+              <p class="font-weight-bold">Conducted By: ${data.user.name}</p>
+            </div>
+          </div>
+        `);
       },
     });
   });

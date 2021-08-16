@@ -1,7 +1,7 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
 from sqlalchemy.sql.functions import mode
-from athsurveyapp.models.models import QuestionType, Survey, Question, Choice, Employee, Branch, Response, QuestionResponse
+from athsurveyapp.models.models import QuestionType, Survey, Question, Choice, Employee, Branch, Response, QuestionResponse, User
 
 ma = Marshmallow()
 
@@ -53,13 +53,18 @@ class QuestionResponseSchema(ma.Schema):
         model = QuestionResponse
         fields = ("id", "question_id", "answer", "feedback", "question")
 
+class UserSchema(ma.Schema):
+    class Meta:
+        model = User
+        fields = ("id", "email", "name")
 
 class ResponseSchema(ma.Schema):
     class Meta:
         model = Response
-        fields = ("id", "date_created", "survey", "question_responses")
+        fields = ("id", "date_created", "survey", "question_responses", "user")
     
     survey = fields.Nested(SurveySchema, only=('name','description', ))
+    user = fields.Nested(UserSchema)
     question_responses = fields.Nested(QuestionResponseSchema, many=True)
 
 class EmployeeSchema(ma.Schema):

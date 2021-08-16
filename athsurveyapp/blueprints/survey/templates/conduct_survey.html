@@ -71,7 +71,7 @@ block body %}
 
           <button
             type="button"
-            class="btn btn-info next mt-5"
+            class="btn btn-info next mt-5 font-weight-bold"
             id="startSurveyBtn"
           >
             Confirm Selection
@@ -110,7 +110,9 @@ block body %}
             <div class="col-6">
               <p>
                 <span class="text-muted">Surveyor:</span>
-                <span class="font-weight-bold">USER NAME</span>
+                <span class="font-weight-bold user-name"
+                  >{{ current_user.name }}</span
+                >
               </p>
             </div>
           </div>
@@ -192,12 +194,16 @@ block body %}
             </table>
           </div>
 
-          <button class="btn btn-secondary previous mt-5">Back</button>
+          <button class="btn btn-secondary previous mt-5 font-weight-bold">
+            Back
+          </button>
           {% if survey.question_types | length != loop.index %}
-          <button class="btn btn-info next mt-5">Next</button>
+          <button class="btn btn-info next mt-5 font-weight-bold">Next</button>
 
           {% else %}
-          <button type="submit" class="btn btn-info mt-5">Submit</button>
+          <button type="submit" class="btn btn-info mt-5 font-weight-bold">
+            Submit
+          </button>
 
           {% endif %}
         </fieldset>

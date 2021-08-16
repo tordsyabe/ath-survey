@@ -89,7 +89,7 @@ def conduct_survey():
         employee = request.form["employee"]
         survey = request.form["survey"]
         
-        new_response = Response(employee, survey)
+        new_response = Response(employee, survey, current_user.id)
         feedback = []
         
         question_responses = [[fieldname, value] for fieldname, value in request.form.items()]
