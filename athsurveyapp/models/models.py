@@ -2,8 +2,23 @@ from sqlalchemy.sql import func
 from dataclasses import dataclass
 from flask_sqlalchemy import SQLAlchemy
 
+from flask_login import UserMixin
+
 db = SQLAlchemy()
 
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String())
+    name = db.Column(db.String(64))
+    is_admin = db.Column(db.Boolean, default=False)
+    
+    def __init__(self, email, password, name, is_admin):
+        self.email = email
+        self.password = password
+        self.name = name
+        self.is_admin = is_admin
 
 class Employee(db.Model):
 
@@ -135,11 +150,13 @@ class Response(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     employee_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=False)
     survey_id = db.Column(db.Integer, db.ForeignKey("survey.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     question_responses = db.relationship("QuestionResponse", backref="response", cascade="all, delete-orphan")
     survey = db.relationship("Survey", backref="responses")
+    user = db.relationship("User", backref="responses")
 
     def __init__(self, employee_id, survey_id):
         self.employee_id = employee_id

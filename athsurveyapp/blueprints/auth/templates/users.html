@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html' %} {% block title %}ATH - Branches{% endblock %}
+{% block meta_description %}Arabian Tea House survey application{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-6">
+      <h1 class="m-0 font-weight-bold">Users</h1>
+    </div>
+    <div class="col-6">
+      <a
+        href="{{url_for('auth_page.create_user')}}"
+        class="btn btn-info float-right mr-2"
+        >Create User</a
+      >
+    </div>
+  </div>
+
+  <div class="row mt-5 jumbotron">
+    <div class="col-12">
+      <table class="table">
+        {% for user in users %}
+        <tr>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.is_admin }}</td>
+        </tr>
+        {% endfor %}
+        <!-- </tbody>s -->
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock%}

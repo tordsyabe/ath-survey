@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, abort
 from flask import jsonify
+from flask_login import login_required
 
 from athsurveyapp.models.models import QuestionType as Qt, db
 from athsurveyapp.schemas import QtSchema
@@ -13,6 +14,7 @@ question_type_args.add_argument("sequence", type=int, help="Sequence", required=
 
 
 class QuestionTypeResource(Resource):
+    decorators = [login_required]
     def get(self, id):
 
         question_type = Qt.query.get(id)
@@ -51,6 +53,7 @@ class QuestionTypeResource(Resource):
 
 
 class QuestionTypeResourceList(Resource):
+    decorators = [login_required]
     def get(self):
 
         question_types = Qt.query.all()

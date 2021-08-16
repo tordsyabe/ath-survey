@@ -1,0 +1,1 @@
+from athsurveyapp.blueprints.auth.views import auth_page

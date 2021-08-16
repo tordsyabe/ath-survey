@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, abort
 from flask import jsonify
+from flask_login import login_required
 
 from athsurveyapp.models.models import Survey, db
 from athsurveyapp.schemas import SurveySchema
@@ -14,7 +15,7 @@ survey_args.add_argument(
 
 
 class SurveyResource(Resource):
-    
+    decorators = [login_required]
     def get(self, id):
         survey = Survey.query.get(id)
         
