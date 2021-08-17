@@ -44,24 +44,24 @@
   </head>
   <body>
     <main>
-      {% for category, message in get_flashed_messages(with_categories=True)
-      %}{% if message %}
-      <div
-        class="alert alert-{{category}} alert-dismissible fade show"
-        role="alert"
-      >
-        {{message}}
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endif %} {% endfor %}
       <div class="container-fluid">
+        {% for category, message in get_flashed_messages(with_categories=True)
+        %}{% if message %}
+        <div
+          class="alert alert-{{category}} alert-dismissible fade show mt-3"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %} {% endfor %}
         <div class="row justify-content-center align-items-center mt-4">
           <div class="col">
             <h4 class="text-center font-weight-bold mb-5">
