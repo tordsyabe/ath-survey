@@ -64,43 +64,46 @@ $(document).ready(function () {
           fieldsetCategory += `
                 <fieldset style="display: none;">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-auto col-md-6">
                         <p><span class="text-muted">Name:</span> <span class="font-weight-bold employee-name"></span></p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-auto col-md-6">
                         <p><span class="text-muted">Branch:</span> <span class="font-weight-bold branch-name" ></span></p>
                     </div>
   
-                    <div class="col-6">
+                    <div class="col-sm-auto col-md-6">
                         <p><span class="text-muted">Designation:</span> <span class="font-weight-bold employee-designation"></span></p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-auto col-md-6">
                         <p><span class="text-muted">Survey:</span> <span class="font-weight-bold survey-name user-name">${surveyName}</span></p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-auto col-md-6">
                         <p><span class="text-muted">Surveyor:</span> <span class="font-weight-bold">${currentUsername}</span></p>
                     </div>
                 </div>
 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <h1 class="font-weight-bold">${
+                        <h3 class="font-weight-bold">${
                           data.question_types[i].description
-                        }</h1>
+                        }</h3>
     
-                    </div>
-                    <table class="table table-hover mt-5 px-5" id="tableSurvey">
+                    
+                    <div class="table-responsive-sm">
+                    <table class="table my-5" id="tableSurvey">
                         <tbody>
                         ${questions}
                         </tbody>
                     </table>
+                    </div>
+                    </div>
                 </div>
 
-                <button class="btn btn-secondary previous mt-5">Back</button>
+                <button class="btn btn-secondary previous font-weight-bold">Back</button>
                 ${
                   data.question_types.length == i + 1
-                    ? '<button type="submit" class="btn btn-info mt-5">Submit</button>'
-                    : '<button class="btn btn-info next mt-5">Next</button>'
+                    ? '<button type="submit" class="btn btn-info font-weight-bold">Submit</button>'
+                    : '<button class="btn btn-info next font-weight-bold">Next</button>'
                 }
             </fieldset>`;
         }

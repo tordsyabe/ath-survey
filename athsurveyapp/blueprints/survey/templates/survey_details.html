@@ -2,16 +2,16 @@
 block meta_description %}Arabian Tea House survey application{% endblock %} {%
 block body %}
 <div class="container">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-12" data-surveyid="{{ survey.id }}">
-      <h1 class="m-0 font-weight-bold" id="surveyName">{{ survey.name }}</h1>
+  <div class="row justify-content-center align-items-center mt-4">
+    <div class="col" data-surveyid="{{ survey.id }}">
+      <h3 class="m-0 font-weight-bold" id="surveyName">{{ survey.name }}</h3>
       <input
         type="text"
         class="survey-name-inline-input font-weight-bold"
         style="display: none"
         value="{{survey.name}}"
       />
-      <p class="text-muted mt-3" id="surveyDescription">
+      <p class="text-muted mt-2" id="surveyDescription">
         {{ survey.description }}
       </p>
       <input
@@ -23,12 +23,12 @@ block body %}
     </div>
   </div>
 
-  <div class="row mt-5 align-items-center">
-    <div class="col-6">
-      <h5 class="font-weight-bold m-0">Questions</h5>
+  <div class="row my-4 align-items-center justify-content-between">
+    <div class="col">
+      <h4 class="font-weight-bold m-0">Questions</h4>
     </div>
 
-    <div class="col-6">
+    <div class="col">
       <button
         type="button"
         class="btn btn-info float-right font-weight-bold"
@@ -37,59 +37,54 @@ block body %}
       >
         Add Category
       </button>
-
-      <button
-        class="btn btn-secondary float-right font-weight-bold mr-2"
-        data-toggle="modal"
-        data-target="#choiceFormModal"
-      >
-        Add Choice Type
-      </button>
     </div>
   </div>
 
   <div class="row mt-5">
     <div class="col-12">
-      <div class="jumbotron py-2">
-        {% if not survey.question_types %}
+      {% if not survey.question_types %}
+      <div class="jumbotron">
         <p class="font-weight-bold text-center my-5 text-muted">
           No categories
         </p>
-        {% else %} {% for question_type in survey.question_types %}
-        <div data-categoryid="{{question_type.id}}" class="mb-5">
-          <div class="d-flex">
-            <h2 class="font-weight-bold my-5 mr-5 survey-category">
-              {{question_type.description}}
-            </h2>
+      </div>
 
-            <input
-              type="text"
-              class="survey-category-inline-input font-weight-bold my-5 mr-5"
-              style="display: none"
-              value="{{question_type.description}}"
-            />
-            <input
-              type="text"
-              class="survey-category-sq-inline-input font-weight-bold my-5 mr-5"
-              style="display: none"
-              value="{{question_type.sequence}}"
-            />
+      {% else %} {% for question_type in survey.question_types %}
+      <div data-categoryid="{{question_type.id}}" class="mb-3 jumbotron">
+        <div class="d-flex">
+          <h3 class="font-weight-bold my-3 mr-5 survey-category">
+            {{question_type.description}}
+          </h3>
 
-            <button
-              class="
-                btn btn-secondary btn-sm
-                my-auto
-                font-weight-bold
-                add-question-btn
-              "
-              data-toggle="modal"
-              data-target="#questionFormModal"
-            >
-              Add Question
-            </button>
-          </div>
+          <input
+            type="text"
+            class="survey-category-inline-input font-weight-bold my-5 mr-5"
+            style="display: none"
+            value="{{question_type.description}}"
+          />
+          <input
+            type="text"
+            class="survey-category-sq-inline-input font-weight-bold my-5 mr-5"
+            style="display: none"
+            value="{{question_type.sequence}}"
+          />
 
-          {% if question_type.questions %}
+          <button
+            class="
+              btn btn-secondary btn-sm
+              my-auto
+              font-weight-bold
+              add-question-btn
+            "
+            data-toggle="modal"
+            data-target="#questionFormModal"
+          >
+            Add Question
+          </button>
+        </div>
+
+        {% if question_type.questions %}
+        <div class="table-responsive-sm">
           <table class="table">
             <tbody>
               {% for question in question_type.questions %}
@@ -100,12 +95,6 @@ block body %}
                   >
                   <span class="text-muted small">(description)</span>
                 </td>
-                <!-- <td>
-                  <span class="font-weight-bold col-4"
-                    >{{question.is_required}}</span
-                  >
-                  <span class="text-muted small">(required)</span>
-                </td> -->
                 <td>
                   <span class="font-weight-bold col-4 d-none"
                     >{{question.choice.id}}</span
@@ -126,8 +115,9 @@ block body %}
                     class="
                       btn btn-secondary btn-sm
                       font-weight-bold
-                      float-right
+                      float-md-right
                       delete-question-form-modal-btn
+                      d-inline
                     "
                     data-toggle="modal"
                     data-target="#deleteQuestionFormModal"
@@ -138,9 +128,10 @@ block body %}
                     class="
                       btn btn-secondary btn-sm
                       font-weight-bold
-                      float-right
+                      float-md-right
                       edit-question-form-modal-btn
                       mr-2
+                      d-inline
                     "
                     data-toggle="modal"
                     data-target="#questionFormModal"
@@ -152,36 +143,32 @@ block body %}
               {% endfor %}
             </tbody>
           </table>
-          {% else %}
-          <div class="row p-3">
-            <div class="col-12">
-              <p class="font-weight-bold text-center text-muted">
-                No questions
-              </p>
-            </div>
+        </div>
+        {% else %}
+        <div class="row p-3">
+          <div class="col-12">
+            <p class="font-weight-bold text-center text-muted">No questions</p>
           </div>
-          {% endif %}
-          <div class="mt-5">
-            <button
-              class="
-                btn btn-secondary btn-sm
-                font-weight-bold
-                delete-category-form-modal-btn
-              "
-              data-toggle="modal"
-              data-target="#deleteCategoryFormModal"
-            >
-              Delete
-            </button>
-            <span class="small text-muted ml-3"
-              >(Deleting category will also delete corresponding
-              questions)</span
-            >
-          </div>
-
-          {% endfor %} {% endif %}
+        </div>
+        {% endif %}
+        <div class="mt-5">
+          <button
+            class="
+              btn btn-secondary btn-sm
+              font-weight-bold
+              delete-category-form-modal-btn
+            "
+            data-toggle="modal"
+            data-target="#deleteCategoryFormModal"
+          >
+            Delete
+          </button>
+          <span class="small text-muted ml-3"
+            >(Deleting category will also delete corresponding questions)</span
+          >
         </div>
       </div>
+      {%endfor%} {%endif %}
     </div>
   </div>
 </div>
@@ -439,10 +426,7 @@ block body %}
     <div class="modal-content">
       <form id="questionForm">
         <div class="modal-header">
-          <h5 class="modal-title font-weight-bold">
-            Add/Edit
-            <span class="small question-description-form">(Grooming)</span>
-          </h5>
+          <h5 class="modal-title font-weight-bold">Add/ Edit</h5>
           <button
             type="button"
             class="close"

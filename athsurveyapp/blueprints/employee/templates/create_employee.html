@@ -1,135 +1,107 @@
 {% extends 'layouts/base.html' %} {% block title %}ATH - Create Employee{%
 endblock %} {% block meta_description %}Arabian Tea House survey application{%
 endblock %} {% block body %}
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-12">
-      <h1 class="m-0 font-weight-bold">New employee</h1>
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center mt-4">
+    <div class="col">
+      <h3 class="m-0 font-weight-bold">New employee</h3>
     </div>
-
-    <div class="col-12 mt-5 jumbotron">
-      <form method="POST">
-        {{ form.csrf_token }}
-
-        <fieldset class="p-5">
-          <div class="row">
+    </div>
+    <div class="row my-5 mx-auto jumbotron p-auto">
+      <div class="col">
+        <form method="POST">
+          {{ form.csrf_token }}
+          <div class="row align-items-center">
             <!--  -->
-            <div class="col-3">
-              {{ form.name.label(class="form-label font-weight-bold float-right
-              mt-2") }}
+            <div class="col-sm-auto col-md-3">
+              {{ form.name.label(class="form-label font-weight-bold
+              float-md-right") }}
             </div>
 
-            <div class="col-7">
+            <div class="col-sm-auto col-md-7">
               <div class="form-group">
                 {{ form.name(class_="form-control")}}
               </div>
-            </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">Employee fullname is required</div>
             </div>
           </div>
 
           <!--  -->
           <!--  -->
-          <div class="row">
-            <div class="col-3">
+          <div class="row align-items-center">
+            <div class="col-sm-auto col-md-3">
               {{ form.gender.label(class="form-label font-weight-bold
-              float-right mt-2") }}
+              float-md-right mt-2") }}
             </div>
 
-            <div class="col-7">
+            <div class="col-sm-auto col-md-7">
               <div class="form-group">
                 {{ form.gender(class_="form-control form-select form-select-sm
                 selectpicker w-100")}}
               </div>
             </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">Please select a gender</div>
-            </div>
           </div>
 
           <!--  -->
-
-          <!--  -->
-          <div class="row">
-            <div class="col-3">
-              {{ form.code.label(class="form-label font-weight-bold float-right
+          <div class="row align-items-center">
+            <div class="col-sm-auto col-md-3">
+              {{ form.code.label(class="form-label font-weight-bold float-md-right
               mt-2") }}
             </div>
 
-            <div class="col-7">
+            <div class="col-sm-auto col-md-7">
               <div class="form-group">
                 {{ form.code(class_="form-control")}}
               </div>
             </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">Employee code is required</div>
-            </div>
           </div>
 
           <!--  -->
-
-          <!--  -->
-          <div class="row">
-            <div class="col-3">
+          <div class="row align-items-center">
+            <div class="col-sm-auto col-md-3">
               {{ form.designation.label(class="form-label font-weight-bold
-              float-right mt-2") }}
+              float-md-right") }}
             </div>
 
-            <div class="col-7">
+            <div class="col-sm-auto col-md-7">
               <div class="form-group">
                 {{ form.designation(class_="form-control")}}
               </div>
             </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">
-                Employee designation is required
-              </div>
-            </div>
           </div>
 
-          <div class="row">
-            <div class="col-3">
+          <div class="row align-items-center">
+            <div class="col-sm-auto col-md-3">
               {{ form.branch.label(class="form-label font-weight-bold
-              float-right mt-2") }}
+              float-md-right") }}
             </div>
 
-            <div class="col-7">
+            <div class="col-sm-auto col-md-7">
               <div class="form-group">
                 {{ form.branch(class_="form-control form-select form-select-sm
                 selectpicker w-100")}}
               </div>
             </div>
-
-            <div class="col-2 offset-3">
-              <div class="invalid-feedback">
-                Employee designation is required
-              </div>
-            </div>
           </div>
 
           <!--  -->
 
-          <div class="mt-5">
-            <button
-              type="submit"
-              class="btn btn-info float-right font-weight-bold"
-            >
-              Save
-            </button>
+          <div class="mt-4 text-center">
+
 
             <a
               href="{{ url_for('employee_page.employee_index') }}"
-              class="btn btn-secondary float-right mr-2 font-weight-bold"
+              class="btn btn-secondary font-weight-bold"
               >Cancel</a
             >
+            <button
+            type="submit"
+            class="btn btn-info mr-2 font-weight-bold"
+          >
+            Save
+          </button>
           </div>
-        </fieldset>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

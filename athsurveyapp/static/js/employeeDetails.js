@@ -43,13 +43,11 @@ $(document).ready(function () {
         responseDetail = "";
         for (var i = 0; i < data.question_responses.length; i++) {
           responseDetail += `
-          <div class="row py-2">
-            <div class="col-6">${data.question_responses[i].question}</div>
-            <div class="col-1">${data.question_responses[i].answer}</div>
-            <div class="col-3">${data.question_responses[i].feedback}</div>
-          </div>
-
-          
+              <tr>
+                <td>${data.question_responses[i].question}</td>
+                <td>${data.question_responses[i].answer}</td>
+                <td>${data.question_responses[i].feedback}</td>
+              </tr>
          `;
         }
         $("#reponseDetails").append(responseDetail);

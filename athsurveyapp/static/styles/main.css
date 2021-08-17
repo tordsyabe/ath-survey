@@ -124,7 +124,7 @@ input[type="radio"]:checked + label {
 }
 
 .table tr:nth-child(even) {
-  background-color: var(--secondary);
+  background-color: var(--dark);
 }
 
 #startSurveyBtn {
