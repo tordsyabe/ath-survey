@@ -39,10 +39,7 @@ def create_app():
     login_manager.login_message_category = "danger"
     login_manager.init_app(app)
 
-    # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
-    #     basedir, "data.sqlite"
-    # )
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://tordsyabe:tordsyabe@localhost/ath_survey'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{os.environ.get("DB_USER")}:{os.environ.get("DB_PASSWORD")}@{os.environ.get("DB_HOST")}:5432/{os.environ.get("DB_NAME")}'
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     api.add_resource(QuestionTypeResource, "/api/question_types/<int:id>")

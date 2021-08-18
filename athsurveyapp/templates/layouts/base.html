@@ -60,50 +60,94 @@
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('dashboard.dashboard') }}"
-                  ><i class="fas fa-tachometer-alt"></i>
-                  <span class="ms-1 d-none d-sm-inline">Dashboard</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                    </div>
+                  </div>
+                </a>
 
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('survey_page.survey_index') }}"
-                  ><i class="fas fa-poll"></i>
-                  <span class="ms-1 d-none d-sm-inline">Surveys</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-poll"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline">Surveys</span>
+                    </div>
+                  </div>
+                </a>
 
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('branch_page.branch_index') }}"
-                  ><i class="fas fa-store"></i>
-                  <span class="ms-1 d-none d-sm-inline">Branches</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-store"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline">Branches</span>
+                    </div>
+                  </div>
+                </a>
 
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('employee_page.employee_index')}}"
-                  ><i class="fas fa-user-friends"></i>
-                  <span class="ms-1 d-none d-sm-inline">Employees</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline">Employees</span>
+                    </div>
+                  </div>
+                </a>
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('survey_page.conduct_survey')}}"
-                  ><i class="fas fa-poll-h"></i>
-                  <span class="ms-1 d-none d-sm-inline">Conduct Survey</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-poll-h"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline"
+                        >Conduct Survey</span
+                      >
+                    </div>
+                  </div>
+                </a>
 
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('auth_page.users_index')}}"
-                  ><i class="fas fa-users"></i>
-                  <span class="ms-1 d-none d-sm-inline">Users</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-users"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline">Users</span>
+                    </div>
+                  </div>
+                </a>
 
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('auth_page.logout')}}"
-                  ><i class="fas fa-sign-out-alt"></i>
-                  <span class="ms-1 d-none d-sm-inline">Logout</span></a
-                >
+                  ><div class="row">
+                    <div class="col-3">
+                      <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <div class="col">
+                      <span class="ms-1 d-none d-sm-inline">Logout</span>
+                    </div>
+                  </div>
+                </a>
               </div>
             </nav>
           </div>

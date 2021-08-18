@@ -10,7 +10,7 @@ db = SQLAlchemy()
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String())
+    password = db.Column(db.String(254))
     name = db.Column(db.String(64))
     is_admin = db.Column(db.Boolean, default=False)
 
@@ -27,11 +27,11 @@ class Employee(db.Model):
     designation = db.Column(db.String(20), nullable=False)
     gender = db.Column(db.String(20), nullable=False)
     branch_id = db.Column(db.Integer, db.ForeignKey("branch.id"), nullable=False)
-    name = db.Column(db.String, nullable=False)
-    code = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(254), nullable=False)
+    code = db.Column(db.String(254), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-    designation = db.Column(db.String, nullable=False)
+    designation = db.Column(db.String(254), nullable=False)
     
     responses = db.relationship("Response", backref="employee", cascade="all, delete-orphan")
 
@@ -52,10 +52,10 @@ class Branch(db.Model):
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
     address = db.Column(db.String(120))
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(254), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), server_default=func.now())
     last_updated = db.Column(db.DateTime(timezone=True), onupdate=func.now())
-    address = db.Column(db.String())
+    address = db.Column(db.String(254))
     employees = db.relationship("Employee", backref="branch")
 
     def __init__(self, name, address):
@@ -163,11 +163,11 @@ class QuestionResponse(db.Model):
     __tablename__ = "question_response"
 
     id = db.Column(db.Integer, primary_key=True)
-    answer = db.Column(db.String)
-    feedback = db.Column(db.String)
+    answer = db.Column(db.String(254))
+    feedback = db.Column(db.String(254))
     response_id = db.Column(db.Integer, db.ForeignKey("response.id"), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey("question.id"), nullable=False)
-    question = db.Column(db.String)
+    question = db.Column(db.String(254))
     
     def __init__(self, question, question_id, answer, feedback):
         self.question = question

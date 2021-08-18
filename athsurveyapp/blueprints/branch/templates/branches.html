@@ -17,6 +17,9 @@
 
   <div class="row my-5 mx-auto jumbotron p-auto">
     <div class="col">
+      {% if not branches %}
+      <p class="font-weight-bold text-muted text-center m-0">No Branches</p>
+      {% else %}
       <div class="table-response-sm">
         <table class="table">
           {% for branch in branches %}
@@ -28,6 +31,7 @@
           {% endfor %}
         </table>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>
