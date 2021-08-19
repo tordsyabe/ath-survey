@@ -155,6 +155,12 @@ $(document).ready(function () {
   // DELETE QUESTION
   $("#deleteQuestionForm").on("submit", function (e) {
     e.preventDefault();
+
+    $("#deleteQuestionSpinner").css("display", "block");
+    $("#deleteQuestionSpinner").addClass("d-inline-block");
+    $("#deleteQuestionBtn").prop("disabled", true);
+    $("#deleteQuestionBtn span").text("Deleting");
+
     const dataQuestionId = $(this).find("input:first").val();
     $.ajax({
       type: "DELETE",
@@ -179,6 +185,12 @@ $(document).ready(function () {
   //   DELETING SURVEY CATEGORY, SHOULD BE CASCADING WITH QUESTIONS
   $("#deleteCategoryForm").on("submit", function (e) {
     e.preventDefault();
+
+    $("#deleteCategorySpinner").css("display", "block");
+    $("#deleteCategorySpinner").addClass("d-inline-block");
+    $("#deleteCategoryBtn").prop("disabled", true);
+    $("#deleteCategoryBtn span").text("Deleting");
+
     const dataCategoryId = $(this).find("input:first").val();
 
     $.ajax({
@@ -197,6 +209,7 @@ $(document).ready(function () {
   $(".add-question-btn").on("click", function (e) {
     const surveyCatDesc = $(this).siblings("h2").text();
     const surveyCatId = $(this).parent().parent().data("categoryid");
+    $("input[id='q_id'").val("");
     $("#questionForm").trigger("reset");
     $("#questionForm").find("input[name='question_type_id']").val(surveyCatId);
 
@@ -206,11 +219,17 @@ $(document).ready(function () {
   // SAVING QUESTION
   $("#questionForm").on("submit", function (e) {
     e.preventDefault();
+
+    $("#saveQuestionSpinner").css("display", "block");
+    $("#saveQuestionSpinner").addClass("d-inline-block");
+    $("#saveQuestionBtn").prop("disabled", true);
+    $("#saveQuestionBtn span").text("Saving");
+
     const q_id = $(this).find("input[name='q_id']").val();
     const desc = $(this).find("input[name='q_description']").val();
     const sq = $(this).find("input[name='q_sequence']").val();
     const choice = $(this).find("select[name='choice_id']").val();
-    // const is_req = $(this).find("input[name='is_required']").val();
+    const is_req = $(this).find("input[name='is_required']").val();
     const qt_id = $(this).find("input[name='question_type_id']").val();
 
     $.ajax({
@@ -246,6 +265,7 @@ $(document).ready(function () {
       .find("h2")
       .text();
     const surveyCatId = $(this)
+      .parent()
       .parent()
       .parent()
       .parent()

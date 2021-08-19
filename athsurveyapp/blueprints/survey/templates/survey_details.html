@@ -194,7 +194,12 @@ block body %}
         <div class="modal-body">
           <p>Are you sure you want to delete this question?</p>
 
-          <input type="hidden" class="form-control" id="id" name="id" />
+          <input
+            type="hidden"
+            class="form-control"
+            id="questionId"
+            name="questionId"
+          />
         </div>
         <div class="modal-footer">
           <button
@@ -209,7 +214,15 @@ block body %}
             class="btn btn-danger font-weight-bold"
             id="deleteQuestionBtn"
           >
-            Delete
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="deleteQuestionSpinner"
+              role="status"
+              style="display: none"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span>Delete</span>
           </button>
         </div>
       </form>
@@ -243,7 +256,12 @@ block body %}
         <div class="modal-body">
           <p>Are you sure you want to delete this category?</p>
 
-          <input type="hidden" class="form-control" id="id" name="id" />
+          <input
+            type="hidden"
+            class="form-control"
+            id="categoryId"
+            name="categoryId"
+          />
         </div>
         <div class="modal-footer">
           <button
@@ -258,78 +276,15 @@ block body %}
             class="btn btn-danger font-weight-bold"
             id="deleteCategoryBtn"
           >
-            Delete
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- NEW CHOICE MODAL FORM -->
-<div
-  class="modal fade"
-  id="choiceFormModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="choiceFormModal"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <form id="choiceForm">
-        <div class="modal-header">
-          <h5 class="modal-title font-weight-bold">New choice type</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row align-items-center justify-content-center">
-            <div class="col-3 font-weight-bold">
-              {{qt_form.qt_description.label(class_="float-right")}}
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="deleteCategorySpinner"
+              role="status"
+              style="display: none"
+            >
+              <span class="sr-only">Loading...</span>
             </div>
-            <div class="col-7">
-              <div class="form-group">
-                <!-- <label for="description">Description</label> -->
-
-                {{qt_form.qt_description(class_="form-control",
-                placeholder="Description")}}
-              </div>
-            </div>
-
-            <div class="col-3 font-weight-bold">
-              {{qt_form.qt_sequence.label(class_="float-right")}}
-            </div>
-            <div class="col-7">
-              <div class="form-group">
-                <!-- <label for="description">Description</label> -->
-
-                {{qt_form.qt_sequence(class_="form-control",
-                placeholder="Sequence")}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary font-weight-bold"
-            data-dismiss="modal"
-          >
-            Close
-          </button>
-          <button
-            type="submit"
-            class="btn btn-info font-weight-bold"
-            id="saveSurveyCategoryBtn"
-          >
-            Save
+            <span>Delete</span>
           </button>
         </div>
       </form>
@@ -486,7 +441,15 @@ block body %}
             class="btn btn-info font-weight-bold"
             id="saveQuestionBtn"
           >
-            Save
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="saveQuestionSpinner"
+              role="status"
+              style="display: none"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span>Save</span>
           </button>
         </div>
       </form>
