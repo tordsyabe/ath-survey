@@ -65,23 +65,26 @@ def conduct_survey():
     
     form = ConductSurveyForm()
     
+
+    branches = Branch.query.all()
     if url_branch_id and url_employee_id:
+        employees = Employee.query.filter_by(branch_id=url_branch_id)
         default_branch = Branch.query.get(url_branch_id)
         default_emp = Employee.query.get(url_employee_id)
 
         form.branch.default = default_branch
         form.employee.default = default_emp
         
-        form.process()
-
-    # form.employee.default = url_employee_id
-    
-    branches = Branch.query.all()
-    
-    if url_branch_id:
-        employees = Employee.query.filter_by(branch_id=url_branch_id)
+        form.process()    
     else:
-        employees = Employee.query.filter_by(branch_id=1)
+        employees = Employee.query.filter_by(branch_id=branches[0].id)
+        default_branch = Branch.query.get(url_branch_id)
+        default_emp = Employee.query.get(url_employee_id)
+
+        form.branch.default = default_branch
+        form.employee.default = default_emp
+        
+        form.process()    
         
     survey = Survey.query.get(1)
     

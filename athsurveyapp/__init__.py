@@ -8,7 +8,7 @@ import os
 
 from athsurveyapp.blueprints.dashboard import dashboard_page
 from athsurveyapp.blueprints.survey import survey_page, SurveyResource
-from athsurveyapp.blueprints.branch import branch_page
+from athsurveyapp.blueprints.branch import branch_page, BranchResource
 from athsurveyapp.blueprints.employee import employee_page, EmployeeResourceList, BranchEmployeeResource, EmployeeResource, EmployeeResponseResource
 from athsurveyapp.blueprints.question_type import (
     question_type_page,
@@ -54,6 +54,8 @@ def create_app():
     api.add_resource(EmployeeResource, "/api/employees/<int:id>")
     api.add_resource(BranchEmployeeResource, "/api/employees/branch/<int:id>")
     api.add_resource(EmployeeResponseResource, "/api/employees/responses/<int:id>")
+    
+    api.add_resource(BranchResource, "/api/branches/<int:id>")
 
     db.init_app(app)
     migrate.init_app(app, db)

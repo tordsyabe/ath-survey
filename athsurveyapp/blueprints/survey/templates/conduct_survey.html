@@ -38,6 +38,7 @@ block body %}
 
             <div class="col-sm-auto col-md-7">
               <div class="form-group">
+   
                 <select
                   class="
                     form-control form-select form-select-sm
@@ -48,12 +49,18 @@ block body %}
                   id="employee"
                   data-live-search="true"
                 >
-                  {% for employee in employees%}
+
+                  {% for employee in employees %}
                   <option value="{{employee.id}}">{{employee.name}}</option>
                   {% endfor %}
                 </select>
+                <div class="spinner-border spinner-border-sm text-info" id="employeeSelectSpinner" role="status" style="position:absolute; top: 20%; right: -2%; display:none;">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                
               </div>
             </div>
+
           </div>
 
           <div class="row align-items-center">

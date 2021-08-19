@@ -2,6 +2,18 @@ $(document).ready(function () {
   let employee;
   const currentUsername = $(".user-name").eq(0).text();
 
+  if (!$('select[id="branch"]').val()) {
+    $("#startSurveyBtn").attr("disabled", true);
+  }
+
+  if (!$('select[id="employee"]').val()) {
+    $("#startSurveyBtn").attr("disabled", true);
+  }
+
+  if (!$('select[id="survey"]').val()) {
+    $("#startSurveyBtn").attr("disabled", true);
+  }
+
   const params = get_query();
   $("#employee").selectpicker("val", params.employee);
 
@@ -122,7 +134,7 @@ $(document).ready(function () {
   $('select[id="branch"]').on("change", function (e) {
     const branch_id = e.target.value;
     const empSelection = $('select[id="employee"]');
-
+    $("#employeeSelectSpinner").css("display", "block");
     $.ajax({
       type: "GET",
       url: `/api/employees/branch/${branch_id}`,
@@ -136,6 +148,7 @@ $(document).ready(function () {
         empSelection.empty().append(options);
         empSelection.val(0);
         empSelection.selectpicker("refresh");
+        $("#employeeSelectSpinner").css("display", "none");
         if (!$('select[id="employee"]').val()) {
           $("#startSurveyBtn").attr("disabled", true);
         }
