@@ -85,8 +85,7 @@ def conduct_survey():
         form.employee.default = default_emp
         
         form.process()    
-        
-    survey = Survey.query.get(1)
+    survey = Survey.query.first()
     
     if request.method == "POST":
         employee = request.form["employee"]

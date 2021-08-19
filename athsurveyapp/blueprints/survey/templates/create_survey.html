@@ -6,52 +6,59 @@ endblock %} {% block body %}
     <div class="col">
       <h3 class="m-0 font-weight-bold">New survey</h3>
     </div>
-    </div>
-    <div class="row my-5 mx-auto jumbotron p-auto">
-      <div class="col">
-        <form method="POST" id="conductSurveyForm">
-          {{ form.csrf_token }}
-          <div class="row align-items-center">
-            <!--  -->
-            <div class="col-sm-auto col-md-3">
-              {{form.name.label(class_="form-label font-weight-bold float-md-right")}}
-            </div>
-
-            <div class="col-sm-auto col-md-7">
-              <div class="form-group">{{form.name(class_="form-control")}}</div>
-            </div>
-            <!--  -->
+  </div>
+  <div class="row my-5 mx-auto jumbotron p-auto">
+    <div class="col">
+      <form method="POST" id="createSurveyForm">
+        {{ form.csrf_token }}
+        <div class="row align-items-center">
+          <!--  -->
+          <div class="col-sm-auto col-md-3">
+            {{form.name.label(class_="form-label font-weight-bold
+            float-md-right")}}
           </div>
-          <div class="row align-items-center">
-            <div class="col-sm-auto col-md-3">
-              {{form.description.label(class_="form-label font-weight-bold float-md-right")}}
-            </div>
 
-            <div class="col-sm-auto col-md-7">
-              <div class="form-group">
-                {{form.description(class_="form-control")}}
-              </div>
-            </div>
-
+          <div class="col-sm-auto col-md-7">
+            <div class="form-group">{{form.name(class_="form-control")}}</div>
           </div>
           <!--  -->
-          <div class="mt-4 text-center">
-            
-            <a
-              href="{{ url_for('survey_page.survey_index') }}"
-              class="btn btn-secondary font-weight-bold"
-              >Cancel</a
-            >
-            <button
-              type="submit"
-              class="btn btn-info mr-2 font-weight-bold"
-            >
-              Save
-            </button>
-
+        </div>
+        <div class="row align-items-center">
+          <div class="col-sm-auto col-md-3">
+            {{form.description.label(class_="form-label font-weight-bold
+            float-md-right")}}
           </div>
-        </form>
-      </div>
+
+          <div class="col-sm-auto col-md-7">
+            <div class="form-group">
+              {{form.description(class_="form-control")}}
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="mt-4 text-center">
+          <a
+            href="{{ url_for('survey_page.survey_index') }}"
+            class="btn btn-secondary font-weight-bold"
+            >Cancel</a
+          >
+          <button
+            type="submit"
+            class="btn btn-info mr-2 font-weight-bold"
+            id="saveSurveyBtn"
+          >
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="saveSurveySpinner"
+              role="status"
+              style="display: none"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span>Save</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

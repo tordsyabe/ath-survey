@@ -6,57 +6,61 @@ endblock %} {% block body %}
     <div class="col-12">
       <h3 class="m-0 font-weight-bold">New branch</h3>
     </div>
-    </div>
-    <div class="row my-5 mx-auto jumbotron p-auto">
+  </div>
+  <div class="row my-5 mx-auto jumbotron p-auto">
     <div class="col">
-      <form method="POST">
+      <form method="POST" id="createBranchForm">
         {{ form.csrf_token }}
-          <div class="row">
-            <!--  -->
-            <div class="col-sm-auto col-md-3">
-              {{ form.name.label(class="form-label font-weight-bold float-md-right
-              mt-2") }}
-            </div>
-
-            <div class="col-sm-auto col-md-7">
-              <div class="form-group">
-                {{ form.name(class_="form-control")}}
-              </div>
-            </div>
-          </div>
+        <div class="row">
           <!--  -->
-          <div class="row">
-            <div class="col-sm-auto col-md-3">
-              {{ form.address.label(class="form-label font-weight-bold
-              float-md-right mt-2") }}
-            </div>
-
-            <div class="col-sm-auto col-md-7">
-              <div class="form-group">
-                {{ form.address(class_="form-control")}}
-              </div>
-            </div>
+          <div class="col-sm-auto col-md-3">
+            {{ form.name.label(class="form-label font-weight-bold float-md-right
+            mt-2") }}
           </div>
 
+          <div class="col-sm-auto col-md-7">
+            <div class="form-group">{{ form.name(class_="form-control")}}</div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row">
+          <div class="col-sm-auto col-md-3">
+            {{ form.address.label(class="form-label font-weight-bold
+            float-md-right mt-2") }}
+          </div>
 
+          <div class="col-sm-auto col-md-7">
+            <div class="form-group">
+              {{ form.address(class_="form-control")}}
+            </div>
+          </div>
+        </div>
 
-          <div class="mt-4 text-center">
+        <div class="mt-4 text-center">
+          <a
+            href="{{ url_for('branch_page.branch_index') }}"
+            class="btn btn-secondary font-weight-bold"
+            >Cancel</a
+          >
 
-            <a
-              href="{{ url_for('branch_page.branch_index') }}"
-              class="btn btn-secondary font-weight-bold"
-              >Cancel</a
+          <button
+            type="submit"
+            class="btn btn-info mr-2 font-weight-bold"
+            id="saveBranchBtn"
+          >
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="saveBranchSpinner"
+              role="status"
+              style="display: none"
             >
-
-            <button 
-              type="submit"
-              class="btn btn-info mr-2 font-weight-bold">
-              Save
-            </button>
-          </div>
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span>Save</span>
+          </button>
+        </div>
       </form>
     </div>
-  </div>
   </div>
 </div>
 {% endblock %}
