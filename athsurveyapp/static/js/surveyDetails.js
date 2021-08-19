@@ -10,6 +10,11 @@ $(document).ready(function () {
 
   saveSurveyCategoryForm.on("submit", function (event) {
     event.preventDefault();
+    $("#saveCategorySpinner").css("display", "block");
+    $("#saveCategorySpinner").addClass("d-inline-block");
+    $("#saveSurveyCategoryBtn").prop("disabled", true);
+    $("#saveSurveyCategoryBtn span").text("Saving");
+
     const categoryDescription = $(
       '#surveyCategoryForm input[id="qt_description"]'
     ).val();
@@ -62,9 +67,10 @@ $(document).ready(function () {
           surveyNameInp.hide();
           surveyNameInp.prev().html(data.name);
           surveyNameInp.prev().show();
+          toastr.success("Survey name updated successfully");
         },
         error: function (error) {
-          console.log(error.responseJSON.message);
+          toastr.error("There was an error updating survey name");
         },
       });
     });
@@ -94,9 +100,10 @@ $(document).ready(function () {
           surveyDescInp.hide();
           surveyDescInp.prev().html(data.description);
           surveyDescInp.prev().show();
+          toastr.success("Survey description updated successfully");
         },
         error: function (error) {
-          console.log(error);
+          toastr.error("There was an error updating survey description");
         },
       });
     });

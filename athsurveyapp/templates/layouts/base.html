@@ -40,6 +40,10 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='styles/main.css') }}"
     />
   </head>
@@ -244,6 +248,7 @@
       type="text/javascript"
       src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
     <script src="{{url_for('static', filename='js/surveyDetails.js')}}"></script>
     <script src="{{url_for('static', filename='js/survey.js')}}"></script>
