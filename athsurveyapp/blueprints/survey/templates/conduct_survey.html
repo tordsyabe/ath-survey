@@ -9,7 +9,7 @@ block body %}
     </div>
     <div class="row my-4 mx-auto jumbotron p-auto">
     <div class="col">
-      <form method="POST">
+      <form method="POST" id="saveResponseForm">
         {{ form.csrf_token }}
         <fieldset>
           <div class="row align-items-center">
@@ -212,8 +212,16 @@ block body %}
           <button class="btn btn-info next font-weight-bold">Next</button>
 
           {% else %}
-          <button type="submit" class="btn btn-info font-weight-bold">
-            Submit
+          <button type="submit" class="btn btn-info font-weight-bold" id="saveResponseBtn">
+            <div
+                class="spinner-border spinner-border-sm text-white mr-1"
+                id="saveReponseSpinner"
+                role="status"
+                style="display: none"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
+              <span>Submit</span>
           </button>
 
           {% endif %}

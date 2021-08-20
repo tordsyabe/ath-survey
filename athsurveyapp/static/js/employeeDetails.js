@@ -1,7 +1,26 @@
 $(document).ready(function () {
   $("#employeesTable").DataTable();
 
+  $("#saveEmployeeDetailForm").submit(function () {
+    $("#saveEmployeeDetailSpinner").css("display", "block");
+    $("#saveEmployeeDetailSpinner").addClass("d-inline-block");
+    $("#saveEmployeeDetailBtn").prop("disabled", true);
+    $("#saveEmployeeDetailBtn span").text("Saving");
+  });
+
+  $("#createEmployeForm").submit(function () {
+    $("#saveEmployeeSpinner").css("display", "block");
+    $("#saveEmployeeSpinner").addClass("d-inline-block");
+    $("#saveEmployeeBtn").prop("disabled", true);
+    $("#saveEmployeeBtn span").text("Saving");
+  });
+  // DELETE EMPLOYEE
   $("#deleteEmployeeForm").submit(function (e) {
+    e.preventDefault();
+    $("#deleteEmployeeSpinner").css("display", "block");
+    $("#deleteEmployeeSpinner").addClass("d-inline-block");
+    $("#deleteEmployeeeBtn").prop("disabled", true);
+    $("#deleteEmployeeeBtn span").text("Deleting");
     const employeeToDelete = $(this).find("input:first").val();
     e.preventDefault();
     $.ajax({
@@ -29,9 +48,15 @@ $(document).ready(function () {
 
     $(this).html(responseDate);
   });
-
+  // GET RESPONSE DETAIL
   $(".view-detailed-response").on("click", function (e) {
     e.preventDefault();
+
+    $("#viewDetailsSpinner").css("display", "block");
+    $("#viewDetailsSpinner").addClass("d-inline-block");
+    $(this).prop("disabled", true);
+    $(this).find("span").text("Getting Details");
+
     const responseId = $(this).data("details-id");
 
     $.ajax({
@@ -58,6 +83,16 @@ $(document).ready(function () {
             </div>
           </div>
         `);
+
+        $("#viewDetailsSpinner").css("display", "none");
+        $("#viewDetailsSpinner").removeClass("d-inline-block");
+        $(".view-detailed-response").prop("disabled", false);
+        $(".view-detailed-response").find("span").text("View Details");
+
+        $("#responseDetailModal").modal("toggle");
+      },
+      error: function (e) {
+        console.log(e);
       },
     });
   });
@@ -66,10 +101,16 @@ $(document).ready(function () {
 
     $("#deleteResponseForm").find("input:first").val(responseId);
   });
-
+  // DELETE RESPOSE
   $("#deleteResponseForm").submit(function (e) {
     const reponseToDelete = $(this).find("input:first").val();
     e.preventDefault();
+
+    $("#deleteResponseSpinner").css("display", "block");
+    $("#deleteResponseSpinner").addClass("d-inline-block");
+    $("#deleteResponseBtn").prop("disabled", true);
+    $("#deleteResponseBtn span").text("Deleting");
+
     $.ajax({
       type: "DELETE",
       url: "/api/employees/responses/" + reponseToDelete,

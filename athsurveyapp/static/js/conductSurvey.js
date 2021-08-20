@@ -1,4 +1,11 @@
 $(document).ready(function () {
+  $("#saveResponseForm").submit(function () {
+    $("#saveReponseSpinner").css("display", "block");
+    $("#saveReponseSpinner").addClass("d-inline-block");
+    $("#saveResponseBtn").prop("disabled", true);
+    $("#saveResponseBtn span").text("Submitting");
+  });
+
   let employee;
   const currentUsername = $(".user-name").eq(0).text();
 

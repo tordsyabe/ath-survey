@@ -45,7 +45,7 @@ block body %}
 
                 <button
                   class="
-                    btn btn-info btn-sm
+                    btn btn-info
                     font-weight-bold
                     view-detailed-response
                     mb-2 mb-md-0
@@ -54,14 +54,18 @@ block body %}
                   data-toggle="modal"
                   data-target="#responseDetailModal"
                 >
-                  View Details
+                  <div
+                    class="spinner-border spinner-border-sm text-white mr-1"
+                    id="viewDetailsSpinner"
+                    role="status"
+                    style="display: none"
+                  >
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <span>View Details</span>
                 </button>
                 <button
-                  class="
-                    btn btn-secondary btn-sm
-                    font-weight-bold
-                    delete-reponse
-                  "
+                  class="btn btn-secondary font-weight-bold delete-reponse"
                   data-delete-id="{{response.id}}"
                   data-target="#deleteResponseModal"
                   data-toggle="modal"
@@ -137,17 +141,25 @@ block body %}
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-secondary btn-sm font-weight-bold"
+            class="btn btn-secondary font-weight-bold"
             data-dismiss="modal"
           >
             Cancel
           </button>
           <button
             type="submit"
-            class="btn btn-danger btn-sm font-weight-bold"
+            class="btn btn-danger font-weight-bold"
             id="deleteEmployeeeBtn"
           >
-            Delete
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="deleteEmployeeSpinner"
+              role="status"
+              style="display: none"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span>Delete</span>
           </button>
         </div>
       </form>
@@ -191,17 +203,25 @@ block body %}
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-secondary btn-sm font-weight-bold"
+            class="btn btn-secondary font-weight-bold"
             data-dismiss="modal"
           >
             Cancel
           </button>
           <button
             type="submit"
-            class="btn btn-danger btn-sm font-weight-bold"
+            class="btn btn-danger font-weight-bold"
             id="deleteResponseBtn"
           >
-            Delete
+            <div
+              class="spinner-border spinner-border-sm text-white mr-1"
+              id="deleteResponseSpinner"
+              role="status"
+              style="display: none"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span>Delete</span>
           </button>
         </div>
       </form>
@@ -251,7 +271,7 @@ block body %}
 >
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
-      <form method="POST">
+      <form method="POST" id="saveEmployeeDetailForm">
         <div class="modal-header">
           <h5 class="modal-title font-weight-bold">
             Edit Employee Information
@@ -343,13 +363,25 @@ block body %}
           <div class="text-center">
             <button
               type="button"
-              class="btn btn-secondary btn-sm font-weight-bold"
+              class="btn btn-secondary font-weight-bold"
               data-dismiss="modal"
             >
               Close
             </button>
-            <button type="submit" class="btn btn-info btn-sm font-weight-bold">
-              Save
+            <button
+              type="submit"
+              class="btn btn-info font-weight-bold"
+              id="saveEmployeeDetailBtn"
+            >
+              <div
+                class="spinner-border spinner-border-sm text-white mr-1"
+                id="saveEmployeeDetailSpinner"
+                role="status"
+                style="display: none"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
+              <span>Save</span>
             </button>
           </div>
         </div>

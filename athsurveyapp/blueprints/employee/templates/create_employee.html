@@ -9,7 +9,7 @@ endblock %} {% block body %}
     </div>
     <div class="row my-5 mx-auto jumbotron p-auto">
       <div class="col">
-        <form method="POST">
+        <form method="POST" id="createEmployeForm">
           {{ form.csrf_token }}
           <div class="row align-items-center">
             <!--  -->
@@ -96,8 +96,17 @@ endblock %} {% block body %}
             <button
             type="submit"
             class="btn btn-info mr-2 font-weight-bold"
+            id="saveEmployeeBtn"
           >
-            Save
+          <div
+          class="spinner-border spinner-border-sm text-white mr-1"
+          id="saveEmployeeSpinner"
+          role="status"
+          style="display: none"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+        <span>Save</span>
           </button>
           </div>
         </form>
