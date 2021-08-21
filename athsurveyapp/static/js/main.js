@@ -1,12 +1,14 @@
 $(document).ready(function () {
   const activePage = window.location.pathname;
 
-  $(".nav-item").each(function () {
-    var linkPage = $(this).find("a").attr("href");
-    if (activePage === linkPage) {
-      $(this).addClass("active");
-    }
-  });
+  $("#sideBarNav")
+    .find(".nav-link")
+    .each(function () {
+      var linkPage = $(this).attr("href");
+      if (activePage === linkPage) {
+        $(this).addClass("active");
+      }
+    });
 
   // Bootsrap select picker
   $(".selectpicker").selectpicker();

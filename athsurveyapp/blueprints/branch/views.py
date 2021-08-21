@@ -2,17 +2,19 @@ from flask import Blueprint, render_template, request, redirect
 from flask.helpers import url_for
 from athsurveyapp.models.models import Branch, db
 from athsurveyapp.blueprints.branch.forms import BranchForm
-from flask_login import login_required
+from flask_login import login_required,current_user
+from athsurveyapp.decorators import admin_required
 
 branch_page = Blueprint('branch_page', __name__, template_folder='templates')
 
 
 @branch_page.route('/', methods=['GET'])
 @login_required
+@admin_required
 def branch_index():
-
+    print(current_user.id)
     branches = Branch.query.all()
-
+    
     return render_template('branches.html', branches=branches)
 
 

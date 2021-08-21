@@ -1,6 +1,14 @@
 $(document).ready(function () {
   $("#employeesTable").DataTable();
 
+  if (!$("select[id='branch'").val()) {
+    $("#saveEmployeeBtn").attr("disabled", true);
+  }
+
+  $("select[id='branch'").change(function () {
+    $("#saveEmployeeBtn").attr("disabled", false);
+  });
+
   $("#saveEmployeeDetailForm").submit(function () {
     $("#saveEmployeeDetailSpinner").css("display", "block");
     $("#saveEmployeeDetailSpinner").addClass("d-inline-block");
