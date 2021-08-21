@@ -7,12 +7,14 @@ from athsurveyapp.models.models import db, Survey, Branch, Employee, Response, Q
 from athsurveyapp.blueprints.question_type import QuestionTypeForm
 
 from flask_login import current_user, login_required
+from athsurveyapp.decorators import admin_required
 
 survey_page = Blueprint("survey_page", __name__, template_folder="templates")
 
 
 @survey_page.route("/", methods=["GET"])
 @login_required
+@admin_required
 def survey_index():
 
     surveys = Survey.query.all()
@@ -22,6 +24,7 @@ def survey_index():
 
 @survey_page.route("/create", methods=["GET", "POST"])
 @login_required
+@admin_required
 def create_survey():
     form = SurveyForm()
 
@@ -42,6 +45,7 @@ def create_survey():
 
 @survey_page.route("/<id>")
 @login_required
+@admin_required
 def survey_details(id):
 
     qt_form = QuestionTypeForm()
@@ -58,6 +62,7 @@ def survey_details(id):
     
 @survey_page.route("/conduct", methods=["GET", "POST"])
 @login_required
+@admin_required
 def conduct_survey():
     
     url_employee_id = request.args.get('employee')

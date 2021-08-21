@@ -20,6 +20,7 @@ def branch_index():
 
 @branch_page.route('/create', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def create_branch():
 
     form = BranchForm()

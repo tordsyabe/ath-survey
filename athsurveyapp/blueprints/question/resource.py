@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse, abort
 from flask import jsonify
 from flask_login import login_required
+from athsurveyapp.decorators import admin_required
 
 
 from athsurveyapp.models.models import Question, db
@@ -34,7 +35,7 @@ question_args.add_argument(
 
 
 class QuestionResouce(Resource):
-    decorators = [login_required]
+    decorators = [login_required,admin_required]
     def get(self, id):
         question = Question.query.get(id)
 
@@ -59,7 +60,7 @@ class QuestionResouce(Resource):
 
 
 class QuestionResourceList(Resource):
-    decorators = [login_required]
+    decorators = [login_required, admin_required]
     def get(self):
         questions = Question.query.all()
 

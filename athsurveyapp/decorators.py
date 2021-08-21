@@ -9,6 +9,6 @@ def admin_required(f):
         
         user = User.query.get(int(current_user.id))
         if not user.is_admin:
-            return redirect(url_for('survey_page.conduct_survey'))
+            return redirect(url_for('dashboard.dashboard'))
         return f(*args, **kwargs)
     return decorated_function

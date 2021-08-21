@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse, abort
 from flask import jsonify
 from flask_login import login_required
+from athsurveyapp.decorators import admin_required
 
 from athsurveyapp.models.models import Employee, Response, db
 from athsurveyapp.schemas import EmployeeSchema, EmployeeByBranchSchema, ResponseSchema
@@ -16,7 +17,7 @@ class BranchEmployeeResource(Resource):
         return employees_by_branch_schema.dump(employees_by_branch)
     
 class EmployeeResource(Resource):
-    decorators = [login_required]
+    decorators = [login_required, admin_required]
     def get(self, id):
         
         employee = Employee.query.get(id)
@@ -42,7 +43,7 @@ class EmployeeResource(Resource):
         return {"message": "Employee successfully deleted"}
 
 class EmployeeResourceList(Resource):
-    decorators = [login_required]
+    decorators = [login_required, admin_required]
     def get(self):
         employees = Employee.query.all()
         
@@ -51,7 +52,7 @@ class EmployeeResourceList(Resource):
         return employee_list_schema.dump(employees)
     
 class EmployeeResponseResource(Resource):
-    decorators = [login_required]
+    decorators = [login_required, admin_required]
     def get(self, id):
         
         response = Response.query.get(id)

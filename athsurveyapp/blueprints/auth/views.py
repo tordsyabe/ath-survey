@@ -3,11 +3,13 @@ from athsurveyapp.models.models import User, db
 from athsurveyapp.blueprints.auth.forms import RegisterForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
+from athsurveyapp.decorators import admin_required
 
 auth_page = Blueprint('auth_page', __name__, template_folder="templates")
 
 @auth_page.route('/user')
 @login_required
+@admin_required
 def users_index():
     
     users = User.query.all()
@@ -45,6 +47,7 @@ def login():
 
 @auth_page.route('/register', methods=['GET', 'POST'])
 @login_required
+@admin_required
 def create_user():
     
     form = RegisterForm()

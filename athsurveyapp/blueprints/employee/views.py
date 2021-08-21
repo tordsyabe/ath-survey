@@ -3,12 +3,14 @@ from athsurveyapp.blueprints.employee.forms import EmployeeForm
 from athsurveyapp.models.models import Employee, Branch, Question, db
 import datetime
 from flask_login import login_required
+from athsurveyapp.decorators import admin_required
 
 employee_page = Blueprint('employee_page', __name__, template_folder="templates")
 
 
 @employee_page.route("/")
 @login_required
+@admin_required
 def employee_index():
 
     employees = Employee.query.all()
@@ -17,6 +19,7 @@ def employee_index():
 
 @employee_page.route("/<id>", methods=['GET', 'POST'])
 @login_required
+@admin_required
 def employee_details(id):
     form = EmployeeForm()
     
@@ -57,6 +60,7 @@ def employee_details(id):
 
 @employee_page.route("/create", methods=['GET', 'POST'])
 @login_required
+@admin_required
 def create_employee():
 
     form = EmployeeForm()
