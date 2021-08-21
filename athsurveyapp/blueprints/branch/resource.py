@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse, abort
 from flask import jsonify
 from flask_login import login_required
+from athsurveyapp.decorators import admin_required
 
 from athsurveyapp.models.models import Branch, db
 

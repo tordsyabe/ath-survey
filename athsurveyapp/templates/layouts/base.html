@@ -103,7 +103,7 @@
                     </div>
                   </div>
                 </a>
-                {% endif %} {% if current_user.is_admin %}
+                {% endif %}
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('employee_page.employee_index')}}"
@@ -116,7 +116,6 @@
                     </div>
                   </div>
                 </a>
-                {% endif %}
                 <a
                   class="nav-link font-weight-bold px-0"
                   href="{{ url_for('survey_page.conduct_survey')}}"
@@ -188,6 +187,7 @@
                     >Dashboard</a
                   >
                 </li>
+                {% if current_user.is_admin %}
                 <li class="nav-item">
                   <a
                     class="nav-link font-weight-bold"
@@ -195,6 +195,7 @@
                     >Surveys</a
                   >
                 </li>
+
                 <li class="nav-item">
                   <a
                     class="nav-link font-weight-bold"
@@ -202,7 +203,7 @@
                     >Branches</a
                   >
                 </li>
-
+                {%endif%}
                 <li class="nav-item">
                   <a
                     class="nav-link font-weight-bold"
@@ -210,6 +211,7 @@
                     >Employees</a
                   >
                 </li>
+
                 <li class="nav-item">
                   <a
                     class="nav-link font-weight-bold"
@@ -217,7 +219,7 @@
                     >Conduct Survey</a
                   >
                 </li>
-
+                {% if current_user.is_admin%}
                 <li class="nav-item">
                   <a
                     class="nav-link font-weight-bold"
@@ -225,6 +227,7 @@
                     >Users</a
                   >
                 </li>
+                {% endif %}
 
                 <li class="nav-item">
                   <a

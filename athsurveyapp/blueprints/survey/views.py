@@ -62,7 +62,6 @@ def survey_details(id):
     
 @survey_page.route("/conduct", methods=["GET", "POST"])
 @login_required
-@admin_required
 def conduct_survey():
     
     url_employee_id = request.args.get('employee')

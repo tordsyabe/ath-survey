@@ -10,7 +10,6 @@ branch_page = Blueprint('branch_page', __name__, template_folder='templates')
 
 @branch_page.route('/', methods=['GET'])
 @login_required
-@admin_required
 def branch_index():
     print(current_user.id)
     branches = Branch.query.all()

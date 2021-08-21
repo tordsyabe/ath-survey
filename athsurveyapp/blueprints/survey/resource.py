@@ -16,7 +16,7 @@ survey_args.add_argument(
 
 
 class SurveyResource(Resource):
-    decorators = [login_required, admin_required]
+    decorators = [login_required]
     def get(self, id):
         survey = Survey.query.get(id)
         
